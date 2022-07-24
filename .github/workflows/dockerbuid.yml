@@ -1,4 +1,4 @@
-name: Build Docker Image - Weekly
+name: Build Docker Image
 on:
   push:
     branches-ignore:
@@ -7,7 +7,6 @@ on:
       - ".github/**"
       - "LICENSE"
       - "**.md"
-  workflow_dispatch:
   schedule:
     - cron: '0 5 * * *'
 
