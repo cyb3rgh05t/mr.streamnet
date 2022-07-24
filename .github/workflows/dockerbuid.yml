@@ -72,3 +72,7 @@ jobs:
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+        
+      - name: Get Branch Name and Tag
+        uses: ypicard/get-branch-name-github-action@v1
+
