@@ -7,7 +7,6 @@ on:
       - ".github/**"
       - "LICENSE"
       - "**.md"
-  workflow_dispatch:
   schedule:
     - cron: '0 5 * * *'
 
