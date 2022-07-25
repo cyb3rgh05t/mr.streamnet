@@ -29,7 +29,7 @@ module.exports = {
     async execute(client) {
 
         check();
-        setInterval(check, 200 * 1000); //30 seconds
+        setInterval(check, 21600 * 1000);
 
         /**
          * Format a date to a readable string
