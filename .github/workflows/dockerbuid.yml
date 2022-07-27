@@ -1,4 +1,4 @@
-name: Build Docker Image - Weekly
+name: Build Docker Image
 on:
   push:
     branches-ignore:

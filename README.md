@@ -1,3 +1,3 @@
 ## Mr.StreamNet
 
-discord bot v13
+discord bot for my personal use updated to discord.js_v13
