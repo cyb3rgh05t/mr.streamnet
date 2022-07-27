@@ -100,7 +100,7 @@ module.exports = {
                         Embed
                         .setDescription(
                             `Das Transcript wurde gespeichert [TRANSCRIPT](${Message.url})`
-                        ),
+                        )
                         .setTimestamp(),
                     ],
                 });

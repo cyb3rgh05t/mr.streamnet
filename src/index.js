@@ -59,6 +59,7 @@ client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
 client.modals = new Collection();
+client.logger = require("../utils/logger");
 
 module.exports = client;
 
