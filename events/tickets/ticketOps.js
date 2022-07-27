@@ -88,8 +88,7 @@ module.exports = {
                 .send({
                     embeds: [
                         Embed.setTitle(`Ticket ID: ${docs.TicketID}`)
-                        .setDescription(`Closed By: ${member.user.tag}\nMember: <@${docs.CreatedBy}>`)
-                        //.addField(`The Transcript is now saved [TRANSCRIPT](${Message.url})`)
+                        .setDescription(`Closed By: ${member.user}\nMember: <@${docs.CreatedBy}>`)
                         .setThumbnail(`${interaction.guild.iconURL({dynamic: true})}`)
                         .setTimestamp(),
                     ],
@@ -102,6 +101,7 @@ module.exports = {
                         .setDescription(
                             `Das Transcript wurde gespeichert [TRANSCRIPT](${Message.url})`
                         ),
+                        .setTimestamp(),
                     ],
                 });
 
