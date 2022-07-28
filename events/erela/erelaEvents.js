@@ -3,15 +3,15 @@ const colors = require("colors");
 
 client.manager
     .on("nodeConnect", (node) => {
-        console.log(`[LAVALINK]`.green.bold, `| Connection has been established to "${node.options.identifier}".`)
+        client.logger.log(`[LAVALINK] Connection has been established to [${node.options.identifier}]`, "ready")
     })
 
     .on("nodeDisconnect", (node, error) => {
-        console.log(`[LAVALINK]`.red.bold, `| Lost connection to "${node.options.identifier}" due to an error: ${error.message}.`)
+        client.logger.log(`[LAVALINK] Lost connection to "${node.options.identifier}" due to an error: ${error.message}`, "error")
     })
 
     .on("nodeError", (node, error) => {
-        console.log(`[LAVALINK]`.red.bold, `| Node "${node.options.identifier}" has encountered an error: ${error.message}.`)
+        client.logger.log(`[LAVALINK] Node "${node.options.identifier}" has encountered an error: ${error.message}`, "error")
     })
 
     module.exports = {

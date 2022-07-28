@@ -38,11 +38,14 @@ module.exports = {
      */
    async execute(client) {
         //Bot Activity
-        console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
-        console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}]`)
-        console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
-        console.log(`[CLIENT]`.green.bold, `[INFO]`.yellow.bold,`| Client is now ready and online!`);
-
+        //console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
+        //console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}`)
+        //console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
+        //console.log(`[CLIENT]`.green.bold, `[INFO]`.yellow.bold,`| Client is now ready and online!`);
+        client.logger.log(`Checking Client....`, "debug")
+        client.logger.log(`Logged in as ${client.user.tag}`, "ready")
+        client.logger.log(`Client is starting....`, "debug")
+        client.logger.log(`Client is now ready and online!`, "ready")
         
         // Client Activity
             const initialStatus = setTimeout(() => {
@@ -82,10 +85,13 @@ module.exports = {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             }).then(() => {
-                console.log(`[DATABASE]`.green.bold, `| Database is now ready`)
-                console.log(`[DATABASE]`.green.bold, `[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
+                //console.log(`[DATABASE]`.green.bold, `| Database is now ready`)
+                //console.log(`[DATABASE]`.green.bold, `[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
+                client.logger.log(`Connected to MongoDB Database!`, "debug")
+                client.logger.log(`Database is now ready`, "ready")
             }).catch((err) => {
-                console.log(`[ERROR] |`.red.bold, err)
+                //console.log(`[ERROR] |`.red.bold, err)
+                client.logger.log(err, "error")
             });
 
             //erela music

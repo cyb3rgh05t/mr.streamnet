@@ -1,5 +1,6 @@
 const chalk = require("chalk");
 const moment = require("moment");
+const colors = require("colors");
 
 module.exports = class Logger {
 	static log (content, type = "log") {

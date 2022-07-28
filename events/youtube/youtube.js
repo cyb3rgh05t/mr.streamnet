@@ -12,8 +12,8 @@ const lastVideos = {};
 const config = {
     "MESSAGE": "New video: **{videoTitle}**! It was uploaded by {videoAuthorName} at {videoPubDate}! Here is the link: {videoURL}",
     "YOUTUBERS": [
-        "LYXCODE",
-        "https://www.youtube.com/channel/UCGyqi4UW3on0jK1W5reea1w"
+        "LYXCODE"
+        
     ],
     "DISCORD_CHANNEL_ID": rssFeedChannelId,
     "YOUTUBE_API_KEY": youtubeAPI
@@ -48,15 +48,15 @@ module.exports = {
          * @returns The last video of the youtuber
          */
         async function getLastVideo(youtubeChannelName, rssURL){
-            console.log(`[${youtubeChannelName}]`.yellow.bold, `| Getting videos...`);
+            client.logger.log(`[${youtubeChannelName}] Getting videos...`, "debug");
             let content = await parser.parseURL(rssURL);
-            console.log(`[${youtubeChannelName}]`.yellow.bold, `| ${content.items.length} videos found`);
+            client.logger.log(`[${youtubeChannelName}] ${content.items.length} videos found`, "log");
             let tLastVideos = content.items.sort((a, b) => {
                 let aPubDate = new Date(a.pubDate || 0).getTime();
                 let bPubDate = new Date(b.pubDate || 0).getTime();
                 return bPubDate - aPubDate;
             });
-            console.log(`[${youtubeChannelName}]`.yellow.bold, `| The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`);
+            client.logger.log(`[${youtubeChannelName}] The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`, "log");
             return tLastVideos[0];
         }
 
@@ -67,15 +67,15 @@ module.exports = {
          * @returns The video || null
          */
         async function checkVideos(youtubeChannelName, rssURL){
-            console.log(`[${youtubeChannelName}]`.yellow.bold, `| Get the last video..`);
+            client.logger.log(`[${youtubeChannelName}] Get the last video..`, "debug");
             let lastVideo = await getLastVideo(youtubeChannelName, rssURL);
             // If there isn't any video in the youtube channel, return
-            if(!lastVideo) return console.log("[ERROR]".red.bold, " | No video found for " + lastVideo);
+            if(!lastVideo) return client.logger.log("No video found for " + lastVideo, "log");
             // If the date of the last uploaded video is older than the date of the bot starts, return 
-            if(new Date(lastVideo.pubDate).getTime() < startAt) return console.log(`[${youtubeChannelName}]`.yellow.bold, `| Last video was uploaded before the bot starts`);
+            if(new Date(lastVideo.pubDate).getTime() < startAt) return client.logger.log(`[${youtubeChannelName}] Last video was uploaded before the bot starts`, "log");
             let lastSavedVideo = lastVideos[youtubeChannelName];
             // If the last video is the same as the last saved, return
-            if(lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return console.log(`[${youtubeChannelName}]`.yellow.bold, `| Last video is the same as the last saved`);
+            if(lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return client.logger.log(`[${youtubeChannelName}] Last video is the same as the last saved`, "log");
             return lastVideo;
         }
 
@@ -99,7 +99,7 @@ module.exports = {
         * @returns The channel info || null
         */
         async function getYoutubeChannelInfos(name){
-            console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}]`.yellow.bold, `| Resolving channel infos...`);
+            client.logger.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] Resolving channel infos...`, "debug");
             let channel = null;
             /* Try to search by ID */
             let id = getYoutubeChannelIdFromURL(name);
@@ -115,7 +115,7 @@ module.exports = {
                 }
             }
 
-            console.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}]`.yellow.bold, `| Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`);
+            client.logger.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`, "log");
             return channel;
         }
 
@@ -123,15 +123,15 @@ module.exports = {
         * Check for new videos
         */
         async function check(){
-            console.log(`[RSS FEED]`.green.bold, `| Checking YOUTUBE API...`);
+            client.logger.log(`Checking YOUTUBE API...`, "debug");
             config.YOUTUBERS.forEach(async (youtuber) => {
-                console.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10) + "..." : youtuber}]`.yellow.bold, `| Start checking...`);
+                client.logger.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10) + "..." : youtuber}] Start checking...`, "debug");
                 let channelInfos = await getYoutubeChannelInfos(youtuber);
-                if(!channelInfos) return console.log("[ERROR]".red.bold, "| Invalid youtuber provided: " + youtuber);
+                if(!channelInfos) return client.logger.log("Invalid youtuber provided: " + youtuber, "error");
                 let video = await checkVideos(channelInfos.raw.snippet.title, "https://www.youtube.com/feeds/videos.xml?channel_id=" + channelInfos.id);
-                if(!video) return console.log(`[${channelInfos.raw.snippet.title}]`.yellow.bold, `| No notification`);
+                if(!video) return client.logger.log(`[${channelInfos.raw.snippet.title}] No notification`, "log");
                 let channel = client.channels.cache.get(config.DISCORD_CHANNEL_ID);
-                if(!channel) return console.log("[ERROR]".yellow.bold, "| Channel not found");
+                if(!channel) return client.logger.log("Channel not found", "log");
                 channel.send({ content: 
                     config.MESSAGE
                     .replace("{videoURL}", video.link)
