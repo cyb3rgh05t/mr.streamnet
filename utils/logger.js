@@ -27,6 +27,9 @@ module.exports = class Logger {
 		case "buttons": {
 			return console.log(`[${chalk.gray(date)}]: [${chalk.black.bgWhite(type.toUpperCase())}] ${content}`);
 		}
+		case "prefix": {
+			return console.log(`[${chalk.gray(date)}]: [${chalk.black.bgWhite(type.toUpperCase())}] ${content}`);
+		}
 		case "modals": {
 			return console.log(`[${chalk.gray(date)}]: [${chalk.black.bgWhite(type.toUpperCase())}] ${content}`);
 		}

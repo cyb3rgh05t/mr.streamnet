@@ -6,13 +6,13 @@ module.exports = async (client, PG, Ascii) => {
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/prefixCommands/*/*.js`)).map(async (file) => {       
         const cmd = require(file);
        
-        if (cmd.length <= 0) return console.log("[WARNING] No PREFIXCOMMANDS Found".yellow.bold);
         if(cmd.name){
             client.prefixcmd.set(cmd.name, cmd);
         }
-        await Table.addRow(cmd.name, "🟩 LOADED")
+        //await Table.addRow(cmd.name, "🟩 LOADED")
+        client.logger.log(`LOADED PrefixCommand ${cmd.name.toUpperCase()} from ${file.split("/").pop()}`, "prefix")
         
     });
-    console.log(Table.toString());
+    //console.log(Table.toString());
     
 }

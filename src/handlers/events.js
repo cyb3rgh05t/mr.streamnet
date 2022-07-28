@@ -17,7 +17,7 @@ module.exports = async (client, PG) => {
             client.on(event.name, (...args) => event.execute(...args, client));
         };
         const L = file.split("/");
-        client.logger.log(`Loading Events ${L[8].green.bold}`, "event");
+        client.logger.log(`LOADED Event ${event.name.toUpperCase()} from ${file.split("/").pop()}`, "event")
     });
 
 }
