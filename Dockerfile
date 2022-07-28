@@ -11,7 +11,7 @@ COPY package.json /usr/src/bot
 
 # Install dependencies
 RUN apt-get update
-RUN sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+RUN apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 #RUN apt install python2.7 -y
 #RUN npm config set python python2.7
 #RUN npm install -g node-gyp
