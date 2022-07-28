@@ -32,12 +32,12 @@ module.exports = async(client, PG, Ascii) => {
 
     client.commands.set(command.name, command);
     CommandsArray.push(command);
-    console.log(`${command.name.toUpperCase()} from ${file.split("/").pop()}`, `LOADED`.green.bold)
-    //await Table.addRow(command.name,"🟩 LOADED");
+    //console.log(`${command.name.toUpperCase()} from ${file.split("/").pop()}`, `LOADED`.green.bold)
+    await Table.addRow(command.name,"🟩 LOADED");
     
   });
 
-  //console.log(Table.toString());
+  console.log(Table.toString());
 
 
      

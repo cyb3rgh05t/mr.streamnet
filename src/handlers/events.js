@@ -1,13 +1,15 @@
 const { Events } = require("../validation/eventNames");
 const colors = require("colors");
 
-module.exports = async (client, PG) => {
+module.exports = async (client, PG, Ascii) => {
+    const Table = new Ascii("Events Handler");
 
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
+        if (event.length <= 0) return console.log("[WARNING] No EVENTS Found".yellow.bold);
         if(!Events.includes(event.name) || !event.name) {
             const L = file.split("/");
-            await client.logger.log(`${event.name || "MISSING"} Event name is either invalid or missing`, "error");
+            await Table.addRow(`${event.name || "MISSING"}`, `🟥 Event name is either invalid or missing: ${L[6] + `/` + L[7]}`);
             return;
         }
 
@@ -16,8 +18,9 @@ module.exports = async (client, PG) => {
         } else {
             client.on(event.name, (...args) => event.execute(...args, client));
         };
-        const L = file.split("/");
-        client.logger.log(`Loading Events ${L[8].green.bold}`, "event");
+
+        await Table.addRow(event.name, "🟩 LOADED")
     });
 
+    console.log(Table.toString());
 }
