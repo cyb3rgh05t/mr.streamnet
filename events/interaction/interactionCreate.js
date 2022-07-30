@@ -44,8 +44,6 @@ module.exports = {
               }
 
             }                                  
-            //command.execute(interaction, client);
-            //console.log(`[INFO]`.yellow.bold,`${interaction.user.tag} in channel #${interaction.channel.name} triggered an interaction "/${interaction.commandName}".`)
         }
     }
 }

@@ -224,7 +224,7 @@ module.exports = {
             break;
 
             default : {
-                console.log(`[ERROR]`.red.bold,"Error in giveaway command.")
+                client.logger.log("Error in giveaway command", "error")
             }
         }
         

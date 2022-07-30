@@ -58,5 +58,5 @@ module.exports = client;
 
 client.login(token).then(() => {
 }).catch((err) => {
-    console.log(err, "error")
+    client.logger.log(err, "error")
 });

@@ -1,6 +1,7 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../src/databases/modDB");
 const colors = require("colors");
+const client = require("../../src");
 
 
 module.exports = {
@@ -41,7 +42,7 @@ module.exports = {
             interaction.reply({ content: "Done", ephemeral: true });
 
         } catch (err) {
-            console.log(`[ERROR]`.red.bold, err);
+            client.logger.log(err, "error");
         }
     },
 };

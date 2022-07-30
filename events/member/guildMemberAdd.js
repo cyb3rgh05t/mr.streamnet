@@ -36,7 +36,9 @@ module.exports = {
             .setAuthor({ name: `${member.guild.name}`, iconURL: member.guild.iconURL({ dynamic: true }), url: 'https://discord.gg/gUmHCurE4g' })
             .setTitle("<:approved:995615632961847406> CAPTCHA Solved!")
             .setDescription(`${member.user}, du hast das CAPTCHA erfolgreich ausgefüllt und dir wurde Zugriff auf **${member.guild.name}** gewährt!`)
-            .addField("Bestätige die Regeln", "<#694495838013095967>")
+            .addFields(
+                { name: `Bestätige die Regeln`, value: `<#694495838013095967>` }
+                )
             .setTimestamp()
             .setColor("GREEN")
             .setThumbnail(member.guild.iconURL({ dynamic: true })),
@@ -44,7 +46,9 @@ module.exports = {
             .setAuthor({ name: `${member.guild.name}`, iconURL: member.guild.iconURL({ dynamic: true }), url: 'https://discord.gg/gUmHCurE4g' })
             .setTitle("<:rejected:995614671128244224> CAPTCHA Failed!")
             .setDescription(`${member.user}, du hast das CAPTCHA nicht erfolgreich ausgefüllt!`)
-            .addField("Du wurdest vom Server gekickt", "Um es erneut zu versuchen, klicke auf -> **[StreamNet Invite](https://discord.gg/gUmHCurE4g)**")
+            .addFields(
+                { name: `Du wurdest vom Server gekickt`, value: `Um es erneut zu versuchen, klicke auf -> **[StreamNet Invite](https://discord.gg/gUmHCurE4g)**` }
+            )
             .setTimestamp()
             .setColor("RED")
             .setThumbnail(member.guild.iconURL({ dynamic: true })),
@@ -62,11 +66,5 @@ module.exports = {
             newMemberChannel.send(newMemberMessage)
         }));
 
-        /*if (captcha.on("failure" || "timeout", data => {
-            const { user, guild } = member
-            member.kick();
-            //console.log(`A Member has Solved a CAPTCHA!`);
-            console.log(data);
-        }));*/
     }
 }

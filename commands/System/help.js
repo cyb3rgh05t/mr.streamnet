@@ -73,7 +73,7 @@ module.exports = {
                 .setTitle(`${client.user.username} | Help`)
                 .setDescription(` Hello **<@${interaction.member.user.id}>**, I am <@${client.user.id}>. \n\nA multipurpose Butler Bot for StreamNet.club.  \n\n*Choose an category below to see all my commands* \n\n`)
                 .setThumbnail(client.user.displayAvatarURL())
-                .setColor('YELLOW')
+                .setColor("DARK_BUT_NOT_BLACK")
                 //.setTimestamp()
 
             interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
