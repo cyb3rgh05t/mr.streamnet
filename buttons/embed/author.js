@@ -47,7 +47,7 @@ module.exports = {
     
             const modal = new Modal()
             .setCustomId("ce_author_modal")
-            .setTitle("Autor Zeile")
+            .setTitle("Author")
             .addComponents(authorTextModalInputRow, authorIconModalInputRow)
     
             await interaction.showModal(modal)

@@ -38,7 +38,7 @@ module.exports = {
 
             const modal = new Modal()
             .setCustomId("ce_thumbnail_modal")
-            .setTitle("Banner")
+            .setTitle("Thumbnail")
             .addComponents(thumbnailModalInputRow)
     
             await interaction.showModal(modal)

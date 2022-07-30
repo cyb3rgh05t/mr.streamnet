@@ -33,7 +33,7 @@ module.exports = {
             }).catch((err) => console.error(err.message));
             
         
-            interaction.reply({content: "Embed zurückgesetzt!", ephemeral: true}).catch((err) => console.error(err.message));
+            interaction.reply({content: "Embed reset!", ephemeral: true}).catch((err) => console.error(err.message));
         
         
         })

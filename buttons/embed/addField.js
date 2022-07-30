@@ -50,7 +50,7 @@ module.exports = {
     
             const modal = new Modal()
             .setCustomId("ce_addField_modal")
-            .setTitle("Embed Farbe")
+            .setTitle("Add Field")
             .addComponents(FieldNameTextModalInputRow, FieldValueTextModalInputRow)
     
             await interaction.showModal(modal)

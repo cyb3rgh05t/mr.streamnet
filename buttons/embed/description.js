@@ -40,7 +40,7 @@ module.exports = {
     
             const modal = new Modal()
             .setCustomId("ce_description_modal")
-            .setTitle("Beschreibung")
+            .setTitle("Description")
             .addComponents(DescriptionActionRow)
     
             await interaction.showModal(modal)  

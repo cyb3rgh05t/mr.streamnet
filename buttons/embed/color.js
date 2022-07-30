@@ -39,7 +39,7 @@ module.exports = {
     
             const modal = new Modal()
             .setCustomId("ce_color_modal")
-            .setTitle("Embed Farbe")
+            .setTitle("Color")
             .addComponents(ColorTextModalInputRow)
     
             await interaction.showModal(modal)
