@@ -19,32 +19,6 @@ const { Manager } = require("erela.js");
 
 require("./handlers/antiCrash")(client);
 
-client.manager = new Manager({
-    nodes,
-    plugins: [
-        new Spotify({
-            clientID: SpotifyClientID,
-            clientSecret: SpotifySecret,
-        }),
-        new Apple(),
-        new Deezer(),
-    ],
-    send: (id, payload) => {
-        let guild = client.guilds.cache.get(id);
-        if (guild) guild.shard.send(payload);
-    },
-});
-
-/*
-client.distube = new DisTube(client, {
-    youtubeDL: false,
-    emitNewSongOnly: true,
-    leaveOnFinish: true,
-    emitAddSongWhenCreatingQueue: false,
-    plugins: [new SpotifyPlugin()]
-});
-*/
-
 ["giveawaySys"].forEach(system => {
     require(`../systems/${system}`)(client)
 });
@@ -62,6 +36,22 @@ client.userSettings = new Collection();
 client.prefixcmd = new Collection();
 client.modals = new Collection();
 client.logger = require("../utils/logger");
+client.manager = new Manager({
+    nodes: nodes,
+    plugins: [
+        new Spotify({
+            clientID: SpotifyClientID,
+            clientSecret: SpotifySecret,
+        }),
+        new Apple(),
+        new Deezer(),
+    ],
+    autoplay: true,
+    send: (id, payload) => {
+        let guild = client.guilds.cache.get(id);
+        if (guild) guild.shard.send(payload);
+    },
+});
 
 module.exports = client;
 

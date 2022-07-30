@@ -70,7 +70,7 @@ module.exports = {
                         .setColor("DARK_BUT_NOT_BLACK")
                         .setTitle("🎶  Enqueued")
                         .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**`)
-                        .setFooter({ text: `${interaction.user.username}` })
+                        .setFooter({ text: `${member.username}` })
                         .setThumbnail(res.tracks[0].displayThumbnail("3"))
                     await interaction.reply({ embeds: [enqueueEmbed] });
 

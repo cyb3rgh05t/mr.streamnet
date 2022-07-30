@@ -11,7 +11,7 @@ module.exports = async (client, PG, Ascii) => {
 
         client.buttons.set(buttonFile.id, buttonFile);
 
-        client.logger.log(`LOADED Button ${buttonFile.id.toUpperCase()} from ${file.split("/").pop()}`, "modals")
+        client.logger.log(`LOADED Button ${buttonFile.id.toUpperCase()} from ${file.split("/").pop()}`, "buttons")
     
     });
     
