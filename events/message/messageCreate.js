@@ -52,7 +52,7 @@ async execute(message) {
               cmd.run(client, message, args);
 
         } catch (error) {
-          console.log(`[ERROR]`.red.bold, error)
+          console.log(error, "error")
         }
 
 	},
