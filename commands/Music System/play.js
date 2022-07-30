@@ -21,6 +21,9 @@ module.exports = {
     * @param {Client} client 
     */
      async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
         const { options, member, guild } = interaction;
         const VoiceChannel = member.voice.channel;
 
@@ -43,12 +46,12 @@ module.exports = {
 
                     if (res.loadType === "LOAD_FAILED") {
                         if (!player.queue.current) player.destroy();
-                        return interaction.reply({ content: "❌ An error has occured while trying to add this song." })
+                        return interaction.editReply({ content: "❌ An error has occured while trying to add this song." })
                     }
 
                     if (res.loadType === "NO_MATCHES") {
                         if (!player.queue.current) player.destroy();
-                        return interaction.reply({ content: "❌ No results found." })
+                        return interaction.editReply({ content: "❌ No results found." })
                     }
 
                     if (res.loadType === "PLAYLIST_LOADED") {
@@ -58,7 +61,7 @@ module.exports = {
                         const playlistEmbed = new MessageEmbed()
                             .setDescription(`🎶  **${res.playlist.name} (${query})** has been added to the queue.`)
                             .addField("Enqueued", `\`${res.tracks.length}\` tracks`)
-                        return interaction.reply({ embeds: [playlistEmbed] })
+                        return interaction.editReply({ embeds: [playlistEmbed] })
                     }
 
                     if (res.loadType === "TRACK_LOADED" || res.loadType === "SEARCH_RESULT") {
@@ -69,10 +72,10 @@ module.exports = {
                     const enqueueEmbed = new MessageEmbed()
                         .setColor("DARK_BUT_NOT_BLACK")
                         .setTitle("🎶  Enqueued")
-                        .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**`)
-                        .setFooter({ text: `${member.username}` })
+                        .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**\n\n${member}`)
+                        //.setFooter({ text: `${member}` })
                         .setThumbnail(res.tracks[0].displayThumbnail("3"))
-                    await interaction.reply({ embeds: [enqueueEmbed] });
+                    await interaction.editReply({ embeds: [enqueueEmbed] });
 
                     if (!player.playing && !player.paused && !player.queue.size) player.play()
 

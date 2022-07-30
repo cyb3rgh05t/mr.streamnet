@@ -14,15 +14,18 @@ module.exports = {
     * @param {Client} client 
     */
      async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
         const player = client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." })
+        if (!player.playing) return interaction.editReply({ content: "There is nothing in the queue." })
         await player.stop();
 
         const skipEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription(`⏭️  Skipped`)
+            .setDescription(`⏭️  **Skipped**`)
 
-        return interaction.reply({ embeds: [skipEmbed] });
+        return interaction.editReply({ embeds: [skipEmbed] });
     }
 }

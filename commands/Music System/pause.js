@@ -14,16 +14,36 @@ module.exports = {
     * @param {Client} client 
     */
     async execute(interaction, client) {
+        await interaction.deferReply({
+      ephemeral: false
+    });
 
         const player = interaction.client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." })
+        if (!player.queue.current) {
+            let thing = new MessageEmbed()
+             .setColor("RED")
+             .setDescription("There is no music playing.");
+            return interaction.editReply({ embeds: [thing] }); 
+        }
+
+        if (player.paused) {
+            let thing = new MessageEmbed()
+              .setColor("RED")
+              .setDescription(`⏸️ The player is already paused.`)
+            return interaction.editReply({ embeds: [thing] });
+          }
 
         await player.pause(true);
 
-        const pauseEmbed = new MessageEmbed()
-            .setColor("#303236")
-            .setDescription("⏸️  Paused.")
-        return interaction.reply({ embeds: [pauseEmbed] })
+        const song = player.queue.current;
+
+        let thing = new MessageEmbed()
+        .setColor("DARK_BUT_NOT_BLACK")
+        
+        .setDescription(`⏸️ **Paused**\n\n[${song.title}](${song.uri})`)
+        return interaction.editReply({ embeds: [thing] });
+
+        
     }
 }

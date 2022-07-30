@@ -1,6 +1,7 @@
-const chalk = require("chalk"); // Importing Chalk from Chalk
+const chalk = require("chalk");
+const colors = require("colors/safe")
 const config = require('../config/config.json')
-const {MessageEmbed, WebhookClient} = require('discord.js') // Importing MessageEmbed from Discord.js
+const {MessageEmbed, WebhookClient} = require('discord.js')
 const {inspect} = require("util")
 const s = new WebhookClient({
                 id: "999705430597042397",
@@ -9,8 +10,7 @@ const s = new WebhookClient({
 
 module.exports = (client) => {
     client.on('error', err => {
-        // const a = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        console.log(err)
+        client.logger.log(err, "error")
         const ErrorEmbed = new MessageEmbed()
             .setTitle('Error')
             .setURL('https://discordjs.guide/popular-topics/errors.html#api-errors')
@@ -25,15 +25,15 @@ module.exports = (client) => {
     process.on("unhandledRejection", (reason, p) => {
         // const b = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
         console.log(
-            chalk.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
+            colors.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
             reason, p
         )
         const unhandledRejectionEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Unhandled Rejection/Catch 🟥**')
             .setURL('https://nodejs.org/api/process.html#event-unhandledrejection')
             .setColor('RED')
-            .addField('Reason', `\`\`\`${inspect(reason, { depth: 0 })}\`\`\``.substring(0, 1000))
-            .addField('Promise', `\`\`\`${inspect(p, { depth: 0 })}\`\`\``.substring(0, 1000))
+            .addFields({ name: 'Reason', value: `\`\`\`${inspect(reason, { depth: 0 })}\`\`\``.substring(0, 1000) })
+            .addFields({ name: 'Promise', value: `\`\`\`${inspect(p, { depth: 0 })}\`\`\``.substring(0, 1000) })
             .setTimestamp()
         return s.send({
             embeds: [unhandledRejectionEmbed]
@@ -42,13 +42,13 @@ module.exports = (client) => {
     
     process.on("uncaughtException", (err, origin) => {
         // const c = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        console.log(err, origin)
+        client.logger.log(err, origin, "error")
         const uncaughtExceptionEmbed = new MessageEmbed()
-            .setTitle('**🟥There was an Uncaught Exception/Catch 🟥**')
+            .setTitle('**🟥 There was an Uncaught Exception/Catch 🟥**')
             .setColor('RED')
             .setURL('https://nodejs.org/api/process.html#event-uncaughtexception')
-            .addField('Error', `\`\`\`${inspect(err, { depth: 0 })}\`\`\``.substring(0, 1000))
-            .addField('Origin', `\`\`\`${inspect(origin, { depth: 0 })}\`\`\``.substring(0, 1000))
+            .addFields({ name: 'Error', value: `\`\`\`${inspect(err, { depth: 0 })}\`\`\``.substring(0, 1000) })
+            .addFields({ name: 'Origin', value: `\`\`\`${inspect(origin, { depth: 0 })}\`\`\``.substring(0, 1000) })
             .setTimestamp()
         return s.send({
             embeds: [uncaughtExceptionEmbed]
@@ -57,13 +57,13 @@ module.exports = (client) => {
     
     process.on("uncaughtExceptionMonitor", (err, origin) => {
         // const d = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        console.log(err, origin)
+        client.logger.log(err, origin, "error")
         const uncaughtExceptionMonitorEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Uncaught Exception Monitor 🟥**')
             .setColor('RED')
             .setURL('https://nodejs.org/api/process.html#event-uncaughtexceptionmonitor')
-            .addField('Error', `\`\`\`${inspect(err, { depth: 0 })}\`\`\``.substring(0, 1000))
-            .addField('Origin', `\`\`\`${inspect(origin, { depth: 0 })}\`\`\``.substring(0, 1000))
+            .addFields({ name: 'Error', value: `\`\`\`${inspect(err, { depth: 0 })}\`\`\``.substring(0, 1000) })
+            .addFields({ name: 'Origin', value: `\`\`\`${inspect(origin, { depth: 0 })}\`\`\``.substring(0, 1000) })
             
             .setTimestamp()
     
@@ -74,14 +74,14 @@ module.exports = (client) => {
     
     process.on("multipleResolves", (type, promise, reason) => {
         // const e = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        console.log(type, promise, reason)
+        client.logger.log(type, promise, reason, "warn")
         const multipleResolvesEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Multiple Resolve 🟥**')
             .setURL('https://nodejs.org/api/process.html#event-multipleresolves')
             .setColor('RED')
-            .addField('Type', `\`\`\`${inspect(type, { depth: 0 })}\`\`\``.substring(0, 1000))
-            .addField('Promise', `\`\`\`${inspect(promise, { depth: 0 })}\`\`\``.substring(0, 1000))
-            .addField('Reason', `\`\`\`${inspect(reason, { depth: 0 })}\`\`\``.substring(0, 1000))
+            .addFields({ name: 'Type', value: `\`\`\`${inspect(type, { depth: 0 })}\`\`\``.substring(0, 1000) })
+            .addFields({ name:'Promise', value:`\`\`\`${inspect(promise, { depth: 0 })}\`\`\``.substring(0, 1000) })
+            .addFields({ name: 'Reason', value: `\`\`\`${inspect(reason, { depth: 0 })}\`\`\``.substring(0, 1000) })
             .setTimestamp()
         return s.send({
             embeds: [multipleResolvesEmbed]
@@ -90,12 +90,12 @@ module.exports = (client) => {
     
     process.on("warning", (warn) => {
         // const f = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        console.log(warn)
+        client.logger.log(warn, "warn")
         const warningEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Uncaught Exception Monitor Warning 🟥**')
             .setColor('RED')
             .setURL('https://nodejs.org/api/process.html#event-warning')
-            .addField('Warn', `\`\`\`${inspect(warn, { depth: 0 })}\`\`\``.substring(0, 1000))
+            .addFields({ name: 'Warn', value: `\`\`\`${inspect(warn, { depth: 0 })}\`\`\``.substring(0, 1000) })
             .setTimestamp()
         return s.send({
             embeds: [warningEmbed]

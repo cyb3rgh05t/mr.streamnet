@@ -14,11 +14,15 @@ module.exports = {
     * @param {Client} client 
     */
      async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
+
         const { options, member, guild } = interaction;
         const player = client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." });
-            if (!player.queue.length) return interaction.reply({ content: "There is nothing in the queue." });
+        if (!player.playing) return interaction.editReply({ content: "There is nothing in the queue." });
+            if (!player.queue.length) return interaction.editReply({ content: "There is nothing in the queue." });
 
                 const queue = player.queue.map((t, i) => `\`${++i}.\` **${t.title}** [${t.requester}]`);
                 const chunked = util.chunk(queue, 10).map(x => x.join("\n"));
@@ -28,6 +32,6 @@ module.exports = {
                 .setTitle(`🎶 Current queue for ${guild.name}`)
                 .setDescription(chunked[0])
 
-                return interaction.reply({ embeds: [queueEmbed] })
+                return interaction.editReply({ embeds: [queueEmbed] })
     }
 }

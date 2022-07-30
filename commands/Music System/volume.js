@@ -21,18 +21,22 @@ module.exports = {
     * @param {Client} client 
     */
      async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
+
         const { options, member, guild } = interaction;
         const player = client.manager.get(interaction.guildId);
 
         const volume = options.getNumber("percent");
-                    if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." })
-                    if (volume < 0 || volume > 100) return interaction.reply({ content: `You can only set the volume from 0 to 100.` })
+                    if (!player.playing) return interaction.editReply({ content: "There is nothing in the queue." })
+                    if (volume < 0 || volume > 100) return interaction.editReply({ content: `You can only set the volume from 0 to 100.` })
                     player.setVolume(volume);
 
                     const volumeEmbed = new MessageEmbed()
                         .setColor("DARK_BUT_NOT_BLACK")
                         .setDescription(`🔈 Volume has been set to **${player.volume}%**.`)
-                    return interaction.reply({ embeds: [volumeEmbed] })
+                    return interaction.editReply({ embeds: [volumeEmbed] })
 
      }
 }

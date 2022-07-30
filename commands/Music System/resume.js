@@ -14,15 +14,20 @@ module.exports = {
     * @param {Client} client 
     */
     async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
 
         const player = interaction.client.manager.get(interaction.guildId);
 
         await player.pause(false);
 
+        const song = player.queue.current;
+
         const resumeEmbed = new MessageEmbed()
         .setColor("DARK_BUT_NOT_BLACK")
-        .setDescription("▶️ Resumed")
-        return interaction.reply({ embeds: [resumeEmbed] })
+        .setDescription(`▶️ **Resumed**\n\n[${song.title}](${song.uri})`)
+        return interaction.editReply({ embeds: [resumeEmbed] })
 
     }
 }

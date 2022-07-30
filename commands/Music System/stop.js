@@ -14,6 +14,9 @@ module.exports = {
     * @param {Client} client 
     */
     async execute(interaction, client) {
+        await interaction.deferReply({
+            ephemeral: false
+          });
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -21,7 +24,7 @@ module.exports = {
 
             const disconnectEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription("⏹️  Disconnected.")
-            return interaction.reply({ embeds: [disconnectEmbed] })
+            .setDescription("⏹️  **Disconnected**")
+            return interaction.editReply({ embeds: [disconnectEmbed] })
     }
 }
