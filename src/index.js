@@ -9,8 +9,8 @@ const PG = promisify(glob);
 const Ascii = require("ascii-table")
 const colors = require("colors");
 
-const { DisTube } = require('distube');
-const { SpotifyPlugin } = require('@distube/spotify');
+//const { DisTube } = require('distube');
+//const { SpotifyPlugin } = require('@distube/spotify');
 
 const Deezer = require("erela.js-deezer");
 const Spotify = require("better-erela.js-spotify").default;
@@ -35,6 +35,7 @@ client.manager = new Manager({
     },
 });
 
+/*
 client.distube = new DisTube(client, {
     youtubeDL: false,
     emitNewSongOnly: true,
@@ -42,6 +43,7 @@ client.distube = new DisTube(client, {
     emitAddSongWhenCreatingQueue: false,
     plugins: [new SpotifyPlugin()]
 });
+*/
 
 ["giveawaySys"].forEach(system => {
     require(`../systems/${system}`)(client)
@@ -66,5 +68,5 @@ module.exports = client;
 
 client.login(token).then(() => {
 }).catch((err) => {
-    console.log(`[ERROR]`.red.bold, err)
+    console.log(err, "error")
 });

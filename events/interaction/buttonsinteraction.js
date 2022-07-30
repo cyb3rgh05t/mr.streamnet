@@ -10,18 +10,18 @@ module.exports = {
     execute(interaction, client) {
         if(!interaction.isButton()) return;
         
-        const Button = client.buttons.get(interaction.customId);
+        const button = client.buttons.get(interaction.customId);
 
-        if(!Button)
+        if(!button)
             return;
         
-        if(Button.permission && !interaction.member.permissions.has(Button.permission))
+        if(button.permission && !interaction.member.permissions.has(button.permission))
         return interaction.reply({ content: `You do not have the required permission for this command: \`${interaction.customId}\`.`, ephemeral: true })
 
-        if(Button.ownerOnly && interaction.member.id !== interaction.guild.ownerId)
+        if(button.ownerOnly && interaction.member.id !== interaction.guild.ownerId)
         return interaction.reply({content: "You are not the owner.", ephemeral: true});
 
-        Button.execute(interaction, client);
+        button.execute(interaction, client);
         
     }
 }
