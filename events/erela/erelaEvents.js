@@ -1,4 +1,4 @@
-const client = require("../../src/index");
+/*const client = require("../../src/index");
 
 client.manager
     .on("nodeConnect", (node) => {
@@ -16,7 +16,7 @@ client.manager
     module.exports = {
         name: "ErelaEvents",
       };
-/*
+*/
       //const DB = require("../../Structures/Schemas/trackEnd");
       //const DB_COUNTER = require("../../Structures/Schemas/songsPlayed");
       const client = require("../../src/index");
@@ -43,13 +43,9 @@ client.manager
       const row = new MessageActionRow()
           .addComponents(
               new MessageButton()
-              .setCustomId('volumeDownMusic') //DONE
-              .setStyle('DANGER')
-              .setEmoji('🔉'),
-              new MessageButton()
-              .setCustomId('volumeUpMusic') //DONE
-              .setStyle('SUCCESS')
-              .setEmoji('🔊'),
+                .setCustomId('shuffleMusic') //DONE
+                .setStyle('SECONDARY')
+                .setEmoji('🔀'),
               new MessageButton()
               .setCustomId('skipMusic') //DONE
               .setStyle('SECONDARY')
@@ -61,22 +57,37 @@ client.manager
               new MessageButton()
               .setCustomId('resumeMusic') //DONE
               .setStyle('SECONDARY')
-              .setEmoji('⏯️')
+              .setEmoji('⏯️'),
+              new MessageButton()
+              .setCustomId('stopMusic') //DONE
+              .setStyle('SECONDARY')
+              .setEmoji('⏹')
+          )
+          const row2 = new MessageActionRow()
+          .addComponents(
+              new MessageButton()
+              .setCustomId('volumeDownMusic') //DONE
+              .setStyle('DANGER')
+              .setEmoji('🔉'),
+              new MessageButton()
+              .setCustomId('volumeUpMusic') //DONE
+              .setStyle('SUCCESS')
+              .setEmoji('🔊')
           )
       
       client.manager
       
-          .on("nodeConnect", (node) => {
-              console.log(`[Erela] >> Connection has been established to "${node.options.identifier}".`)
-          })
-      
-          .on("nodeDisconnect", (node, error) => {
-              console.log(`[Erela] >> Lost connection to "${node.options.identifier}" due to an error: ${error.message}.`)
-          })
-      
-          .on("nodeError", (node, error) => {
-              console.log(`[Erela] >> Node "${node.options.identifier}" has encountered an error: ${error.message}.`)
-          })
+        .on("nodeConnect", (node) => {
+        client.logger.log(`[LAVALINK] Connection has been established to [${node.options.identifier}]`, "ready")
+        })
+
+        .on("nodeDisconnect", (node, error) => {
+        client.logger.log(`[LAVALINK] Lost connection to [${node.options.identifier}] due to an error: ${error.message}`, "error")
+        })
+
+        .on("nodeError", (node, error) => {
+        client.logger.log(`[LAVALINK] Node [${node.options.identifier}] has encountered an error: ${error.message}`, "error")
+        })
           /*
           .on("trackEnd", async (player, track) => {
       
@@ -105,15 +116,15 @@ client.manager
               // await fetchedMessage.edit({ embeds: [new MessageEmbed().setColor("BLURPLE").setDescription(`🔹 |  Finished **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"} - <@${track.requester.id}>]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()]})
       
           }) 
-      
+      */
           .on("trackStart", async (player, track) => {
       
               trackMsgId = await client.channels.cache.get(player.textChannel).send({
-                  embeds: [new MessageEmbed().setColor("BLURPLE").setDescription(`🔹 |  Now Playing **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"} - <@${track.requester.id}>]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
+                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"} - <@${track.requester.id}>]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
                   components: [row]
               })
       
-              const dbFound = await DB.findOne({
+             /* const dbFound = await DB.findOne({
                   guildId: player.guild
               });
       
@@ -125,7 +136,7 @@ client.manager
                   guildId: player.guild,
                   messageId: trackMsgId.id
               });
-      
+      */
       
           })
       
@@ -134,7 +145,7 @@ client.manager
               player.destroy()
               player.disconnect()
       
-          })*/
+          })
 
           module.exports = {
             name: "ErelaEvents",

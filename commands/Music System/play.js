@@ -37,7 +37,8 @@ module.exports = {
             guild: interaction.guild.id,
             voiceChannel: member.voice.channel.id,
             textChannel: interaction.channelId,
-            selfDeafen: true
+            selfDeafen: true,
+            volume: 100
         });
 
         let res;
