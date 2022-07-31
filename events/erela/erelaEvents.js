@@ -24,9 +24,9 @@
       const row = new MessageActionRow()
           .addComponents(
               new MessageButton()
-                .setCustomId('shuffleMusic') //DONE
-                .setStyle('SECONDARY')
-                .setEmoji('🔀'),
+              .setCustomId('shuffleMusic') //DONE
+              .setStyle('SECONDARY')
+              .setEmoji('🔀'),
               new MessageButton()
               .setCustomId('skipMusic') //DONE
               .setStyle('SECONDARY')
@@ -44,7 +44,7 @@
               .setStyle('SECONDARY')
               .setEmoji('⏹')
           )
-          const row2 = new MessageActionRow()
+        const row2 = new MessageActionRow()
           .addComponents(
               new MessageButton()
               .setCustomId('volumeDownMusic') //DONE
@@ -53,6 +53,10 @@
               new MessageButton()
               .setCustomId('volumeUpMusic') //DONE
               .setStyle('SUCCESS')
+              .setEmoji('🔊'),
+              new MessageButton()
+              .setCustomId('lyrics') //DONE
+              .setStyle('SECONDARY')
               .setEmoji('🔊')
           )
       

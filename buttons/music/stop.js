@@ -12,15 +12,14 @@ module.exports = {
      * @param {Client} client 
      */
     async execute(interaction, client) {
-        const member = interaction.member;
 
         const player = interaction.client.manager.get(interaction.guildId);
 
         player.destroy()
 
-            const disconnectEmbed = new MessageEmbed()
-            .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription("⏹️  **Disconnected**")
-            return interaction.reply({ embeds: [disconnectEmbed], ephemeral: true })
+           const disconnectEmbed = new MessageEmbed()
+           .setColor("DARK_BUT_NOT_BLACK")
+           .setDescription("⏹️  **Disconnected**")
+           return interaction.reply({ embeds: [disconnectEmbed], ephemeral: true })
     }
 }

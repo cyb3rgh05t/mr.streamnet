@@ -12,7 +12,6 @@ module.exports = {
      * @param {Client} client 
      */
     async execute(interaction, client) {
-        const member = interaction.member;
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -30,13 +29,12 @@ module.exports = {
             return interaction.reply({ embeds: [thing], ephemeral: true });
           }
 
-        await player.pause(true);
+        await player.pause(true)
 
         const song = player.queue.current;
 
         let thing = new MessageEmbed()
-        .setColor("DARK_BUT_NOT_BLACK")
-        
+        .setColor("DARK_BUT_NOT_BLACK")  
         .setDescription(`⏸️ **Paused**\n\n[${song.title}](${song.uri})`)
         return interaction.reply({ embeds: [thing], ephemeral: true });
 

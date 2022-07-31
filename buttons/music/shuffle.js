@@ -12,7 +12,6 @@ module.exports = {
      * @param {Client} client 
      */
     async execute(interaction, client) {
-        const member = interaction.member;
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -21,10 +20,10 @@ module.exports = {
 
                 player.queue.shuffle()
 
-                const shuffleEmbed = new MessageEmbed()
-                .setColor("DARK_BUT_NOT_BLACK")
-                .setDescription(`🔀 Shuffled the queue`)
-                return interaction.reply({ embeds: [shuffleEmbed], ephemeral: true });
+               const shuffleEmbed = new MessageEmbed()
+               .setColor("DARK_BUT_NOT_BLACK")
+               .setDescription(`🔀 Shuffled the queue`)
+               return interaction.reply({ embeds: [shuffleEmbed], ephemeral: true });
 
     }
 }
