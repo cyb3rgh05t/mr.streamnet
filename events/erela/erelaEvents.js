@@ -1,22 +1,3 @@
-/*const client = require("../../src/index");
-
-client.manager
-    .on("nodeConnect", (node) => {
-        client.logger.log(`[LAVALINK] Connection has been established to [${node.options.identifier}]`, "ready")
-    })
-
-    .on("nodeDisconnect", (node, error) => {
-        client.logger.log(`[LAVALINK] Lost connection to [${node.options.identifier}] due to an error: ${error.message}`, "error")
-    })
-
-    .on("nodeError", (node, error) => {
-        client.logger.log(`[LAVALINK] Node [${node.options.identifier}] has encountered an error: ${error.message}`, "error")
-    })
-
-    module.exports = {
-        name: "ErelaEvents",
-      };
-*/
       //const DB = require("../../Structures/Schemas/trackEnd");
       //const DB_COUNTER = require("../../Structures/Schemas/songsPlayed");
       const client = require("../../src/index");
@@ -120,7 +101,7 @@ client.manager
           .on("trackStart", async (player, track) => {
       
               trackMsgId = await client.channels.cache.get(player.textChannel).send({
-                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"} - <@${track.requester.id}>]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
+                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"}]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
                   components: [row]
               })
       

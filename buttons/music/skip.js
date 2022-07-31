@@ -16,8 +16,9 @@ module.exports = {
 
         const player = client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." })
-        await player.stop();
+        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue.", ephemeral: true })
+        if (!player.queue.length) return interaction.reply({ content: "There is nothing in the queue.", ephemeral: true });
+        //await player.stop();
 
         const skipEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")

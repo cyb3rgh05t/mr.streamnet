@@ -22,7 +22,7 @@ module.exports = {
     */
      async execute(interaction, client) {
         await interaction.deferReply({
-            ephemeral: false
+            ephemeral: true
           });
         const { options, member, guild } = interaction;
         const VoiceChannel = member.voice.channel;
