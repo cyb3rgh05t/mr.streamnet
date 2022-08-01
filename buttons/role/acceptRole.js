@@ -4,7 +4,6 @@ const { memberId, streamnetId, welcomeChannelId } = require("../../src/config/co
 
 module.exports = {
     id: "acceptRole",
-    permission: "MANAGE_MESSAGES",
     async execute(interaction) {
         const member = interaction.member;
  
