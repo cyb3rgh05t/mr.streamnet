@@ -5,7 +5,7 @@ const gClient = new genius.Client();
 
 module.exports = {
     name: "queue",
-    description: "Add to song to queue",
+    description: "Show current queue",
     usage: "/queue",
     public: true,
     
@@ -25,7 +25,7 @@ module.exports = {
             if (!player.queue.length) return interaction.editReply({ content: "There is nothing in the queue." });
 
                 const queue = player.queue.map((t, i) => `\`${++i}.\` **${t.title}** [${t.requester}]`);
-                const chunked = util.chunk(queue, 10).map(x => x.join("\n"));
+                const chunked = util.chunk(queue, 100).map(x => x.join("\n"));
 
                 const queueEmbed = new MessageEmbed()
                 .setColor("DARK_BUT_NOT_BLACK")

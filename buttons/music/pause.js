@@ -36,7 +36,8 @@ module.exports = {
         let thing = new MessageEmbed()
         .setColor("DARK_BUT_NOT_BLACK")  
         .setDescription(`⏸️ **Paused**\n\n[${song.title}](${song.uri})`)
-        return interaction.reply({ embeds: [thing], ephemeral: true });
+            return interaction.reply({ embeds: [thing]},
+            setTimeout(() => interaction.deleteReply(), 3000));
 
     }
 

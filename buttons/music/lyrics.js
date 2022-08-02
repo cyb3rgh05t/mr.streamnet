@@ -6,7 +6,8 @@ const gClient = new genius.Client();
 
 module.exports = {
     id: "lyrics",
-    permission: "ADMINISTRATOR",
+    public: true,
+
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 

@@ -46,18 +46,26 @@
           )
         const row2 = new MessageActionRow()
           .addComponents(
+              //new MessageButton()
+              //.setCustomId('volumeDownMusic') //DONE
+              //.setStyle('DANGER')
+              //.setEmoji('🔉'),
+              //.setDisabled(true),
+              //new MessageButton()
+              //.setCustomId('volumeUpMusic') //DONE
+              //.setStyle('SUCCESS')
+              //.setEmoji('🔊'),
+              //.setDisabled(true),
               new MessageButton()
-              .setCustomId('volumeDownMusic') //DONE
-              .setStyle('DANGER')
-              .setEmoji('🔉'),
-              new MessageButton()
-              .setCustomId('volumeUpMusic') //DONE
-              .setStyle('SUCCESS')
-              .setEmoji('🔊'),
+              .setCustomId('queue') //DONE
+              .setStyle('SECONDARY')
+              .setEmoji('')
+              .setLabel("Queue"),
               new MessageButton()
               .setCustomId('lyrics') //DONE
               .setStyle('SECONDARY')
-              .setEmoji('🔊')
+              .setEmoji('💬')
+              .setLabel("Lyrics")
           )
       
       client.manager
@@ -105,8 +113,8 @@
           .on("trackStart", async (player, track) => {
       
               trackMsgId = await client.channels.cache.get(player.textChannel).send({
-                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** [${msToTime(track.duration) || "Undetermined"}]`).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
-                  components: [row]
+                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** \`${msToTime(track.duration) || "Undetermined"}\``).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
+                  components: [row, row2]
               })
       
              /* const dbFound = await DB.findOne({
@@ -126,6 +134,8 @@
           })
       
           .on("queueEnd", async (player, track) => {
+            const channel = client.channels.cache.get(player.textChannel);
+            channel.send("Queue has ended.");
       
               player.destroy()
               player.disconnect()

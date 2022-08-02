@@ -6,7 +6,8 @@ const gClient = new genius.Client();
 
 module.exports = {
     id: "resumeMusic",
-    permission: "ADMINISTRATOR",
+    public: true,
+
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
@@ -22,6 +23,7 @@ module.exports = {
        const resumeEmbed = new MessageEmbed()
        .setColor("DARK_BUT_NOT_BLACK")
        .setDescription(`▶️ **Resumed**\n\n[${song.title}](${song.uri})`)
-       return interaction.reply({ embeds: [resumeEmbed], ephemeral: true })
+            return interaction.reply({ embeds: [resumeEmbed]},
+            setTimeout(() => interaction.deleteReply(), 3000));
     }
 }

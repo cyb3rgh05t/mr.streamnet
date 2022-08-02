@@ -6,7 +6,7 @@ const gClient = new genius.Client();
 
 module.exports = {
     id: "skipMusic",
-    permission: "ADMINISTRATOR",
+    public: true,
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
@@ -22,7 +22,8 @@ module.exports = {
         const skipEmbed = new MessageEmbed()
         .setColor("DARK_BUT_NOT_BLACK")
         .setDescription(`⏭️  **Skipped**`)
-        return interaction.reply({ embeds: [skipEmbed], ephemeral: true });
+            return interaction.reply({ embeds: [skipEmbed]},
+            setTimeout(() => interaction.deleteReply(), 3000));
 
     }
 }

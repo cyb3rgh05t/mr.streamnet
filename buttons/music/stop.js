@@ -6,7 +6,7 @@ const gClient = new genius.Client();
 
 module.exports = {
     id: "stopMusic",
-    permission: "ADMINISTRATOR",
+    public: true,
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
@@ -20,6 +20,6 @@ module.exports = {
            const disconnectEmbed = new MessageEmbed()
            .setColor("DARK_BUT_NOT_BLACK")
            .setDescription("⏹️  **Disconnected**")
-           return interaction.reply({ embeds: [disconnectEmbed], ephemeral: true })
+           return interaction.reply({ embeds: [disconnectEmbed], ephemeral: false })
     }
 }

@@ -61,7 +61,7 @@ module.exports = {
                         if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
                         const playlistEmbed = new MessageEmbed()
                             .setDescription(`🎶  **${res.playlist.name} (${query})** has been added to the queue.`)
-                            .addField("Enqueued", `\`${res.tracks.length}\` tracks`)
+                            .addField("Enqueued", `\`${res.tracks.length}\` tracks added by ${member}`)
                         return interaction.editReply({ embeds: [playlistEmbed] })
                     }
 
@@ -74,7 +74,7 @@ module.exports = {
                         .setColor("DARK_BUT_NOT_BLACK")
                         .setTitle("🎶  Enqueued")
                         .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**\n\n${member}`)
-                        //.setFooter({ text: `${member}` })
+                        .setFooter({ text: `${res.tracks[0].requester}` })
                         .setThumbnail(res.tracks[0].displayThumbnail("3"))
                     await interaction.editReply({ embeds: [enqueueEmbed] });
 
