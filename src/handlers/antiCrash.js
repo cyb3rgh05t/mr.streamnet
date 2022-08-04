@@ -42,7 +42,7 @@ module.exports = (client) => {
     
     process.on("uncaughtException", (err, origin) => {
         // const c = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        client.logger.log(err, origin, "error")
+        console.log(err, origin)
         const uncaughtExceptionEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Uncaught Exception/Catch 🟥**')
             .setColor('RED')
@@ -57,7 +57,7 @@ module.exports = (client) => {
     
     process.on("uncaughtExceptionMonitor", (err, origin) => {
         // const d = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        client.logger.log(err, origin, "error")
+        console.log(err, origin)
         const uncaughtExceptionMonitorEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Uncaught Exception Monitor 🟥**')
             .setColor('RED')
@@ -74,7 +74,7 @@ module.exports = (client) => {
     
     process.on("multipleResolves", (type, promise, reason) => {
         // const e = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
-        client.logger.log(type, promise, reason, "warn")
+        console.log(type, promise, reason)
         const multipleResolvesEmbed = new MessageEmbed()
             .setTitle('**🟥 There was an Multiple Resolve 🟥**')
             .setURL('https://nodejs.org/api/process.html#event-multipleresolves')

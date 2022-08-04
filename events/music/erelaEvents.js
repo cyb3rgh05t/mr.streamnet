@@ -1,11 +1,7 @@
-      //const DB = require("../../Structures/Schemas/trackEnd");
+      //const DB = require("../../src/databases/musicDB");
       //const DB_COUNTER = require("../../Structures/Schemas/songsPlayed");
       const client = require("../../src/index");
-      const {
-          MessageEmbed,
-          MessageActionRow,
-          MessageButton
-      } = require("discord.js");
+      const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
       
       function msToTime(duration) {
           var milliseconds = Math.floor((duration % 1000) / 100),
@@ -111,13 +107,13 @@
           }) 
       */
           .on("trackStart", async (player, track) => {
-      
+            
               trackMsgId = await client.channels.cache.get(player.textChannel).send({
-                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🎶 Now Playing **[${track.title}](${track.uri})** \`${msToTime(track.duration) || "Undetermined"}\``).setImage(track.displayThumbnail("maxresdefault")).setTimestamp()],
+                  embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`🎶 Now Playing`).setDescription(`**[${track.title}](${track.uri})** - \`${msToTime(track.duration) || "Undetermined"}\``).setImage(track.displayThumbnail("maxresdefault"))],
                   components: [row, row2]
               })
       
-             /* const dbFound = await DB.findOne({
+             /*const dbFound = await DB.findOne({
                   guildId: player.guild
               });
       
@@ -127,15 +123,16 @@
       
               else await DB.create({
                   guildId: player.guild,
-                  messageId: trackMsgId.id
-              });
-      */
+                  messageId: trackMsgId.id,
+                  
+              });*/
+      
       
           })
       
           .on("queueEnd", async (player, track) => {
             const channel = client.channels.cache.get(player.textChannel);
-            channel.send("Queue has ended.");
+            channel.send("Player stopped, Queue has ended.");
       
               player.destroy()
               player.disconnect()

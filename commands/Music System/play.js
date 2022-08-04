@@ -10,7 +10,7 @@ module.exports = {
     public: true,
     options: [
         {
-            name: "query", 
+            name: "input", 
             description: "Provide the name of the song or URL.", 
             type: "STRING", 
             required: true 
@@ -22,7 +22,7 @@ module.exports = {
     */
      async execute(interaction, client) {
         await interaction.deferReply({
-            ephemeral: true
+            ephemeral: false
           });
         const { options, member, guild } = interaction;
         const VoiceChannel = member.voice.channel;
@@ -42,7 +42,7 @@ module.exports = {
         });
 
         let res;
-        const query = interaction.options.getString("query");
+        const query = interaction.options.getString("input");
                     res = await player.search(query, interaction.user.username);
 
                     if (res.loadType === "LOAD_FAILED") {
@@ -74,7 +74,7 @@ module.exports = {
                         .setColor("DARK_BUT_NOT_BLACK")
                         .setTitle("🎶  Enqueued")
                         .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**\n\n${member}`)
-                        .setFooter({ text: `${res.tracks[0].requester}` })
+                        //.setFooter({ text: `${res.tracks[0].requester}` })
                         .setThumbnail(res.tracks[0].displayThumbnail("3"))
                     await interaction.editReply({ embeds: [enqueueEmbed] });
 

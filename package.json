@@ -48,6 +48,8 @@
     "glob": "^8.0.3",
     "lavasfy": "^2.3.0",
     "libsodium-wrappers": "^0.7.10",
+    "lodash": "^4.17.21",
+    "lyrics-finder": "^21.7.0",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.4.6",
