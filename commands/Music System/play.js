@@ -8,6 +8,19 @@ const genius = require("genius-lyrics");
 const gClient = new genius.Client();
 const DB = require("../../src/databases/musicDB");
 
+function msToTime(duration) {
+    var milliseconds = Math.floor((duration % 1000) / 100),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
+}
+
 module.exports = {
     name: "play",
     description: "Plays a song",
@@ -107,9 +120,19 @@ module.exports = {
         const enqueueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
             .setTitle("🎶  Enqueued")
-            .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**\n\n<@${dbFound.requesterId}>`)
+            .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**`)
             //.setFooter({ text: `${res.tracks[0].requester}` })
             .setThumbnail(res.tracks[0].displayThumbnail("3"))
+            .addFields({
+                name: `Duration :`,
+                value: `\`${msToTime(res.tracks[0].duration) || "Undetermined"}\``,
+                inline: true
+
+            }, {
+                name: `Requester :`,
+                value: `<@${dbFound.requesterId}>`,
+                inline: true
+            })
         await interaction.editReply({
             embeds: [enqueueEmbed]
         });
