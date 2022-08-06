@@ -95,12 +95,12 @@ client.manager
 
         trackMsgId = await client.channels.cache.get(player.textChannel).send({
             embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`🎶 Now Playing`).setDescription(`**[${track.title}](${track.uri})**`).addFields({
-                name: `Duration`,
+                name: `Duration :`,
                 value: `\`${msToTime(track.duration) || "Undetermined"}\``,
                 inline: true
 
             }, {
-                name: `Requester:`,
+                name: `Requester :`,
                 value: `<@${dbFound.requesterId}>`,
                 inline: true
             }).setImage(track.displayThumbnail("maxresdefault"))],
