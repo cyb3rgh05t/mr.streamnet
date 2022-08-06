@@ -16,9 +16,9 @@ module.exports = {
 
         const player = interaction.client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ content: "There is nothing in the queue." },
+        if (!player.playing) return interaction.reply({ embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]},
         setTimeout(() => interaction.deleteReply(), 3000));
-            if (!player.queue.length) return interaction.reply({ content: "There is nothing in the queue." },
+            if (!player.queue.length) return interaction.reply({ embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]},
             setTimeout(() => interaction.deleteReply(), 3000));
 
                 player.queue.shuffle()

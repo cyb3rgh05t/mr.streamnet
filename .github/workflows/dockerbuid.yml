@@ -7,8 +7,6 @@ on:
       - ".github/**"
       - "LICENSE"
       - "**.md"
-  schedule:
-    - cron: '0 5 * * *'
 
 jobs:
   GHRC:

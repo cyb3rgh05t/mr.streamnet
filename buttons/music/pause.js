@@ -18,15 +18,17 @@ module.exports = {
         if (!player.queue.current) {
             let thing = new MessageEmbed()
              .setColor("RED")
-             .setDescription("There is no music playing.");
-            return interaction.reply({ embeds: [thing], ephemeral: true }); 
+             .setDescription("❌ There is no music playing.");
+            return interaction.reply({ embeds: [thing]},
+              setTimeout(() => interaction.deleteReply(), 3000)); 
         }
 
         if (player.paused) {
             let thing = new MessageEmbed()
               .setColor("RED")
               .setDescription(`⏸️ The player is already paused.`)
-            return interaction.reply({ embeds: [thing], ephemeral: true });
+            return interaction.reply({ embeds: [thing]},
+              setTimeout(() => interaction.deleteReply(), 3000));
           }
 
         await player.pause(true)

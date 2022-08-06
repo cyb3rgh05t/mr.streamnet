@@ -1,5 +1,4 @@
 const { Client } = require("discord.js");
-//const public_CommandsArray = require("../../src/handlers/public")
 const { databaseUrl } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");

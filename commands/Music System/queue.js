@@ -21,8 +21,10 @@ module.exports = {
         const { options, member, guild } = interaction;
         const player = client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.editReply({ content: "There is nothing in the queue." });
-            if (!player.queue.length) return interaction.editReply({ content: "There is nothing in the queue." });
+        if (!player.playing) return interaction.editReply({ embeds: [new MessageEmbed().setColor("DARK_RED").setDescription("❌ There is nothing in the queue.")]},
+        setTimeout(() => interaction.deleteReply(), 3000));
+            if (!player.queue.length) return interaction.editReply({ embeds: [new MessageEmbed().setColor("DARK_RED").setDescription("❌ There is nothing in the queue.")]},
+            setTimeout(() => interaction.deleteReply(), 3000));
 
                 const queue = player.queue.map((t, i) => `\`${++i}.\` **${t.title}** [${t.requester}]`);
                 const chunked = util.chunk(queue, 100).map(x => x.join("\n"));
