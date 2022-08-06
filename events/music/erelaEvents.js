@@ -145,7 +145,7 @@ client.manager
         const fetchedMessage = await client.channels.cache.get(player.textChannel).messages.fetch(dbFound.messageId)
 
         await fetchedMessage.edit({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})** - \`${msToTime(track.duration) || "Undetermined"}\``).setImage(track.displayThumbnail("maxresdefault"))]
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})**`).setImage(track.displayThumbnail("maxresdefault"))]
         })
 
         //const channel = client.channels.cache.get(player.textChannel);
