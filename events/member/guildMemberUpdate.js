@@ -1,6 +1,11 @@
 const client = require("../../src/index");
-const { GuildMember } = require("discord.js");
-const { memberId, streamnetId } = require("../../src/config/config.json");
+const {
+    GuildMember
+} = require("discord.js");
+const {
+    memberId,
+    streamnetId
+} = require("../../src/config/config.json");
 
 module.exports = {
     name: "guildMemberUpdate",
@@ -11,8 +16,8 @@ module.exports = {
      */
     execute(oldMember, newMember) {
 
-    if (newMember.roles.cache.some(role => role.id === streamnetId)) {
-        newMember.roles.remove(memberId);
+        if (newMember.roles.cache.some(role => role.id === streamnetId)) {
+            newMember.roles.remove(memberId);
         }
     }
 }

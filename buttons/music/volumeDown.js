@@ -1,12 +1,16 @@
-const { ButtonInteraction, Client, MessageEmbed } = require("discord.js");
+const {
+    ButtonInteraction,
+    Client,
+    MessageEmbed
+} = require("discord.js");
+const DB = require("../../src/databases/musicDB");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
 
-
 module.exports = {
     id: "volumeDownMusic",
-    permission: "ADMINISTRATOR",
+    public: true,
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
@@ -14,18 +18,26 @@ module.exports = {
     async execute(interaction, client) {
         const member = interaction.member;
 
-        const player = interaction.client.manager.get({
-            guild: interaction.guild.id,
-            voiceChannel: member.voice.channel.id,
-            textChannel: interaction.channelId,
-            selfDeafen: true,
-            volume: 100
-        });
-    
-        let amount = Number(player.volume) - 10;
-            if (amount = 1) return await interaction.reply("Cannot lower the player volume further more");
+        const player = interaction.client.manager.get(interaction.guildId);
 
-            player.setVolume(amount);
-            await interaction.reply("🔉 Volume set to \`[ ${player.volume}% ]\`");
+        const dbFound = await DB.findOne({
+            guildId: player.guild
+        });
+
+        const requester = dbFound.requesterId
+
+        if (interaction.user.id !== requester) {
+            return interaction.reply({
+                    embeds: [new MessageEmbed().setColor("RED").setDescription(`❌ Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
+                },
+                setTimeout(() => interaction.deleteReply(), 5000));
+        }
+
+
+        let amount = Number(player.volume) - 10;
+        if (amount = 1) return await interaction.reply("Cannot lower the player volume further more");
+
+        player.setVolume(amount);
+        await interaction.reply("🔉 Volume set to \`[ ${player.volume}% ]\`");
     }
 }

@@ -1,4 +1,8 @@
-const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
+const {
+    CommandInteraction,
+    MessageEmbed,
+    Client
+} = require("discord.js");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
@@ -8,15 +12,15 @@ module.exports = {
     description: "Resume song",
     usage: "/resume",
     public: true,
-    
+
     /**
-    * @param {CommandInteraction} interaction 
-    * @param {Client} client 
-    */
+     * @param {CommandInteraction} interaction 
+     * @param {Client} client 
+     */
     async execute(interaction, client) {
         await interaction.deferReply({
             ephemeral: false
-          });
+        });
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -25,9 +29,11 @@ module.exports = {
         const song = player.queue.current;
 
         const resumeEmbed = new MessageEmbed()
-        .setColor("DARK_BUT_NOT_BLACK")
-        .setDescription(`▶️ **Resumed**\n\n[${song.title}](${song.uri})`)
-        return interaction.editReply({ embeds: [resumeEmbed] })
+            .setColor("DARK_BUT_NOT_BLACK")
+            .setDescription(`▶️ **Resumed**\n\n[${song.title}](${song.uri})`)
+        return interaction.editReply({
+            embeds: [resumeEmbed]
+        })
 
     }
 }

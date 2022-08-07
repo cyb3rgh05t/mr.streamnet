@@ -1,7 +1,12 @@
-const { ButtonInteraction, Client, MessageEmbed } = require("discord.js");
+const {
+    ButtonInteraction,
+    Client,
+    MessageEmbed
+} = require("discord.js");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
+const DB = require("../../src/databases/musicDB");
 
 
 module.exports = {
@@ -15,16 +20,35 @@ module.exports = {
 
         const player = client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.reply({ embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]},
-        setTimeout(() => interaction.deleteReply(), 3000));
-        if (!player.queue.length) return interaction.reply({ embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]},
-        setTimeout(() => interaction.deleteReply(), 3000));
+        const dbFound = await DB.findOne({
+            guildId: player.guild
+        });
+
+        const requester = dbFound.requesterId
+
+        if (interaction.user.id !== requester) {
+            return interaction.reply({
+                    embeds: [new MessageEmbed().setColor("RED").setDescription(`❌ Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
+                },
+                setTimeout(() => interaction.deleteReply(), 5000));
+        }
+
+        if (!player.playing) return interaction.reply({
+                embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]
+            },
+            setTimeout(() => interaction.deleteReply(), 3000));
+        if (!player.queue.length) return interaction.reply({
+                embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]
+            },
+            setTimeout(() => interaction.deleteReply(), 3000));
         await player.stop()
 
         const skipEmbed = new MessageEmbed()
-        .setColor("DARK_BUT_NOT_BLACK")
-        .setDescription(`⏭️  **Skipped**`)
-            return interaction.reply({ embeds: [skipEmbed]},
+            .setColor("DARK_BUT_NOT_BLACK")
+            .setDescription(`⏭️  **Skipped**`)
+        return interaction.reply({
+                embeds: [skipEmbed]
+            },
             setTimeout(() => interaction.deleteReply(), 3000));
 
     }

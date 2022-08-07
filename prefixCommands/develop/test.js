@@ -1,4 +1,8 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
+const {
+    Client,
+    Message,
+    MessageEmbed
+} = require("discord.js");
 
 module.exports = {
     name: "test",
@@ -11,7 +15,9 @@ module.exports = {
      * @param {Message} message
      * @param {String[]} args
      */
-    run: async(client, message, args) => {
-        message.channel.send({ content: "Hello World..." })
+    run: async (client, message, args) => {
+        message.channel.send({
+            content: "Hello World..."
+        })
     }
 }

@@ -1,4 +1,8 @@
-const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
+const {
+    CommandInteraction,
+    MessageEmbed,
+    Client
+} = require("discord.js");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
@@ -8,27 +12,33 @@ module.exports = {
     description: "Shuffle song",
     usage: "/shuffle",
     public: true,
-    
+
     /**
-    * @param {CommandInteraction} interaction 
-    * @param {Client} client 
-    */
+     * @param {CommandInteraction} interaction 
+     * @param {Client} client 
+     */
     async execute(interaction, client) {
         await interaction.deferReply({
             ephemeral: false
-          });
+        });
 
         const player = interaction.client.manager.get(interaction.guildId);
 
-        if (!player.playing) return interaction.editReply({ content: "There is nothing in the queue." });
-            if (!player.queue.length) return interaction.editReply({ content: "There is nothing in the queue." });
+        if (!player.playing) return interaction.editReply({
+            content: "There is nothing in the queue."
+        });
+        if (!player.queue.length) return interaction.editReply({
+            content: "There is nothing in the queue."
+        });
 
-                player.queue.shuffle()
+        player.queue.shuffle()
 
-                const shuffleEmbed = new MessageEmbed()
-                .setColor("DARK_BUT_NOT_BLACK")
-                .setDescription(`🔀 Shuffled the queue`)
-                return interaction.editReply({ embeds: [shuffleEmbed] })
+        const shuffleEmbed = new MessageEmbed()
+            .setColor("DARK_BUT_NOT_BLACK")
+            .setDescription(`🔀 Shuffled the queue`)
+        return interaction.editReply({
+            embeds: [shuffleEmbed]
+        })
 
     }
 }

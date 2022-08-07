@@ -1,8 +1,16 @@
-const { MessageActionRow, MessageButton, Modal, MessageEmbed, ButtonInteraction, Client, TextInputComponent } = require("discord.js");
+const {
+    MessageActionRow,
+    MessageButton,
+    Modal,
+    MessageEmbed,
+    ButtonInteraction,
+    Client,
+    TextInputComponent
+} = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
-    id: "ce_color",
+    id: "color",
     permission: "MANAGE_MESSAGES",
     /**
      * 
@@ -22,30 +30,36 @@ module.exports = {
         const mRow2 = i.message.components[1];
         const mRow3 = i.message.components[2];
 
-        db.findOne({messageId: i.message.id, userId: m.id}, async (err, data) => {
-            if(err) throw err;
-            if(!data) return interaction.reply({content: "Dieses Menü gehört nicht dir!", ephemeral: true}).catch((err) => console.error(err.message));
+        db.findOne({
+            messageId: i.message.id,
+            userId: m.id
+        }, async (err, data) => {
+            if (err) throw err;
+            if (!data) return interaction.reply({
+                content: "Dieses Menü gehört nicht dir!",
+                ephemeral: true
+            }).catch((err) => console.error(err.message));
 
             const InputField = new TextInputComponent()
-            .setCustomId("ce_color_modal_input")
-            .setLabel("Gebe hier einen Farbcode ein!")
-            .setMinLength(1)
-            .setMaxLength(6)
-            .setRequired(true)
-            .setStyle("SHORT")
-    
-    
+                .setCustomId("ce_color_modal_input")
+                .setLabel("Gebe hier einen Farbcode ein!")
+                .setMinLength(1)
+                .setMaxLength(6)
+                .setRequired(true)
+                .setStyle("SHORT")
+
+
             const ColorTextModalInputRow = new MessageActionRow().addComponents(InputField)
-    
+
             const modal = new Modal()
-            .setCustomId("ce_color_modal")
-            .setTitle("Color")
-            .addComponents(ColorTextModalInputRow)
-    
+                .setCustomId("ce_color_modal")
+                .setTitle("Color")
+                .addComponents(ColorTextModalInputRow)
+
             await interaction.showModal(modal)
 
         })
-        
+
 
 
     }

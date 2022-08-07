@@ -1,21 +1,34 @@
-const { Client, Collection } = require("discord.js");
-const client = new Client({intents: 131071});
+const {
+    Client,
+    Collection
+} = require("discord.js");
+const client = new Client({
+    intents: 131071
+});
 
-const { nodes, SpotifyClientID, SpotifySecret, token } = require("./config/config.json");
+const {
+    nodes,
+    SpotifyClientID,
+    SpotifySecret,
+    token
+} = require("./config/config.json");
 
-const { promisify } = require("util");
-const { glob } = require("glob");
+const {
+    promisify
+} = require("util");
+const {
+    glob
+} = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table")
 const colors = require("colors");
 
-//const { DisTube } = require('distube');
-//const { SpotifyPlugin } = require('@distube/spotify');
-
 const Deezer = require("erela.js-deezer");
 const Spotify = require("better-erela.js-spotify").default;
 const Apple = require("better-erela.js-apple").default;
-const { Manager } = require("erela.js");
+const {
+    Manager
+} = require("erela.js");
 
 require("./handlers/antiCrash")(client);
 
@@ -28,7 +41,7 @@ require("./handlers/antiCrash")(client);
 });
 
 
-client.tools = require("./console/errorEmbed");
+client.tools = require("../utils/embedTools");
 client.commands = new Collection();
 client.buttons = new Collection();
 client.cooldowns = new Collection();
@@ -56,7 +69,6 @@ client.manager = new Manager({
 module.exports = client;
 
 
-client.login(token).then(() => {
-}).catch((err) => {
+client.login(token).then(() => {}).catch((err) => {
     client.logger.log(err, "error")
 });

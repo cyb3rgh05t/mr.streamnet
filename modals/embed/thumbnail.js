@@ -1,4 +1,12 @@
-const { MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, Client, TextInputComponent } = require("discord.js");
+const {
+    MessageActionRow,
+    MessageButton,
+    Modal,
+    MessageEmbed,
+    ModalSubmitInteraction,
+    Client,
+    TextInputComponent
+} = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -19,11 +27,17 @@ module.exports = {
         const mRow2 = i.message.components[1];
         const mRow3 = i.message.components[2];
         const input = i.fields.getTextInputValue("ce_thumbnail_modal_input");
-        if(!input.startsWith("https://")) return interaction.reply({content: "Dies ist keine korrekte URL!", ephemeral: true}).catch((err) => console.error(err.message));
-        
+        if (!input.startsWith("https://")) return interaction.reply({
+            content: "Dies ist keine korrekte URL!",
+            ephemeral: true
+        }).catch((err) => console.error(err.message));
 
-        interaction.reply({content: "Thumbnail erfolgreich gesetzt!", ephemeral: true}).catch((err) => console.error(err.message))
-        
+
+        interaction.reply({
+            content: "Thumbnail erfolgreich gesetzt!",
+            ephemeral: true
+        }).catch((err) => console.error(err.message))
+
 
         interaction.message.edit({
             embeds: [ShowEmbed, PrevEmbed.setThumbnail(`${input}`)],

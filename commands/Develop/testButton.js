@@ -1,4 +1,7 @@
-const { MessageActionRow, MessageButton } = require("discord.js");
+const {
+    MessageActionRow,
+    MessageButton
+} = require("discord.js");
 
 module.exports = {
     name: "testbutton",
@@ -19,7 +22,9 @@ module.exports = {
             .setStyle("DANGER")
         )
 
-        interaction.reply({components: [row]});
+        interaction.reply({
+            components: [row]
+        });
 
     }
 }

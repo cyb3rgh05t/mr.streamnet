@@ -6,13 +6,13 @@ module.exports = async (client, PG, Ascii) => {
 
     buttonsFolder.map(async (file) => {
         const buttonFile = require(file);
-        if(!buttonFile.id)
-        return client.logger.log(`FAILED missing a Button ID`, "error");
+        if (!buttonFile.id)
+            return client.logger.log(`FAILED missing a Button ID`, "error");
 
         client.buttons.set(buttonFile.id, buttonFile);
 
         client.logger.log(`LOADED Button ${buttonFile.id.toUpperCase()} from ${file.split("/").pop()}`, "buttons")
-    
+
     });
-    
+
 }

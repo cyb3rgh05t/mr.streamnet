@@ -1,8 +1,19 @@
-const { CommandInteraction, Client, MessageEmbed, MessageAttachment } = require("discord.js")
-const { connection } = require("mongoose");
-const { execute } = require("../../events/client/ready");
+const {
+    CommandInteraction,
+    Client,
+    MessageEmbed,
+    MessageAttachment
+} = require("discord.js")
+const {
+    connection
+} = require("mongoose");
+const {
+    execute
+} = require("../../events/client/ready");
 
-const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+const {
+    ChartJSNodeCanvas
+} = require('chartjs-node-canvas');
 const DB = require('../../src/databases/clientDB');
 const moment = require("moment");
 
@@ -140,27 +151,25 @@ module.exports = {
         // Chart Data
         const chartData = {
             labels: labels,
-            datasets: [
-                {
-                    label: 'RAM Usage',
-                    fill: true,
-                    gradient: {
-                        backgroundColor: {
-                            axis: 'y',
-                            colors: {
-                                0: colors.green.zero,
-                                100: colors.green.quarter,
-                            },
+            datasets: [{
+                label: 'RAM Usage',
+                fill: true,
+                gradient: {
+                    backgroundColor: {
+                        axis: 'y',
+                        colors: {
+                            0: colors.green.zero,
+                            100: colors.green.quarter,
                         },
                     },
-                    pointBackgroundColor: colors.green.default,
-                    borderColor: colors.green.default,
-                    data: memData,
-                    lineTension: 0.4,
-                    borderWidth: 2,
-                    pointRadius: 3
                 },
-            ],
+                pointBackgroundColor: colors.green.default,
+                borderColor: colors.green.default,
+                data: memData,
+                lineTension: 0.4,
+                borderWidth: 2,
+                pointRadius: 3
+            }, ],
         }
 
         // Output
@@ -233,8 +242,7 @@ module.exports = {
             .addFields({
 
                 name: `<:icon_reply:993231553083736135> GENERAL`,
-                value: 
-                `
+                value: `
                 **\`•\` Client**: <:icon_online:993231898291736576> ONLINE
                 **\`•\` Ping**: ${client.ws.ping}ms
                 **\`•\` Uptime**: ${moment.duration(parseInt(client.uptime)).format(" D [days], H [hrs], m [mins], s [secs]")}
@@ -245,8 +253,7 @@ module.exports = {
             }, {
 
                 name: `<:icon_reply:993231553083736135> DATABASE`,
-                value: 
-                `
+                value: `
                 **\`•\` Connection**: ${switchTo(connection.readyState)}
                 ㅤ
                 `,
@@ -255,8 +262,7 @@ module.exports = {
             }, {
 
                 name: `<:icon_reply:993231553083736135> HARDWARE`,
-                value: 
-                `
+                value: `
                 **\`•\` Average RAM Usage**: ${avgMem.toFixed(2)}MB
                 `,
                 inline: false,

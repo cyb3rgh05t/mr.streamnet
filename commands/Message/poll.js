@@ -1,4 +1,9 @@
-const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const {
+    CommandInteraction,
+    MessageEmbed,
+    MessageActionRow,
+    MessageButton
+} = require("discord.js");
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {
@@ -6,13 +11,11 @@ module.exports = {
     description: "Create or manage a poll",
     usage: "/poll [command]",
     permission: "ADMINISTRATOR",
-    options: [
-        {
+    options: [{
             name: "create",
             description: "Create a poll",
             type: "SUB_COMMAND",
-            options: [
-                {
+            options: [{
                     name: "title",
                     description: "Give a name for the poll",
                     type: "STRING",
@@ -51,21 +54,23 @@ module.exports = {
             name: "results",
             description: "Show the results of a poll",
             type: "SUB_COMMAND",
-            options: [
-                {
-                    name: "message_id",
-                    description: "Provide the messageID of the poll",
-                    type: "STRING",
-                    required: true
-                }
-            ]
+            options: [{
+                name: "message_id",
+                description: "Provide the messageID of the poll",
+                type: "STRING",
+                required: true
+            }]
         }
     ],
     /**
      * @param {CommandInteraction} interaction 
      */
     async execute(interaction) {
-        const { options, guild, user } = interaction;
+        const {
+            options,
+            guild,
+            user
+        } = interaction;
         const SubCommand = options.getSubcommand();
 
         switch (SubCommand) {
@@ -81,46 +86,48 @@ module.exports = {
                 const Row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
-                            .setCustomId("poll-1")
-                            .setStyle("SECONDARY")
-                            .setLabel("1️⃣"),
+                        .setCustomId("poll-1")
+                        .setStyle("SECONDARY")
+                        .setLabel("1️⃣"),
                         new MessageButton()
-                            .setCustomId("poll-2")
-                            .setStyle("SECONDARY")
-                            .setLabel("2️⃣")
+                        .setCustomId("poll-2")
+                        .setStyle("SECONDARY")
+                        .setLabel("2️⃣")
                     )
 
                 if (Choice3) {
                     Choices.push(`3️⃣ ${Choice3}`);
                     Row.addComponents(
                         new MessageButton()
-                            .setCustomId("poll-3")
-                            .setStyle("SECONDARY")
-                            .setLabel("3️⃣")
+                        .setCustomId("poll-3")
+                        .setStyle("SECONDARY")
+                        .setLabel("3️⃣")
                     )
                 }
                 if (Choice4) {
                     Choices.push(`4️⃣ ${Choice4}`);
                     Row.addComponents(
                         new MessageButton()
-                            .setCustomId("poll-4")
-                            .setStyle("SECONDARY")
-                            .setLabel("4️⃣")
+                        .setCustomId("poll-4")
+                        .setStyle("SECONDARY")
+                        .setLabel("4️⃣")
                     )
                 }
                 if (Choice5) {
                     Choices.push(`5️⃣ ${Choice5}`);
                     Row.addComponents(
                         new MessageButton()
-                            .setCustomId("poll-5")
-                            .setStyle("SECONDARY")
-                            .setLabel("5️⃣")
+                        .setCustomId("poll-5")
+                        .setStyle("SECONDARY")
+                        .setLabel("5️⃣")
                     )
                 }
 
                 const Embed = new MessageEmbed()
                     .setTitle(`${Title}`)
-                    .setFooter({text: `Poll by ${user.tag}`})
+                    .setFooter({
+                        text: `Poll by ${user.tag}`
+                    })
                     .setColor("NOT_QUITE_BLACK")
                     .setTimestamp()
                     .setDescription(Choices.join("\n\n"));
@@ -129,7 +136,11 @@ module.exports = {
                     .setColor("RED");
 
                 try {
-                    const M = await interaction.reply({embeds: [Embed], components: [Row], fetchReply: true});
+                    const M = await interaction.reply({
+                        embeds: [Embed],
+                        components: [Row],
+                        fetchReply: true
+                    });
                     await DB.create({
                         GuildID: guild.id,
                         ChannelID: interaction.channel.id,
@@ -145,36 +156,51 @@ module.exports = {
                 } catch (err) {
                     ErrorEmbed
                         .setDescription(`<:denied:941879735200382986> There was an error while trying to create a poll`);
-                    interaction.reply({embeds: [Embed], ephemeral: true});
+                    interaction.reply({
+                        embeds: [Embed],
+                        ephemeral: true
+                    });
                     console.log(err);
                 }
             }
             break;
 
-            case "results": {
-                const MessageID = options.getString("message_id");
-                const Data = await DB.findOne({ GuildID: guild.id, MessageID: MessageID });
-                if (!Data) {
-                    Embed
-                        .setColor("RED")
-                        .setDescription(`<:denied:941879735200382986> Could not find any poll with that messageID`);
-                    return interaction.reply({embeds: [Embed], ephemeral: true});
-                }
-                const Embed = new MessageEmbed()
-                    .setColor("NOT_QUITE_BLACK")
-                    .setAuthor({name: `${Data.Title}`})
-                    .setFooter({text: `MessageID: ${MessageID}`})
-                    .setTimestamp();
-                
-                let ButtonSize = [`1️⃣ - \`${Data.Button1}\` Users Selected`, `2️⃣ - \`${Data.Button2}\` Users Selected`];
-                if (Data.Button3 !== null) ButtonSize.push(`3️⃣ - \`${Data.Button3}\` Users Selected`);
-                if (Data.Button4 !== null) ButtonSize.push(`4️⃣ - \`${Data.Button4}\` Users Selected`);
-                if (Data.Button5 !== null) ButtonSize.push(`5️⃣ - \`${Data.Button5}\` Users Selected`);
-
-                Embed.setDescription(ButtonSize.join("\n\n"));
-                interaction.reply({embeds: [Embed]});
+        case "results": {
+            const MessageID = options.getString("message_id");
+            const Data = await DB.findOne({
+                GuildID: guild.id,
+                MessageID: MessageID
+            });
+            if (!Data) {
+                Embed
+                    .setColor("RED")
+                    .setDescription(`<:denied:941879735200382986> Could not find any poll with that messageID`);
+                return interaction.reply({
+                    embeds: [Embed],
+                    ephemeral: true
+                });
             }
-            break;
+            const Embed = new MessageEmbed()
+                .setColor("NOT_QUITE_BLACK")
+                .setAuthor({
+                    name: `${Data.Title}`
+                })
+                .setFooter({
+                    text: `MessageID: ${MessageID}`
+                })
+                .setTimestamp();
+
+            let ButtonSize = [`1️⃣ - \`${Data.Button1}\` Users Selected`, `2️⃣ - \`${Data.Button2}\` Users Selected`];
+            if (Data.Button3 !== null) ButtonSize.push(`3️⃣ - \`${Data.Button3}\` Users Selected`);
+            if (Data.Button4 !== null) ButtonSize.push(`4️⃣ - \`${Data.Button4}\` Users Selected`);
+            if (Data.Button5 !== null) ButtonSize.push(`5️⃣ - \`${Data.Button5}\` Users Selected`);
+
+            Embed.setDescription(ButtonSize.join("\n\n"));
+            interaction.reply({
+                embeds: [Embed]
+            });
+        }
+        break;
         }
     }
 }

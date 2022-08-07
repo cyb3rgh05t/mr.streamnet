@@ -1,4 +1,6 @@
-const { prefix } = require("../config/config.json");
+const {
+  prefix
+} = require("../config/config.json");
 const mongoose = require("mongoose");
 
 const settings = mongoose.Schema({

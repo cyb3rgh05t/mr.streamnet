@@ -1,4 +1,7 @@
-const { ButtonInteraction, Client } = require("discord.js");
+const {
+    ButtonInteraction,
+    Client
+} = require("discord.js");
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {
@@ -9,13 +12,30 @@ module.exports = {
      * @param {Client} client 
      */
     async execute(interaction, client) {
-        const data = await DB.findOne({ GuildID: interaction.guild.id, MessageID: interaction.message.id })
+        const data = await DB.findOne({
+            GuildID: interaction.guild.id,
+            MessageID: interaction.message.id
+        })
         if (!data) return;
 
-        if (data.Users.includes(interaction.user.id)) return interaction.reply({content: `You have already chosen your answer`, ephemeral: true});
+        if (data.Users.includes(interaction.user.id)) return interaction.reply({
+            content: `You have already chosen your answer`,
+            ephemeral: true
+        });
 
-        await DB.findOneAndUpdate({ GuildID: interaction.guild.id, MessageID: interaction.message.id}, {Button5: data.Button5 + 1, $push: { Users: interaction.user.id }});
+        await DB.findOneAndUpdate({
+            GuildID: interaction.guild.id,
+            MessageID: interaction.message.id
+        }, {
+            Button5: data.Button5 + 1,
+            $push: {
+                Users: interaction.user.id
+            }
+        });
 
-        interaction.reply({content: `Your answer has been sent`, ephemeral: true});
+        interaction.reply({
+            content: `Your answer has been sent`,
+            ephemeral: true
+        });
     }
 }

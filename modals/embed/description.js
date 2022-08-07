@@ -1,4 +1,12 @@
-const { MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, Client, TextInputComponent } = require("discord.js");
+const {
+    MessageActionRow,
+    MessageButton,
+    Modal,
+    MessageEmbed,
+    ModalSubmitInteraction,
+    Client,
+    TextInputComponent
+} = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -20,7 +28,10 @@ module.exports = {
         const mRow3 = i.message.components[2];
         const input = i.fields.getTextInputValue("ce_description_modal_input");
 
-        interaction.reply({content: "Beschreibung erfolgreich gesetzt!", ephemeral: true}).catch((err) => console.error(err.message))
+        interaction.reply({
+            content: "Beschreibung erfolgreich gesetzt!",
+            ephemeral: true
+        }).catch((err) => console.error(err.message))
 
         interaction.message.edit({
             embeds: [ShowEmbed, PrevEmbed.setDescription(`${input}`)],

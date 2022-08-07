@@ -142,7 +142,10 @@ module.exports = {
 
         if (player.queue.totalSize > 1)
 
-            enqueueEmbed.addField("Position in queue", `\`${player.queue.size - 0}\``);
+            enqueueEmbed.addFields({
+                name: "Position in queue",
+                value: `\`${player.queue.size - 0}\``
+            });
         return interaction.editReply({
                 embeds: [enqueueEmbed]
             },

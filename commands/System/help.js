@@ -1,4 +1,10 @@
-const { Client, SelectMenuInteraction, MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
+const {
+    Client,
+    SelectMenuInteraction,
+    MessageEmbed,
+    MessageActionRow,
+    MessageSelectMenu
+} = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
@@ -6,20 +12,20 @@ module.exports = {
     description: 'Lists all Bot commands',
     usage: "/help [command]",
     public: true,
-  options: [
-    {
-      name: "command",
-      description: "command to get more info on",
-      type: "STRING",
-    },
-  ],
+    options: [{
+        name: "command",
+        description: "command to get more info on",
+        type: "STRING",
+    }, ],
     /**
      * @param {SelectMenuInteraction} interaction
      * @param {Client} client
      */
     async execute(interaction, client) {
         let cmdFound = "";
-        const { options } = interaction;
+        const {
+            options
+        } = interaction;
         const embedDescription = new MessageEmbed();
 
         const cmdName = options.getString("command");
@@ -32,23 +38,26 @@ module.exports = {
                     embedDescription.setColor('YELLOW');
                     embedDescription.setDescription(
                         `Description: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n **Permission**: ${cmd.permission || "None"} `);
-                if (cmdoptions) {
-                    embedDescription.setDescription(
-                        `**Description**: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n **Permission**: ${cmd.permission || "None"}\n\n **Command Options**:`
-                     );
+                    if (cmdoptions) {
+                        embedDescription.setDescription(
+                            `**Description**: ${cmd.description || "None"}\n **Usage**: \`${cmd.usage || "None"}\`\n **Permission**: ${cmd.permission || "None"}\n\n **Command Options**:`
+                        );
 
-                    cmdoptions.map((option) => {
-                     embedDescription.addField(option.name, `${option.description || "None"}`);
-                    });
-                }
-                
+                        cmdoptions.map((option) => {
+                            embedDescription.addField(option.name, `${option.description || "None"}`);
+                        });
+                    }
+
                 } else if (!cmdFound) {
-                     embedDescription.setColor("RED");
-                     embedDescription.setTitle("no command");
-                     embedDescription.setDescription(`no commands was found with the name of \`/${cmdName}\`!\n Use \`/help\` to see all the available commands`);
+                    embedDescription.setColor("RED");
+                    embedDescription.setTitle("no command");
+                    embedDescription.setDescription(`no commands was found with the name of \`/${cmdName}\`!\n Use \`/help\` to see all the available commands`);
                 }
             });
-            interaction.reply({ embeds: [embedDescription], ephemeral: true });
+            interaction.reply({
+                embeds: [embedDescription],
+                ephemeral: true
+            });
 
         } else {
 
@@ -68,15 +77,19 @@ module.exports = {
                         })
                     ])
                 );
-                
-                const embed = new MessageEmbed()
+
+            const embed = new MessageEmbed()
                 .setTitle(`${client.user.username} | Help`)
                 .setDescription(` Hello **<@${interaction.member.user.id}>**, I am <@${client.user.id}>. \n\nA multipurpose Butler Bot for StreamNet.club.  \n\n*Choose an category below to see all my commands* \n\n`)
                 .setThumbnail(client.user.displayAvatarURL())
                 .setColor("DARK_BUT_NOT_BLACK")
-                //.setTimestamp()
+            //.setTimestamp()
 
-            interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+            interaction.reply({
+                embeds: [embed],
+                components: [row],
+                ephemeral: true
+            });
         }
     }
 }

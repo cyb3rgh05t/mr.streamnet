@@ -1,51 +1,52 @@
-const { CommandInteraction, Client } = require("discord.js");
+const {
+  CommandInteraction,
+  Client
+} = require("discord.js");
 const moment = require("moment");
 const voucher_codes = require("voucher-code-generator");
 const schema = require("../../src/databases/codeDB");
 
 
 module.exports = {
-    name: "gencode",
-    description: `gen premium codes`,
-    usage: "/gencode [plan] [amount]",
-    permission: "ADMINISTRATOR",
-    options: [
-        {
-          name: "plan",
-          description: `choose your plan`,
-          type: "STRING",
-          required: true,
-          choices: [
-            {
-              name: "daily",
-              value: "daily",
-            },
-            {
-              name: "weekly",
-              value: "weekly",
-            },
-            {
-              name: "monthly",
-              value: "monthly",
-            },
-            {
-              name: "yearly",
-              value: "yearly",
-            },
-          ],
+  name: "gencode",
+  description: `gen premium codes`,
+  usage: "/gencode [plan] [amount]",
+  permission: "ADMINISTRATOR",
+  options: [{
+      name: "plan",
+      description: `choose your plan`,
+      type: "STRING",
+      required: true,
+      choices: [{
+          name: "daily",
+          value: "daily",
         },
         {
-          name: "amount",
-          description: `amount of codes`,
-          type: "NUMBER",
-          required: false,
+          name: "weekly",
+          value: "weekly",
+        },
+        {
+          name: "monthly",
+          value: "monthly",
+        },
+        {
+          name: "yearly",
+          value: "yearly",
         },
       ],
-    /**
-     * @param {CommandInteraction} interaction 
-     */
-    async execute(interaction, client) {
-        let codes = [];
+    },
+    {
+      name: "amount",
+      description: `amount of codes`,
+      type: "NUMBER",
+      required: false,
+    },
+  ],
+  /**
+   * @param {CommandInteraction} interaction 
+   */
+  async execute(interaction, client) {
+    let codes = [];
 
     // Display available plans of the code
     const plan = interaction.options.getString("plan");
@@ -95,6 +96,6 @@ module.exports = {
         "dddd, MMMM Do YYYY"
       )}\`\`\`\nTo redeem, use \`/redeem <code>\``,
     });
-  
-    }
+
+  }
 }
