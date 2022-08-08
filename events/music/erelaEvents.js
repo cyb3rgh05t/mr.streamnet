@@ -71,6 +71,59 @@ const row2 = new MessageActionRow()
         .setDisabled(true)
     )
 
+const row3 = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setCustomId('shuffleMusic') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('🔀')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('skipMusic') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('⏩')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('pauseMusic') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('⏸️')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('resumeMusic') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('⏯️')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('stopMusic') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('⏹')
+        .setDisabled(true)
+    )
+const row4 = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setCustomId('volumeDownMusic') //DONE
+        .setStyle('DANGER')
+        .setEmoji('🔉')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('queue') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('🎶')
+        .setLabel("Queue")
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('lyrics') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('💬')
+        .setLabel("Lyrics")
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('volumeUpMusic') //DONE
+        .setStyle('SUCCESS')
+        .setEmoji('🔊')
+        .setDisabled(true)
+    )
 client.manager
 
     .on("nodeConnect", (node) => {
@@ -145,8 +198,10 @@ client.manager
         const fetchedMessage = await client.channels.cache.get(player.textChannel).messages.fetch(dbFound.messageId)
 
         await fetchedMessage.edit({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})**`).setImage(track.displayThumbnail("maxresdefault"))]
-        })
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})**`).setImage(track.displayThumbnail("maxresdefault"))],
+            components: [row3, row4]
+        });
+        //setTimeout(() => fetchedMessage.delete(), 5000));
 
         //const channel = client.channels.cache.get(player.textChannel);
         //channel.send("⏹ Player stopped, Queue has ended.");

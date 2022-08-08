@@ -35,12 +35,21 @@ module.exports = {
 
         player.destroy()
 
+        const dbmessage = await DB.findOne({
+            guildId: player.guild
+        });
+
+        const fetchedMessage = await client.channels.cache.get(player.textChannel).messages.fetch(dbmessage.messageId)
+
+        await fetchedMessage.delete()
+
         const disconnectEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
             .setDescription("⏹️  **Disconnected**")
         return interaction.reply({
-            embeds: [disconnectEmbed],
-            ephemeral: false
-        })
+                embeds: [disconnectEmbed]
+            },
+            setTimeout(() => interaction.deleteReply(), 3000));
+
     }
 }
