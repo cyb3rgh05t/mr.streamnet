@@ -11,7 +11,7 @@ module.exports = {
     name: "shuffle",
     description: "Shuffle song",
     usage: "/shuffle",
-    public: true,
+    permission: "ADMINISTRATOR",
 
     /**
      * @param {CommandInteraction} interaction 

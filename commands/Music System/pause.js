@@ -11,7 +11,7 @@ module.exports = {
   name: "pause",
   description: "Pause song",
   usage: "/pause",
-  public: true,
+  permission: "ADMINISTRATOR",
 
   /**
    * @param {CommandInteraction} interaction 

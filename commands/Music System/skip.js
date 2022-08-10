@@ -11,7 +11,7 @@ module.exports = {
     name: "skip",
     description: "Skip song",
     usage: "/skip",
-    public: true,
+    permission: "ADMINISTRATOR",
 
     /**
      * @param {CommandInteraction} interaction 

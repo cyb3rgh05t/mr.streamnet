@@ -11,7 +11,7 @@ module.exports = {
     name: "queue",
     description: "Show current queue",
     usage: "/queue",
-    public: true,
+    permission: "ADMINISTRATOR",
 
     /**
      * @param {CommandInteraction} interaction 

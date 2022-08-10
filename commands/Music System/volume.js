@@ -11,7 +11,7 @@ module.exports = {
     name: "volume",
     description: "Alter the volume",
     usage: "/volume [percent]",
-    public: true,
+    permission: "ADMINISTRATOR",
     options: [{
         name: "percent",
         description: "10 = 10%",

@@ -11,7 +11,7 @@ module.exports = {
     name: "resume",
     description: "Resume song",
     usage: "/resume",
-    public: true,
+    permission: "ADMINISTRATOR",
 
     /**
      * @param {CommandInteraction} interaction 
