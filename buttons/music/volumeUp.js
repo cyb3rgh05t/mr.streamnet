@@ -33,11 +33,16 @@ module.exports = {
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
-
-        let amount = Number(player.volume) + 10;
+        const volume = dbFound.volume
+        let amount = Number(volume) + 10;
         if (amount >= 100) return await interaction.reply("Cannot higher the player volume further more");
 
+
         player.setVolume(amount);
-        await interaction.reply("🔉 Volume set to \`[ ${player.volume}% ]\`");
+        await interaction.reply("🔉 Volume set to **${player.volume}%**");
+
+        if (dbFound) await dbFound.updateOne({
+            volume: player.volume
+        });
     }
 }

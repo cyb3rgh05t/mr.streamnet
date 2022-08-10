@@ -6,6 +6,7 @@ const music = new mongoose.Schema({
   channelId: String,
   messageId: String,
   requesterId: String,
+  queueId: String,
   voiceChannelId: String,
   volume: String
 

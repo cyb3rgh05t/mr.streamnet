@@ -1,7 +1,9 @@
 const {
     ButtonInteraction,
     Client,
-    MessageEmbed
+    MessageEmbed,
+    MessageActionRow,
+    MessageButton
 } = require("discord.js");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
@@ -59,9 +61,25 @@ module.exports = {
             .setTitle(`🎶 Current queue for ${guild.name}`)
             .setDescription(chunked[0])
 
-        return interaction.editReply({
+        const queueRow = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setCustomId("queueClose")
+                .setStyle("DANGER")
+                .setLabel("Close")
+                .setEmoji("❕")
+            )
+
+        if (dbFound) await dbFound.updateOne({
+            queueId: queueEmbed.id,
+        });
+        member.send({
             embeds: [queueEmbed]
-        })
+        });
+
+        return interaction.editReply({
+            embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> PlayList wurde dir als PM gesendet!`)]
+        }, setTimeout(() => interaction.deleteReply(), 3000));
 
 
     }

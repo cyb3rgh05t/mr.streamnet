@@ -4,14 +4,13 @@ const {
     MessageActionRow,
     MessageButton
 } = require('discord.js');
-const colors = require("colors");
+const client = require("../../src/index");
 const DB = require("../../src/databases/ticketSetupDB");
 
 module.exports = {
     name: "ticketsetup",
     description: "Setup your ticket panel",
     usage: "/ticketsetup [channel] [category] [transcript] [helpers] [description] [buttons]",
-    permission: "ADMINISTRATOR",
     permission: "ADMINISTRATOR",
     options: [{
             name: "channel",
@@ -165,7 +164,7 @@ module.exports = {
                     2. Make sure your button names do not exceed 200 characters
                     `
                 );
-            console.error(`[ERROR]`.red.bold, err);
+            client.logger.log(err, "error");
             interaction.reply({
                 embeds: [errEmbed]
             });

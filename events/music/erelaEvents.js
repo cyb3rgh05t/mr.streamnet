@@ -49,11 +49,21 @@ const row = new MessageActionRow()
     )
 const row2 = new MessageActionRow()
     .addComponents(
-        new MessageButton()
+        /*new MessageButton()
         .setCustomId('volumeDownMusic') //DONE
         .setStyle('DANGER')
         .setEmoji('🔉')
         .setDisabled(true),
+        new MessageButton()
+        .setCustomId('volumeUpMusic') //DONE
+        .setStyle('SUCCESS')
+        .setEmoji('🔊')
+        .setDisabled(true),*/
+        new MessageButton()
+        .setCustomId('queueAdd') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('🎵')
+        .setLabel("Add Song"),
         new MessageButton()
         .setCustomId('queue') //DONE
         .setStyle('SECONDARY')
@@ -63,12 +73,7 @@ const row2 = new MessageActionRow()
         .setCustomId('lyrics') //DONE
         .setStyle('SECONDARY')
         .setEmoji('💬')
-        .setLabel("Lyrics"),
-        new MessageButton()
-        .setCustomId('volumeUpMusic') //DONE
-        .setStyle('SUCCESS')
-        .setEmoji('🔊')
-        .setDisabled(true)
+        .setLabel("Lyrics")
     )
 
 const row3 = new MessageActionRow()
@@ -101,10 +106,21 @@ const row3 = new MessageActionRow()
     )
 const row4 = new MessageActionRow()
     .addComponents(
-        new MessageButton()
+        /*new MessageButton()
         .setCustomId('volumeDownMusic') //DONE
         .setStyle('DANGER')
         .setEmoji('🔉')
+        .setDisabled(true),
+        new MessageButton()
+        .setCustomId('volumeUpMusic') //DONE
+        .setStyle('SUCCESS')
+        .setEmoji('🔊')
+        .setDisabled(true),*/
+        new MessageButton()
+        .setCustomId('queueAdd') //DONE
+        .setStyle('SECONDARY')
+        .setEmoji('🎵')
+        .setLabel("Lyrics")
         .setDisabled(true),
         new MessageButton()
         .setCustomId('queue') //DONE
@@ -117,11 +133,6 @@ const row4 = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('💬')
         .setLabel("Lyrics")
-        .setDisabled(true),
-        new MessageButton()
-        .setCustomId('volumeUpMusic') //DONE
-        .setStyle('SUCCESS')
-        .setEmoji('🔊')
         .setDisabled(true)
     )
 client.manager
@@ -198,10 +209,10 @@ client.manager
         const fetchedMessage = await client.channels.cache.get(player.textChannel).messages.fetch(dbFound.messageId)
 
         await fetchedMessage.edit({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})**`).setImage(track.displayThumbnail("maxresdefault"))],
-            components: [row3, row4]
-        });
-        //setTimeout(() => fetchedMessage.delete(), 5000));
+                embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`⏹  Finished | Queue has ended`).setDescription(`**[${track.title}](${track.uri})**`).setImage(track.displayThumbnail("maxresdefault"))],
+                components: [row3, row4]
+            },
+            setTimeout(() => fetchedMessage.delete(), 20000));
 
         //const channel = client.channels.cache.get(player.textChannel);
         //channel.send("⏹ Player stopped, Queue has ended.");

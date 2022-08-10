@@ -1,24 +1,27 @@
 const {
+    MessageActionRow,
+    MessageButton,
+    Modal,
+    MessageEmbed,
     ButtonInteraction,
     Client,
-    MessageEmbed
+    TextInputComponent
 } = require("discord.js");
 const DB = require("../../src/databases/musicDB");
-const util = require("../../utils/util");
-const genius = require("genius-lyrics");
-const gClient = new genius.Client();
 
 module.exports = {
-    id: "volumeDownMusic",
+    id: "queueAdd",
     public: true,
     /**
+     * 
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
      */
-    async execute(interaction, client) {
-        const member = interaction.member;
 
-        const player = interaction.client.manager.get(interaction.guildId);
+
+    async execute(interaction, client) {
+
+        const player = client.manager.get(interaction.guildId);
 
         const dbFound = await DB.findOne({
             guildId: player.guild
@@ -27,17 +30,28 @@ module.exports = {
         const requester = dbFound.requesterId
 
         if (interaction.user.id !== requester) {
-            return interaction.reply({
+            return interaction.editReply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription(`❌ Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
 
+        const InputField = new TextInputComponent()
+            .setCustomId("addMusic_input")
+            .setLabel("Song Namen, URL oder PlayList URL")
+            .setRequired(true)
+            .setStyle("SHORT")
 
-        let amount = Number(dbFound.volume) - 10;
-        if (amount = 1) return await interaction.reply("Cannot lower the player volume further more");
 
-        player.setVolume(amount);
-        await interaction.reply("🔉 Volume set to **${player.volume}%**");
+        const addMusicRow = new MessageActionRow().addComponents(InputField)
+
+        const modal = new Modal()
+            .setCustomId("addMusic_modal")
+            .setTitle("Song hinzufügen")
+            .addComponents(addMusicRow)
+
+        await interaction.showModal(modal)
+
+
     }
 }

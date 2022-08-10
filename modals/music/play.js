@@ -1,7 +1,11 @@
 const {
-    CommandInteraction,
+    MessageActionRow,
+    MessageButton,
+    Modal,
     MessageEmbed,
-    Client
+    ModalSubmitInteraction,
+    Client,
+    TextInputComponent
 } = require("discord.js");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
@@ -22,24 +26,14 @@ function msToTime(duration) {
 }
 
 module.exports = {
-    name: "play",
-    description: "Plays a song",
-    usage: "/play [input]",
-    permission: "ADMINISTRATOR",
-    options: [{
-        name: "input",
-        description: "Provide the name of the song or URL.",
-        type: "STRING",
-        required: true
-    }],
+    id: "playMusic_modal",
     /**
-     * @param {CommandInteraction} interaction 
+     * 
+     * @param {ModalSubmitInteraction} interaction 
      * @param {Client} client 
      */
     async execute(interaction, client) {
-        await interaction.deferReply({
-            ephemeral: false
-        });
+
         const {
             options,
             member,
@@ -48,12 +42,12 @@ module.exports = {
         const VoiceChannel = member.voice.channel;
 
         if (!VoiceChannel)
-            return interaction.editReply({
+            return interaction.reply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription("❌ You aren't in a voice channel. Join one to be able to play music!")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         if (guild.me.voice.channelId && VoiceChannel.id !== guild.me.voice.channelId)
-            return interaction.editReply({
+            return interaction.reply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription("I'm already playing music in <#${guild.me.voice.channelId}>.!")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
@@ -67,7 +61,9 @@ module.exports = {
         });
 
         let res;
-        const query = interaction.options.getString("input");
+
+        const query = interaction.fields.getTextInputValue("playMusic_input");
+
         res = await player.search(query, interaction.user.username);
 
         await DB.create({
@@ -80,7 +76,7 @@ module.exports = {
 
         if (res.loadType === "LOAD_FAILED") {
             if (!player.queue.current) player.destroy();
-            return interaction.editReply({
+            return interaction.reply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription("❌ An Error occured while adding this song.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
@@ -88,7 +84,7 @@ module.exports = {
 
         if (res.loadType === "NO_MATCHES") {
             if (!player.queue.current) player.destroy();
-            return interaction.editReply({
+            return interaction.reply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription("❌ No Results found.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
@@ -101,7 +97,7 @@ module.exports = {
             const playlistEmbed = new MessageEmbed()
                 .setDescription(`🎶  **${res.playlist.name}** has been added to the queue.`)
                 .addField("Enqueued", `\`${res.tracks.length}\` tracks added by ${member}`)
-            return interaction.editReply({
+            return interaction.reply({
                 embeds: [playlistEmbed]
             })
         }
@@ -115,7 +111,6 @@ module.exports = {
             guildId: player.guild
         });
 
-        //const requester = await DB.get(dbFound.requesterId)
 
         const enqueueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
@@ -133,7 +128,7 @@ module.exports = {
                 value: `<@${dbFound.requesterId}>`,
                 inline: true
             })
-        await interaction.editReply({
+        await interaction.reply({
             embeds: [enqueueEmbed]
         });
 

@@ -49,8 +49,13 @@ module.exports = {
             .setTitle(`💭  Lyrics for **${trackTitle}**`)
             .setDescription(lyrics)
             .setThumbnail(track.displayThumbnail("3"))
-        return interaction.editReply({
+        member.send({
             embeds: [lyricsEmbed]
-        })
+        });
+
+        return interaction.editReply({
+            embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> Lyrics wurden dir als PM gesendet!`)]
+        }, setTimeout(() => interaction.deleteReply(), 3000));
+
     }
 }
