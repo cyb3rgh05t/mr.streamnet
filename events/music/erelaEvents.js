@@ -175,6 +175,7 @@ client.manager
         if (dbFound) await dbFound.updateOne({
             messageId: trackMsgId.id,
             channelId: player.textChannel
+
         });
 
         else await DB.create({
