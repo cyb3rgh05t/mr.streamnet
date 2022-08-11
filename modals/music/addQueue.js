@@ -34,8 +34,13 @@ module.exports = {
      */
     async execute(interaction, client) {
 
-        const player = client.manager.get(interaction.guildId);
+        const {
+            options,
+            member,
+            guild
+        } = interaction;
 
+        const player = client.manager.get(interaction.guildId);
 
         let res;
 
@@ -93,7 +98,7 @@ module.exports = {
 
             }, {
                 name: `Requester :`,
-                value: `<@${dbFound.requesterId}>`,
+                value: `${member}`,
                 inline: true
             })
             .addFields({

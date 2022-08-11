@@ -66,7 +66,11 @@ module.exports = {
 
         res = await player.search(query, interaction.user.username);
 
-        await DB.create({
+        const dbFound = await DB.findOne({
+            guildId: player.guild
+        });
+
+        if (dbFound) await dbFound.updateOne({
             guildId: player.guild,
             voiceChannelId: player.voiceChannel,
             channelId: player.textChannel,
@@ -107,10 +111,6 @@ module.exports = {
             player.queue.add(res.tracks[0]);
         }
 
-        const dbFound = await DB.findOne({
-            guildId: player.guild
-        });
-
 
         const enqueueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
@@ -125,7 +125,7 @@ module.exports = {
 
             }, {
                 name: `Requester :`,
-                value: `<@${dbFound.requesterId}>`,
+                value: `${member}`,
                 inline: true
             })
         await interaction.reply({
