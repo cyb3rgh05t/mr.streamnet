@@ -28,14 +28,16 @@ module.exports = {
 
         if (interaction.user.id !== requester) {
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription(`❌ Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
 
 
         let amount = Number(dbFound.volume) - 10;
-        if (amount = 1) return await interaction.reply("Cannot lower the player volume further more");
+        if (amount = 1) return await interaction.reply({
+            embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot lower the player volume further more`)]
+        });
 
         player.setVolume(amount);
         await interaction.reply("🔉 Volume set to **${player.volume}%**");

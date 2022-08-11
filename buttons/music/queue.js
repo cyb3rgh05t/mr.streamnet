@@ -39,17 +39,17 @@ module.exports = {
 
         if (interaction.user.id !== requester) {
             return interaction.editReply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription(`❌ Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
 
         if (!player.playing) return interaction.editReply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
         if (!player.queue.length) return interaction.editReply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("❌ There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
 
@@ -61,14 +61,6 @@ module.exports = {
             .setTitle(`🎶 Current queue for ${guild.name}`)
             .setDescription(chunked[0])
 
-        const queueRow = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                .setCustomId("queueClose")
-                .setStyle("DANGER")
-                .setLabel("Close")
-                .setEmoji("❕")
-            )
 
         if (dbFound) await dbFound.updateOne({
             queueId: queueEmbed.id,
