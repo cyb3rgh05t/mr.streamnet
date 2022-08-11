@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const musicsystem = new mongoose.Schema({
+const music = new mongoose.Schema({
 
   guildId: String,
   channelId: String,
@@ -12,4 +12,4 @@ const musicsystem = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("musicsystem", musicsystem);
+module.exports = mongoose.model("music", music);
