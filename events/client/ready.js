@@ -1,8 +1,10 @@
 const {
-    Client
+    Client,
+    MessageEmbed
 } = require("discord.js");
 const {
-    databaseUrl
+    databaseUrl,
+    lavalinkChannelId
 } = require("../../src/config/config.json");
 const os = require("os");
 const osUtils = require("os-utils");
@@ -41,14 +43,10 @@ module.exports = {
      */
     async execute(client) {
         //Bot Activity
-        //console.log(`[CLIENT]`.green.bold, `| Checking Client....`);
-        //console.log(`[CLIENT]`.green.bold, `| Logged in as ${client.user.tag}`)
-        //console.log(`[CLIENT]`.green.bold, `| Client is starting....`)
-        //console.log(`[CLIENT]`.green.bold, `[INFO]`.yellow.bold,`| Client is now ready and online!`);
-        client.logger.log(`Checking Client....`, "debug")
-        client.logger.log(`Logged in as ${client.user.tag}`, "ready")
-        client.logger.log(`Client is starting....`, "debug")
-        client.logger.log(`Client is now ready and online!`, "ready")
+        client.logger.log(`[BOT] Checking Client....`, "debug")
+        client.logger.log(`[BOT] Logged in as ${client.user.tag}`, "ready")
+        client.logger.log(`[BOT] Client is starting....`, "debug")
+        client.logger.log(`[BOT] Client is now ready and online!`, "ready")
 
         // Client Activity
         const initialStatus = setTimeout(() => {
@@ -64,6 +62,7 @@ module.exports = {
         const statusArray = [
             `RAM: ${(process.memoryUsage().heapUsed / 1024 / 1024 ).toFixed(1)}%`,
             `CPU: ${(perc / 1000 ).toFixed(1)}%`,
+            `StreamNet Server`,
         ];
         let index = 0;
 
@@ -94,19 +93,68 @@ module.exports = {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
-            //console.log(`[DATABASE]`.green.bold, `| Database is now ready`)
-            //console.log(`[DATABASE]`.green.bold, `[INFO]`.yellow.bold,`| Connected to MongoDB Database!`);
-            client.logger.log(`Connected to MongoDB Database!`, "debug")
-            client.logger.log(`Database is now ready`, "ready")
+            client.logger.log(`[DATABASE] Connected to MongoDB Database!`, "debug")
+            client.logger.log(`[DATABASE] Database is now ready`, "ready")
         }).catch((err) => {
-            //console.log(`[ERROR] |`.red.bold, err)
             client.logger.log(err, "error")
         });
 
         //erela music
+        const channel = await client.channels.fetch(lavalinkChannelId)
+        const embed = new MessageEmbed()
+            .setColor("#2F3136")
+            .setDescription("Please wait for a minute!\nStatus is being ready!")
+        channel.bulkDelete(10);
+        channel.send({
+            embeds: [embed]
+        }).then((msg) => {
+            setInterval(() => {
+
+                    let all = []
+
+                    client.manager.nodes.forEach(node => {
+                        let info = []
+                        info.push(`Status: ${node.connected ? "🟢" : "🔴"}`)
+                        info.push(`Node: ${(node.options.identifier)}`)
+                        info.push(`Player: ${node.stats.players}`)
+                        info.push(`Playing Players: ${node.stats.playingPlayers}`)
+                        info.push(`Uptime: ${new Date(node.stats.uptime).toISOString().slice(11, 19)}`)
+                        info.push("\nCPU:")
+                        info.push(`Cores: ${node.stats.cpu.cores}`)
+                        info.push(`System Load: ${(Math.round(node.stats.cpu.systemLoad * 100) / 100).toFixed(2)}%`)
+                        info.push(`Lavalink Load: ${(Math.round(node.stats.cpu.lavalinkLoad * 100) / 100).toFixed(2)}%`)
+                        all.push(info.join('\n'))
+                    });
+                    const rembed = new MessageEmbed()
+                        .setAuthor({
+                            name: 'Lavalink Node',
+                            iconURL: client.user.displayAvatarURL()
+                        })
+                        .setDescription(`\`\`\`${all.join('\n\n----------------------------\n')}\n\n` +
+                            `Total Memory  :: ${Math.round(require('os').totalmem() / 1024 / 1024)} mb\n` +
+                            `Free Memory   :: ${Math.round(require('os').freemem() / 1024 / 1024)} mb\n` +
+                            `RSS           :: ${Math.round(process.memoryUsage().rss / 1024 / 1024)} mb\n` +
+                            `Heap Total    :: ${Math.round(process.memoryUsage().heapTotal / 1024 / 1024)} mb\n` +
+                            `Heap Used     :: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} mb\n` +
+                            `External      :: ${Math.round(process.memoryUsage().external / 1024 / 1024)} mb\n` +
+                            `Array Buffer  :: ${Math.round(process.memoryUsage().rss / 1024 / 1024)} mb\n` +
+                            `CPU Model     :: ${require('os').cpus()[0].model}\n` +
+                            `Cores         :: ${require('os').cpus().length}\n` +
+                            `Speed         :: ${require('os').cpus()[0].speed}Mhz\n` +
+                            `Platform      :: ${process.platform}\n` +
+                            `PID           :: ${process.pid}\n` +
+                            `\n` + `\`\`\``)
+                        .setColor("#9966ff")
+                        .setTimestamp(Date.now());
+                    msg.edit({
+                        embeds: [rembed]
+                    })
+                },
+                2000);
+        })
 
         client.manager.init(client.user.id);
-
+        client.logger.log(`[API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "ready");
 
         // Initialising Premium Users
         const users = await User.find();

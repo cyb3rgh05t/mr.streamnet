@@ -34,12 +34,18 @@ module.exports = {
         }
 
 
-        let amount = Number(dbFound.volume) - 10;
-        if (amount = 1) return await interaction.reply({
-            embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot lower the player volume further more`)]
-        });
+        let amount = Number(player.volume) - 10;
+        //if (amount = 1) return await interaction.reply({
+        // embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot lower the player volume further more`)]
+        //}, setTimeout(() => interaction.deleteReply(), 3000));
 
-        player.setVolume(amount);
-        await interaction.reply("🔉 Volume set to **${player.volume}%**");
+        await player.setVolume(amount);
+        if (dbFound) await dbFound.updateOne({
+            volume: player.volume
+        });
+        interaction.reply({
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Volume set to **${player.volume}%**`)]
+        }, setTimeout(() => interaction.deleteReply(), 3000));
+
     }
 }

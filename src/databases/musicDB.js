@@ -8,7 +8,7 @@ const musicsystem = new mongoose.Schema({
   requesterId: String,
   queueId: String,
   voiceChannelId: String,
-  volume: String
+  volume: Number
 
 });
 

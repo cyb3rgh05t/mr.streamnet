@@ -24,7 +24,7 @@ module.exports = {
             })
             .setColor("DARK_BUT_NOT_BLACK")
             .setTitle('🎶 Lust auf Musik ? 🎶')
-            .setDescription("Befolge diese einfachen Schritte...\n1️⃣ Joine den Musik Voice Kanal!\n2️⃣ Klicke auf den **Play Music** Button! ")
+            .setDescription("Befolge diese einfachen Schritte...\n\n1️⃣ Joine den Musik Voice Kanal!\n2️⃣ Klicke auf den **Play Music** Button! ")
             .setThumbnail(guild.iconURL({
                 dynamic: true
             }))

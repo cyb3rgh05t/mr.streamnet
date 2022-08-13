@@ -6,6 +6,9 @@ const {
 const DB = require("../../src/databases/musicDB");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
+const {
+    Player
+} = require("erela.js");
 const gClient = new genius.Client();
 
 
@@ -33,18 +36,19 @@ module.exports = {
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
-        const volume = dbFound.volume
-        let amount = Number(volume) + 10;
-        if (amount >= 100) return await interaction.reply({
+        let amount = Number(player.volume) + 10;
+        if (amount >= 110) return await interaction.reply({
             embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot higher the player volume further more`)]
-        });
-
-
-        player.setVolume(amount);
-        await interaction.reply("🔉 Volume set to **${player.volume}%**");
+        }, setTimeout(() => interaction.deleteReply(), 3000));
 
         if (dbFound) await dbFound.updateOne({
             volume: player.volume
         });
+
+        await player.setVolume(amount);
+        interaction.reply({
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Volume set to **${player.volume}%**`)]
+        }, setTimeout(() => interaction.deleteReply(), 3000));
+
     }
 }

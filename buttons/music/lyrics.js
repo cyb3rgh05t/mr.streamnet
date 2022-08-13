@@ -37,25 +37,36 @@ module.exports = {
                 },
                 setTimeout(() => interaction.deleteReply(), 5000));
         }
+        try {
+            const track = player.queue.current;
+            const trackTitle = track.title.replace("(Official Video)", "").replace("(Official Audio)", "");
+            const actualTrack = await gClient.songs.search(trackTitle);
+            const searches = actualTrack[0];
+            const lyrics = await searches.lyrics();
 
-        const track = player.queue.current;
-        const trackTitle = track.title.replace("(Official Video)", "").replace("(Official Audio)", "");
-        const actualTrack = await gClient.songs.search(trackTitle);
-        const searches = actualTrack[0];
-        const lyrics = await searches.lyrics();
+            const lyricsEmbed = new MessageEmbed()
+                .setColor("DARK_BUT_NOT_BLACK")
+                .setTitle(`💭  Lyrics\n**${trackTitle}**`)
+                .setDescription(lyrics)
+                .setThumbnail(track.displayThumbnail("3"))
+            member.send({
+                embeds: [lyricsEmbed]
+            });
 
-        const lyricsEmbed = new MessageEmbed()
-            .setColor("DARK_BUT_NOT_BLACK")
-            .setTitle(`💭  Lyrics for **${trackTitle}**`)
-            .setDescription(lyrics)
-            .setThumbnail(track.displayThumbnail("3"))
-        member.send({
-            embeds: [lyricsEmbed]
-        });
+            return interaction.editReply({
+                embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> Lyrics wurden dir als PM gesendet!`)]
+            }, setTimeout(() => interaction.deleteReply(), 3000));
+        } catch (_err) {
+            const track = player.queue.current;
+            const noLyrics = new MessageEmbed()
+                .setColor("RED")
+                .setDescription(
+                    `<:rejected:995614671128244224> Keine Lyrics gefunden für\n**[${track.title}](${track.uri})**.`
+                )
 
-        return interaction.editReply({
-            embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> Lyrics wurden dir als PM gesendet!`)]
-        }, setTimeout(() => interaction.deleteReply(), 3000));
-
+            return interaction.editReply({
+                embeds: [noLyrics]
+            }, setTimeout(() => interaction.deleteReply(), 3000));
+        }
     }
 }
