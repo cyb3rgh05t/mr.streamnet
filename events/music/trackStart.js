@@ -79,7 +79,7 @@ module.exports = {
 
 client.manager
 
-    .on("trackStart", async (client, player, track) => {
+    .on("trackStart", async (player, track) => {
 
         const dbFound = await DB.findOne({
             guildId: player.guild
