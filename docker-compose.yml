@@ -1,9 +1,19 @@
 ---
 version: "3"
 services:
+  mongodb:
+    container_name: "streamnet-mongodb"
+    image: "mongo:latest"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
+      MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
+    restart: on-failure
+    volumes:
+      - mongodb_data:/data/db
+
   discordbot:
-    hostname: "discordbot"
-    container_name: "discordbot"
+    hostname: "mr_streamnet"
+    container_name: "mr_streamnet"
     environment:
       - "PGID=1000"
       - "PUID=1000"
@@ -14,3 +24,14 @@ services:
     restart: "unless-stopped"
     volumes:
       - "/opt/appdata/discordbot/config:/usr/src/bot/src/config:rw"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:db
+
+volumes:
+  mongodb_data:
+
+networks:
+  default:
+    name: net-streamnet
