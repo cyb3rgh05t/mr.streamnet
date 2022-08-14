@@ -35,11 +35,11 @@ module.exports = {
         }
 
         if (!player.playing) return interaction.reply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Es befindet sich nichts in der Warteschlange.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
         if (!player.queue.length) return interaction.reply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Es befindet sich nichts in der Warteschlange.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
 
@@ -47,7 +47,7 @@ module.exports = {
 
         const shuffleEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription(`🔀 Shuffled the queue`)
+            .setDescription(`🔀 Playlist wurde gemischt`)
         return interaction.reply({
                 embeds: [shuffleEmbed]
             },

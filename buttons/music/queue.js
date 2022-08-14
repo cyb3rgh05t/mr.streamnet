@@ -45,11 +45,11 @@ module.exports = {
         }
 
         if (!player.playing) return interaction.editReply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Es befindet sich nichts in der Warteschlange.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
         if (!player.queue.length) return interaction.editReply({
-                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> There is nothing in the queue.")]
+                embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Es befindet sich nichts in der Warteschlange.")]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
 
@@ -58,7 +58,7 @@ module.exports = {
 
         const queueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setTitle(`🎶 Current queue for ${guild.name}`)
+            .setTitle(`🎶 Aktuelle Playlist für ${guild.name}`)
             .setDescription(chunked[0])
 
 
@@ -70,7 +70,7 @@ module.exports = {
         });
 
         return interaction.editReply({
-            embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> PlayList wurde dir als PM gesendet!`)]
+            embeds: [new MessageEmbed().setColor("GREEN").setDescription(`<:approved:995615632961847406> Playlist wurde dir als PM gesendet!`)]
         }, setTimeout(() => interaction.deleteReply(), 3000));
 
 

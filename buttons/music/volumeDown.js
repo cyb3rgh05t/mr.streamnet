@@ -36,7 +36,7 @@ module.exports = {
 
         let amount = Number(player.volume) - 10;
         //if (amount = 1) return await interaction.reply({
-        // embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot lower the player volume further more`)]
+        // embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Die Lautstärke des Players kann nicht weiter verringert werden`)]
         //}, setTimeout(() => interaction.deleteReply(), 3000));
 
         await player.setVolume(amount);
@@ -44,7 +44,7 @@ module.exports = {
             volume: player.volume
         });
         interaction.reply({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Volume set to **${player.volume}%**`)]
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Lautstärke eingestellt auf **${player.volume}%**`)]
         }, setTimeout(() => interaction.deleteReply(), 3000));
 
     }

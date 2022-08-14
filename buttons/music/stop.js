@@ -45,7 +45,7 @@ module.exports = {
 
         const disconnectEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription("⏹️  **Disconnected**")
+            .setDescription("⏹️  **Gestoppt und getrennt**")
         return interaction.reply({
                 embeds: [disconnectEmbed]
             },

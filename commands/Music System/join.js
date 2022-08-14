@@ -33,7 +33,7 @@ module.exports = {
             .addComponents(
                 new MessageButton()
                 .setStyle('LINK')
-                .setLabel('JOIN MUSIK KANAL')
+                .setLabel('Join Musik Kanal')
                 .setEmoji('🔉')
                 .setURL('https://discord.gg/UUGSrfwYFC')
                 .setDisabled(false),

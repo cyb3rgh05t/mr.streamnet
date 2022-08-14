@@ -36,7 +36,7 @@ module.exports = {
     if (!player.queue.current) {
       let thing = new MessageEmbed()
         .setColor("RED")
-        .setDescription("❌ There is no music playing.");
+        .setDescription("<:rejected:995614671128244224> Es wird keine Musik gespielt.");
       return interaction.reply({
           embeds: [thing]
         },
@@ -46,7 +46,7 @@ module.exports = {
     if (player.paused) {
       let thing = new MessageEmbed()
         .setColor("RED")
-        .setDescription(`⏸️ The player is already paused.`)
+        .setDescription(`⏸️ Der Player ist bereits pausiert.`)
       return interaction.reply({
           embeds: [thing]
         },
@@ -59,7 +59,7 @@ module.exports = {
 
     let thing = new MessageEmbed()
       .setColor("DARK_BUT_NOT_BLACK")
-      .setDescription(`⏸️ **Paused**\n\n[${song.title}](${song.uri})`)
+      .setDescription(`⏸️ **Pausiert**\n\n[${song.title}](${song.uri})`)
     return interaction.reply({
         embeds: [thing]
       },

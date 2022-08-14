@@ -3,6 +3,7 @@ const {
     Client,
     MessageEmbed
 } = require("discord.js");
+
 const DB = require("../../src/databases/musicDB");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
@@ -38,7 +39,7 @@ module.exports = {
         }
         let amount = Number(player.volume) + 10;
         if (amount >= 110) return await interaction.reply({
-            embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Cannot higher the player volume further more`)]
+            embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Kann die Player-Lautstärke nicht weiter erhöhen`)]
         }, setTimeout(() => interaction.deleteReply(), 3000));
 
         if (dbFound) await dbFound.updateOne({
@@ -47,7 +48,7 @@ module.exports = {
 
         await player.setVolume(amount);
         interaction.reply({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Volume set to **${player.volume}%**`)]
+            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`🔉 Lautstärke eingestellt auf **${player.volume}%**`)]
         }, setTimeout(() => interaction.deleteReply(), 3000));
 
     }

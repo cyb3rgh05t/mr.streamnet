@@ -51,7 +51,7 @@ module.exports = {
         if (res.loadType === "LOAD_FAILED") {
             if (!player.queue.current) player.destroy();
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("❌ An Error occured while adding this song.")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Beim Hinzufügen dieses Titels ist ein Fehler aufgetreten.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         }
@@ -59,7 +59,7 @@ module.exports = {
         if (res.loadType === "NO_MATCHES") {
             if (!player.queue.current) player.destroy();
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("❌ No Results found.")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Keine Ergebnisse gefunden.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         }

@@ -40,7 +40,7 @@ module.exports = {
 
         const resumeEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription(`▶️ **Resumed**\n\n[${song.title}](${song.uri})`)
+            .setDescription(`▶️ **Wieder aufgenommen**\n\n[${song.title}](${song.uri})`)
         return interaction.reply({
                 embeds: [resumeEmbed]
             },

@@ -43,12 +43,12 @@ module.exports = {
 
         if (!VoiceChannel)
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("❌ You aren't in a voice channel. Join one to be able to play music!")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Du befindest dich nicht in einem Sprachkanal. Schließe dich einem an, um Musik spielen zu können!")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         if (guild.me.voice.channelId && VoiceChannel.id !== guild.me.voice.channelId)
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("I'm already playing music in <#${guild.me.voice.channelId}>.!")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("Ich spiele bereits Musik in <#${guild.me.voice.channelId}>.!")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
 
@@ -91,7 +91,7 @@ module.exports = {
         if (res.loadType === "LOAD_FAILED") {
             if (!player.queue.current) player.destroy();
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("❌ An Error occured while adding this song.")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Beim Hinzufügen dieses Titels ist ein Fehler aufgetreten.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         }
@@ -99,7 +99,7 @@ module.exports = {
         if (res.loadType === "NO_MATCHES") {
             if (!player.queue.current) player.destroy();
             return interaction.reply({
-                    embeds: [new MessageEmbed().setColor("RED").setDescription("❌ No Results found.")]
+                    embeds: [new MessageEmbed().setColor("RED").setDescription("<:rejected:995614671128244224> Keine Ergebnisse gefunden.")]
                 },
                 setTimeout(() => interaction.deleteReply(), 3000));
         }
