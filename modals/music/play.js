@@ -78,6 +78,16 @@ module.exports = {
             volume: player.volume,
         });
 
+        else await DB.create({
+            guildId: player.guild,
+            voiceChannelId: player.voiceChannel,
+            channelId: player.textChannel,
+            requesterId: member,
+            volume: player.volume,
+
+
+        });
+
         if (res.loadType === "LOAD_FAILED") {
             if (!player.queue.current) player.destroy();
             return interaction.reply({
