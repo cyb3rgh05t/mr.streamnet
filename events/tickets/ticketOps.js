@@ -105,6 +105,7 @@ module.exports = {
                     const attachment = await createTranscript(channel, {
                         limit: -1,
                         returnBuffer: false,
+                        minify: true,
                         fileName: `${docs.Type} - ${docs.TicketID}.html`,
                     });
                     await DB.updateOne({
@@ -119,7 +120,7 @@ module.exports = {
                             embeds: [
                                 Embed.setTitle(`Ticket ID: ${docs.TicketID}`)
                                 .setDescription(`Closed By: ${member.user}\nMember: <@${docs.CreatedBy}>`)
-                                .setThumbnail(`${interaction.guild.iconURL({dynamic: true})}`)
+                                //.setThumbnail(`${interaction.guild.iconURL({dynamic: true})}`)
                                 .setTimestamp(),
                             ],
                             files: [attachment],
