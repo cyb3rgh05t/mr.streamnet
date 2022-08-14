@@ -105,7 +105,7 @@ module.exports = {
                     const attachment = await createTranscript(channel, {
                         limit: -1,
                         returnBuffer: false,
-                        minify: true,
+                        //minify: true,
                         fileName: `${docs.Type} - ${docs.TicketID}.html`,
                     });
                     await DB.updateOne({
