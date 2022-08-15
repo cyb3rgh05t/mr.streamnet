@@ -5,9 +5,6 @@ services:
     container_name: "streamnet-mongodb"
     image: "mongo:latest"
     environment:
-      - "PGID=${ID}"
-      - "PUID=${ID}"
-      - "TZ=${TZ}"
       MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
       MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
     labels:
