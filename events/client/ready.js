@@ -169,8 +169,9 @@ module.exports = {
                             name: "**RAM**",
                             value: `\`\`\`nim\nAvailable: ${pretty(memdata.total)}\nUsed: ${pretty(memdata.active)}\`\`\``,
                             inline: true
-                        },
-                        {
+                        }
+                    ])
+                    .addFields([{
                             name: "**DISK**",
                             value: `\`\`\`nim\nUsed: ${pretty(diskdata[0].used)} / ${pretty(diskdata[0].size)}\`\`\``,
                             inline: true
