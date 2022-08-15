@@ -7,31 +7,64 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
       MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
-    restart: on-failure
+    labels:
+      - "dockupdater.enable=false"
+    restart: "${RESTARTAPP}"
+    networks:
+      - ${DOCKERNETWORK}
+    security_opt:
+      - "${SECURITYOPS}:${SECURITYOPSSET}"
     volumes:
       - mongodb_data:/data/db
+
+  lavalink:
+    container_name: "lavalink"
+    image: "ghcr.io/cyb3rgh05t/lavalink:latest"
+    restart: "${RESTARTAPP}"
+    networks:
+      - ${DOCKERNETWORK}
+    security_opt:
+      - "${SECURITYOPS}:${SECURITYOPSSET}"
+    environment:
+      - "PGID=${ID}"
+      - "PUID=${ID}"
+      - "TZ=${TZ}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "dockupdater.enable=false"
+      - "traefik.http.routers.lavalink-rtr.entrypoints=https"
+      - "traefik.http.routers.lavalink-rtr.rule=Host(`lavalink.${DOMAIN}`)"
+      - "traefik.http.routers.lavalink-rtr.tls=true"
+      - "traefik.http.routers.lavalink-rtr.tls.certresolver=dns-cloudflare"
+      - "traefik.http.routers.lavalink-rtr.middlewares=chain-authelia@file"
+      - "traefik.http.routers.lavalink-rtr.service=lavalink-svc"
+      - "traefik.http.services.lavalink-svc.loadbalancer.server.port=2333"
 
   discordbot:
     hostname: "mr_streamnet"
     container_name: "mr_streamnet"
     environment:
-      - "PGID=1000"
-      - "PUID=1000"
-      - "TZ=Europe/Berlin"
-      - "UMASK=022"
-      - "TERM=xterm"
+      - "PGID=${ID}"
+      - "PUID=${ID}"
+      - "TZ=${TZ}"
+    labels:
+      - "dockupdater.enable=false"
     image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
-    restart: "unless-stopped"
+    restart: "${RESTARTAPP}"
     volumes:
       - "/opt/appdata/discordbot/config:/usr/src/bot/src/config:rw"
     depends_on:
       - mongodb
+      - lavalink
     links:
       - mongodb:db
+      - lavalink
 
 volumes:
   mongodb_data:
 
 networks:
-  default:
-    name: net-streamnet
+  proxy:
+    driver: bridge
+    external: true
