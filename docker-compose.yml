@@ -58,5 +58,8 @@ volumes:
   mongodb_data:
 
 networks:
+  proxy:
+    driver: bridge
+    external: true
   default:
     name: net-streamnet
