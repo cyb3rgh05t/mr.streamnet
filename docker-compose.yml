@@ -53,7 +53,6 @@ services:
       - lavalink
     links:
       - mongodb:db
-      - lavalink
 
 volumes:
   mongodb_data:
