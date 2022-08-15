@@ -8,10 +8,10 @@ services:
       - "PGID=${ID}"
       - "PUID=${ID}"
       - "TZ=${TZ}"
-    labels:
-      - "dockupdater.enable=false"
       MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
       MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
+    labels:
+      - "dockupdater.enable=false"
     restart: "${RESTARTAPP}"
     volumes:
       - mongodb_data:/data/db
