@@ -9,7 +9,7 @@ const {
 } = require("../../src/config/config.json");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
-const gClient = new genius.Client(lyricsKey);
+const gClient = new genius.Client("top-secret-optional-key");
 const DB = require("../../src/databases/musicDB");
 
 
