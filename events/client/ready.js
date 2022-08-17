@@ -8,7 +8,10 @@ const {
     lavalinkChannelId,
     systemChannelId
 } = require("../../src/config/config.json");
-const mongoose = require("mongoose");
+const {
+    connection,
+    mongoose
+} = require("mongoose");
 const User = require("../../src/databases/userDB");
 const DB = require('../../src/databases/clientDB');
 const os = require("node:os");
@@ -108,8 +111,9 @@ module.exports = {
         //Music System
         const channelLava = await client.channels.fetch(lavalinkChannelId)
         const embed = new MessageEmbed()
-            .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription("Please wait for a minute!\nStatus is being ready!")
+            .setColor('RED')
+            .setTitle('🛑 No Data Found!')
+            .setDescription('Please Wait For The Information To Be Collected!')
         channelLava.bulkDelete(10);
         channelLava.send({
             embeds: [embed]
@@ -117,17 +121,20 @@ module.exports = {
             setInterval(async () => {
 
                 const rembed = new MessageEmbed()
-
+                    .setTitle(`Music System`)
+                    .setColor("DARK_BUT_NOT_BLACK")
                     .addFields([{
                         name: "**Lavalink**",
-                        value: `\`\`\`nim\n${client.manager.nodes.map((node) => `NODE\nStatus: ${node.connected ? "🟢 Online" : "🔴 Offline"}\nName: ${node.options.identifier}\nMemory Usage : ${formatBytes(node.stats.memory.allocated)} - ${node.stats.cpu.lavalinkLoad.toFixed(2)}%\nConnections : ${node.stats.playingPlayers} / ${node.stats.players}\nUptime : ${moment(node.stats.uptime).format("D[ days], H[ hours], M[ minutes], S[ seconds]")}`)}\`\`\``,
-                        inline: true
+                        value: `${client.manager.nodes.map((node) => `
+                        **\`•\`Name**: ${node.options.identifier}
+                        **\`•\`Status**: ${node.connected ? "<:icon_online:993231898291736576>  Online" : "<:icon_offline:993232252647514152> Offline"}
+                        **\`•\`Memory Usage**: ${formatBytes(node.stats.memory.allocated)} - ${node.stats.cpu.lavalinkLoad.toFixed(2)}%
+                        **\`•\`Connections**: ${node.stats.playingPlayers} / ${node.stats.players}
+                        **\`•\`Uptime**: ${moment(node.stats.uptime).format("D[ days], H[ hours], M[ minutes], S[ seconds]")}
+                        
+                        `)}`
                     }])
-                    .setColor("DARK_BUT_NOT_BLACK")
-                    .setFooter({
-                        text: `Update at `
-                    })
-                    .setTimestamp(Date.now());
+
                 msg.edit({
                     embeds: [rembed]
                 });
@@ -140,11 +147,13 @@ module.exports = {
 
         //System Info
 
+
         const channelSys = await client.channels.fetch(systemChannelId)
         let cl1 = await si.currentLoad();
         const Sysembed = new MessageEmbed()
-            .setColor("DARK_BUT_NOT_BLACK")
-            .setDescription("Please wait for a minute!\nStatus is being ready!")
+            .setColor('RED')
+            .setTitle('🛑 No Data Found!')
+            .setDescription('Please Wait For The Information To Be Collected!')
         channelSys.bulkDelete(10);
         channelSys.send({
             embeds: [Sysembed]
@@ -159,33 +168,46 @@ module.exports = {
                 let uptime = await os.uptime();
 
                 const Sysrembed = new MessageEmbed()
-
-                    .addFields([{
-                            name: "**CPU**",
-                            value: `\`\`\`nim\nCpu: ${cpudata.manufacturer + " " + cpudata.brand}\nLoad: ${cl1.currentLoad.toFixed(2)}%\nCores: ${cpudata.cores}\nPlatform: ${osdata.platform}\`\`\``,
-                            inline: true
-                        },
-                        {
-                            name: "**RAM**",
-                            value: `\`\`\`nim\nAvailable: ${pretty(memdata.total)}\nUsed: ${pretty(memdata.active)}\`\`\``,
-                            inline: true
-                        }
-                    ])
-                    .addFields([{
-                            name: "**DISK**",
-                            value: `\`\`\`nim\nUsed: ${pretty(diskdata[0].used)} / ${pretty(diskdata[0].size)}\`\`\``,
-                            inline: true
-                        },
-                        {
-                            name: "**NETWORK**",
-                            value: `\`\`\`nim\nPing: ${Math.round(netdata[0].ms)}ms\nUp: ${pretty(netdata[0].tx_sec)}/s\nDown: ${pretty(netdata[0].rx_sec)}/s\n\nTotal Up: ${pretty(netdata[0].tx_bytes)}\nTotal Down: ${pretty(netdata[0].rx_bytes)}\`\`\``
-                        }
-                    ])
+                    .setTitle(`StreamNet Server`)
                     .setColor("DARK_BUT_NOT_BLACK")
-                    .setFooter({
-                        text: `Update at `
+                    .addFields({
+
+                        name: `<:icon_reply:993231553083736135> SYSTEM`,
+                        value: `
+                        **\`•\` Cpu**: ${cpudata.manufacturer + " " + cpudata.brand}
+                        **\`•\` Load**: ${cl1.currentLoad.toFixed(2)}%
+                        **\`•\` Cores**: ${cpudata.cores}
+                        **\`•\` Platform**: ${osdata.platform}
+                        **\`•\` Memory Available**: ${pretty(memdata.total)}
+                        **\`•\` Memory Used**: ${pretty(memdata.active)}
+                        **\`•\` Database**: ${switchTo(connection.readyState)}
+                        ㅤ
+                        `,
+                        inline: false
+
+                    }, {
+
+                        name: `<:icon_reply:993231553083736135> HARDDRIVE`,
+                        value: `
+                        **\`•\` Used**: ${pretty(diskdata[0].used)} / ${pretty(diskdata[0].size)}
+                        ㅤ
+                        `,
+                        inline: true
+
+                    }, {
+
+                        name: `<:icon_reply:993231553083736135> NETWORK`,
+                        value: `
+                        **\`•\` Ping**: ${Math.round(netdata[0].ms)}ms
+                        **\`•\` Up**: ${pretty(netdata[0].tx_sec)}/s
+                        **\`•\` Down**: ${pretty(netdata[0].rx_sec)}/s
+
+                        **\`•\` Total Up**: ${pretty(netdata[0].tx_bytes)}
+                        **\`•\` Total Down**: ${pretty(netdata[0].rx_bytes)}
+                        `,
+                        inline: false,
+
                     })
-                    .setTimestamp(Date.now());
                 msg.edit({
                     embeds: [Sysrembed]
                 });
@@ -227,6 +249,28 @@ module.exports = {
         }, ms("5s")); //= 5000 (ms)
 
     },
+}
+
+function switchTo(val) {
+    var status = " ";
+    switch (val) {
+        case 0:
+            status = `<:icon_offline:993232252647514152> DISCONNECTED`
+            break;
+
+        case 1:
+            status = `<:icon_online:993231898291736576> CONNECTED`
+            break;
+
+        case 2:
+            status = `<:icon_connecting:993232321685762048> CONNECTING`
+            break;
+
+        case 3:
+            status = `<:icon_disconnecting:993232346172104756> DISCONNECTING`
+            break;
+    }
+    return status;
 }
 
 function uptimer(seconds) {
