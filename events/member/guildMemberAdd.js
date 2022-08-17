@@ -104,7 +104,7 @@ module.exports = {
                 client.logger.log(`New User "${member.user.username}" has joined "${member.guild.name}"`, "log");
                 //const newMemberMessage = `**${member.user}** joined the Server, we now have ${member.guild.memberCount} members!`;
                 newMemberChannel.send({
-                    embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`**${member.user}** joined the Server, we now have ${member.guild.memberCount} members!`)]
+                    embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setDescription(`**${member}** joined the Server, we now have ${member.guild.memberCount} members!`)]
                 })
             }));
 
