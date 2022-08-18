@@ -129,8 +129,7 @@ module.exports = {
                         **\`•\`Name**: ${node.options.identifier}
                         **\`•\`Status**: ${node.connected ? "<:icon_online:993231898291736576>  Online" : "<:icon_offline:993232252647514152> Offline"}
                         **\`•\`Memory Usage**: ${formatBytes(node.stats.memory.allocated)} - ${node.stats.cpu.lavalinkLoad.toFixed(2)}%
-                        **\`•\`Connections**: ${node.stats.playingPlayers} / ${node.stats.players}
-                        **\`•\`Uptime**: ${moment(node.stats.uptime).format("D[ days], H[ hours], M[ minutes], S[ seconds]")}
+                        **\`•\`Connections**: ${node.stats.playingPlayers} / ${node.stats.players} players
                         
                         `)}`
                     }])

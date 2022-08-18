@@ -50,7 +50,7 @@ module.exports = {
 
             const lyricsEmbed = new MessageEmbed()
                 .setColor("DARK_BUT_NOT_BLACK")
-                .setTitle(`💭  Lyrics\n**${trackTitle}**`)
+                .setTitle(`💬 Lyrics\n**${trackTitle}**`)
                 .setDescription(lyrics)
                 .setThumbnail(track.displayThumbnail("3"))
             member.send({

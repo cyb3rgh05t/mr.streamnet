@@ -22,7 +22,16 @@ services:
       - "PUID=${ID}"
       - "TZ=${TZ}"
     labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "dockupdater.enable=false"
+      - "traefik.http.routers.lavalink-rtr.entrypoints=https"
+      - "traefik.http.routers.lavalink-rtr.rule=Host(`lavalink.${DOMAIN}`)"
+      - "traefik.http.routers.lavalink-rtr.tls=true"
+      - "traefik.http.routers.lavalink-rtr.tls.certresolver=dns-cloudflare"
+      - "traefik.http.routers.lavalink-rtr.middlewares=chain-authelia@file"
+      - "traefik.http.routers.lavalink-rtr.service=lavalink-svc"
+      - "traefik.http.services.lavalink-svc.loadbalancer.server.port=2333"
 
   discordbot:
     hostname: "mr_streamnet"
@@ -48,5 +57,6 @@ volumes:
   mongodb_data:
 
 networks:
-  default:
-    name: net-streamnet
+  proxy:
+    driver: bridge
+    external: true
