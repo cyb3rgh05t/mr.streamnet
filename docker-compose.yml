@@ -21,10 +21,6 @@ services:
       - "PGID=${ID}"
       - "PUID=${ID}"
       - "TZ=${TZ}"
-    networks:
-      - ${DOCKERNETWORK}
-    security_opt:
-      - "${SECURITYOPS}:${SECURITYOPSSET}"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
@@ -36,10 +32,6 @@ services:
       - "traefik.http.routers.lavalink-rtr.middlewares=chain-authelia@file"
       - "traefik.http.routers.lavalink-rtr.service=lavalink-svc"
       - "traefik.http.services.lavalink-svc.loadbalancer.server.port=2333"
-networks:
-  proxy:
-    driver: bridge
-    external: true
 
   discordbot:
     hostname: "mr_streamnet"
@@ -65,6 +57,5 @@ volumes:
   mongodb_data:
 
 networks:
-  proxy:
-    driver: bridge
-    external: true
+  default:
+    name: net-streamnet
