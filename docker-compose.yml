@@ -36,10 +36,6 @@ services:
       - "traefik.http.routers.lavalink-rtr.middlewares=chain-authelia@file"
       - "traefik.http.routers.lavalink-rtr.service=lavalink-svc"
       - "traefik.http.services.lavalink-svc.loadbalancer.server.port=2333"
-networks:
-  proxy:
-    driver: bridge
-    external: true
 
   discordbot:
     hostname: "mr_streamnet"
