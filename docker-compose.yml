@@ -7,6 +7,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
       MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
+    networks:
+      - ${DOCKERNETWORK}
+    security_opt:
+      - "${SECURITYOPS}:${SECURITYOPSSET}"
     labels:
       - "dockupdater.enable=false"
     restart: "${RESTARTAPP}"
@@ -21,6 +25,10 @@ services:
       - "PGID=${ID}"
       - "PUID=${ID}"
       - "TZ=${TZ}"
+    networks:
+      - ${DOCKERNETWORK}
+    security_opt:
+      - "${SECURITYOPS}:${SECURITYOPSSET}"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
@@ -40,8 +48,12 @@ services:
       - "PGID=${ID}"
       - "PUID=${ID}"
       - "TZ=${TZ}"
+    networks:
+      - ${DOCKERNETWORK}
+    security_opt:
+      - "${SECURITYOPS}:${SECURITYOPSSET}"
     labels:
-      - "dockupdater.enable=false"
+      - "dockupdater.enable=true"
     image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
     restart: "${RESTARTAPP}"
     volumes:
@@ -57,5 +69,6 @@ volumes:
   mongodb_data:
 
 networks:
-  default:
-    name: net-streamnet
+  proxy:
+    driver: bridge
+    external: true
