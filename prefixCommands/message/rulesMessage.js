@@ -32,7 +32,7 @@ module.exports = {
             });
         } catch (error) {
             message.channel.send("Some Error Occured");
-            console.log(`[ERROR]`.red.bold, error)
+            client.logger.log(error, "error")
         }
     }
 }
