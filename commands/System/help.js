@@ -67,7 +67,7 @@ module.exports = {
                 .addComponents(
                     new MessageSelectMenu()
                     .setCustomId('help-category')
-                    .setPlaceholder('Select a category')
+                    .setPlaceholder('Wähle eine Kategorie')
                     .addOptions([
                         directories.map(dir => {
                             return {
@@ -80,7 +80,7 @@ module.exports = {
 
             const embed = new MessageEmbed()
                 .setTitle(`${client.user.username} | Help`)
-                .setDescription(` Hello **<@${interaction.member.user.id}>**, I am <@${client.user.id}>. \n\nA multipurpose Butler Bot for StreamNet.club.  \n\n*Choose an category below to see all my commands* \n\n`)
+                .setDescription(` Hallo **<@${interaction.member.user.id}>**, Ich bin <@${client.user.id}>. \n\nEin mehrzweck Butler Bot für StreamNet.club.  \n\n*Wähle unten eine Kategorie aus, für alle Befehle.* \n\n`)
                 .setThumbnail(client.user.displayAvatarURL())
                 .setColor("DARK_BUT_NOT_BLACK")
             //.setTimestamp()
