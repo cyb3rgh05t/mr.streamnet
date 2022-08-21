@@ -106,7 +106,7 @@ module.exports = {
          * @returns The channel info || null
          */
         async function getYoutubeChannelInfos(name) {
-            client.logger.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] Resolving channel infos...`, "debug");
+            client.logger.log(`[YOUTUBE] Resolving channel infos...`, "debug");
             let channel = null;
             /* Try to search by ID */
             let id = getYoutubeChannelIdFromURL(name);
@@ -122,7 +122,7 @@ module.exports = {
                 }
             }
 
-            client.logger.log(`[${name.length >= 10 ? name.slice(0, 10)+"..." : name}] Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`, "log");
+            client.logger.log(`[YOUTUBE] Title of the resolved channel: ${channel.raw ? channel.raw.snippet.title : "err"}`, "log");
             return channel;
         }
 
@@ -132,7 +132,7 @@ module.exports = {
         async function check() {
             client.logger.log(`Checking YOUTUBE API...`, "debug");
             config.YOUTUBERS.forEach(async (youtuber) => {
-                client.logger.log(`[${youtuber.length >= 10 ? youtuber.slice(0, 10) + "..." : youtuber}] Start checking...`, "debug");
+                client.logger.log(`[YOUTUBE] Start checking...`, "debug");
                 let channelInfos = await getYoutubeChannelInfos(youtuber);
                 if (!channelInfos) return client.logger.log("Invalid youtuber provided: " + youtuber, "error");
                 let video = await checkVideos(channelInfos.raw.snippet.title, "https://www.youtube.com/feeds/videos.xml?channel_id=" + channelInfos.id);
