@@ -65,12 +65,12 @@ const row2 = new MessageActionRow()
         .setCustomId('queue') //DONE
         .setStyle('SECONDARY')
         .setEmoji('🎶')
-        .setLabel("Queue"),
-        new MessageButton()
+        .setLabel("Queue")
+        /*new MessageButton()
         .setCustomId('lyrics') //DONE
         .setStyle('SECONDARY')
         .setEmoji('💬')
-        .setLabel("Lyrics")
+        .setLabel("Lyrics")*/
     )
 
 module.exports = {

@@ -72,13 +72,13 @@ const row4 = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('🎶')
         .setLabel("Queue")
-        .setDisabled(true),
-        new MessageButton()
+        .setDisabled(true)
+        /*new MessageButton()
         .setCustomId('lyrics') //DONE
         .setStyle('SECONDARY')
         .setEmoji('💬')
         .setLabel("Lyrics")
-        .setDisabled(true)
+        .setDisabled(true)*/
     )
 
 module.exports = {
