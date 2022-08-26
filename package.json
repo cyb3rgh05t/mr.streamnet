@@ -32,7 +32,7 @@
     "chalk": "^4.1.2",
     "chart.js": "^3.9.1",
     "chartjs-node-canvas": "^4.1.6",
-    "chartjs-plugin-gradient": "^0.5.0",
+    "chartjs-plugin-gradient": "^0.5.1",
     "colors": "^1.4.0",
     "discord-giveaways": "^5.2.2",
     "discord-html-transcripts": "^2.5.5",
