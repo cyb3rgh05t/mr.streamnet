@@ -10,6 +10,7 @@ module.exports = {
   name: "redeem",
   description: `Redeem a premium code`,
   usage: "/redeem [code]",
+  public: true,
   options: [{
     name: "code",
     description: `give me code`,

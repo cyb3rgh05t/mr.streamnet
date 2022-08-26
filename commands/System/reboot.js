@@ -10,6 +10,7 @@ const {
 module.exports = {
     name: "reboot",
     description: "Reboot the bot (DANGEROUS)",
+    usage: "/reboot",
     permissions: "ADMINISTRATOR",
     /**
      * 

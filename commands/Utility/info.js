@@ -16,7 +16,7 @@ module.exports = {
     name: "info",
     usage: "/info [user] or [server] or [channel]",
     description: "Returns info based on the command",
-    permission: "ADMINISTRATOR",
+    public: true,
     options: [{
         name: "user",
         description: "Get The User Info",

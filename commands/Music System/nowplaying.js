@@ -13,7 +13,9 @@ const {
 module.exports = {
     name: "nowplaying",
     description: "Show the current playing song",
-    permissions: "ADMINISTRATOR",
+    usage: "/nowplaying",
+    public: true,
+
     /**
      * 
      * @param {Client} client 

@@ -37,7 +37,7 @@ module.exports = {
     name: "status",
     usage: "/status",
     description: "Bot status information",
-    permission: "ADMINISTRATOR",
+    public: true,
 
     /**
      * 
