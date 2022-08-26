@@ -25,8 +25,9 @@ module.exports = {
                     `Restarting . . . `
                 )
             interaction.reply({
-                embeds: [restart]
-            }, setTimeout(() => interaction.deleteReply(), 3000)).then(() => {
+                embeds: [restart],
+                ephemeral: true,
+            }).then(() => {
                 process.on('exit', () => {
                     require('child_process').spawn(process.argv.shift(), process.argv, {
                         cwd: process.cwd(),
