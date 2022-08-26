@@ -19,7 +19,7 @@
   "homepage": "https://github.com/cyb3rgh05t/mr.streamnet#readme",
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
-    "@discordjs/rest": "^1.0.0",
+    "@discordjs/rest": "^1.1.0",
     "@discordjs/voice": "^0.11.0",
     "@distube/spotify": "^1.3.2",
     "ascii-table": "^0.0.9",
@@ -36,7 +36,7 @@
     "colors": "^1.4.0",
     "discord-giveaways": "^5.2.2",
     "discord-html-transcripts": "^2.5.5",
-    "discord-modals": "^1.3.7",
+    "discord-modals": "^1.3.9",
     "discord-welcome-card": "^4.8.1",
     "discord.js": "^13.10.3",
     "discord.js-captcha": "^2.5.3",
