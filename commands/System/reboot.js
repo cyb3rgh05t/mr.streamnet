@@ -24,9 +24,8 @@ module.exports = {
                     `Restarting . . . `
                 )
             interaction.reply({
-                embeds: [restart],
-                ephemeral: true,
-            }).then(() => {
+                embeds: [restart]
+            }, setTimeout(() => interaction.deleteReply(), 3000)).then(() => {
                 process.on('exit', () => {
                     require('child_process').spawn(process.argv.shift(), process.argv, {
                         cwd: process.cwd(),
@@ -43,9 +42,8 @@ module.exports = {
                     `<:rejected:995614671128244224> You cannot use this command.`
                 )
             interaction.reply({
-                embeds: [embed],
-                ephemeral: true
-            })
+                embeds: [embed]
+            }, setTimeout(() => interaction.deleteReply(), 3000));
         }
     }
 }
