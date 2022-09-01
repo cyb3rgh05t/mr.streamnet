@@ -7,13 +7,6 @@ const client = new Client({
 });
 
 const {
-    nodes,
-    SpotifyClientID,
-    SpotifySecret,
-    token
-} = require("./config/config.json");
-
-const {
     promisify
 } = require("util");
 const {
@@ -21,7 +14,6 @@ const {
 } = require("glob");
 const PG = promisify(glob);
 const Ascii = require("ascii-table")
-const colors = require("colors");
 
 const Deezer = require("erela.js-deezer");
 const Spotify = require("better-erela.js-spotify").default;
@@ -36,11 +28,12 @@ require("./handlers/antiCrash")(client);
     require(`../systems/${system}`)(client)
 });
 
-["events", "commands", "prefixcmd", "buttons", "modals"].forEach(handler => {
+["events", "slashCommands", "commands", "buttons", "modals"].forEach(handler => {
     require(`./handlers/${handler}`)(client, PG, Ascii)
 });
 
-
+client.config = require("../src/config.json");
+client.logger = require("../utils/logger");
 client.tools = require("../utils/embedTools");
 client.commands = new Collection();
 client.buttons = new Collection();
@@ -48,13 +41,12 @@ client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
 client.modals = new Collection();
-client.logger = require("../utils/logger");
 client.manager = new Manager({
-    nodes: nodes,
+    nodes: client.config.nodes,
     plugins: [
         new Spotify({
-            clientID: SpotifyClientID,
-            clientSecret: SpotifySecret,
+            clientID: client.config.SpotifyClientID,
+            clientSecret: client.config.SpotifySecret,
         }),
         new Apple(),
         new Deezer(),
@@ -69,6 +61,6 @@ client.manager = new Manager({
 module.exports = client;
 
 
-client.login(token).then(() => {}).catch((err) => {
+client.login(client.config.token).then(() => {}).catch((err) => {
     client.logger.log(err, "error")
 });

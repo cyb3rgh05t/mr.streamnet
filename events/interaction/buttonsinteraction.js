@@ -1,6 +1,9 @@
 const {
     ButtonInteraction
 } = require("discord.js");
+const {
+    Permissions
+} = require("../../src/validation/permissions");
 
 module.exports = {
     name: "interactionCreate",

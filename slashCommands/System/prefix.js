@@ -4,7 +4,6 @@ const {
 	Client
 } = require("discord.js");
 const GuildSettings = require("../../src/databases/settingsDB");
-const colors = require("colors");
 
 module.exports = {
 	name: "prefix",
@@ -61,11 +60,11 @@ module.exports = {
 					})
 				]
 			})
-			console.log(`[INFO]`.yellow.bold, `Client Prefix is now = "${caracter[0]}"`)
+			client.logger.log(`Client Prefix is now = "${caracter[0]}"`, "log")
 
 		} catch (error) {
 			interaction.reply("Some Error Occured");
-			console.log(`[ERROR]`.red.bold, error)
+			console.log(error, "error")
 		}
 
 	}

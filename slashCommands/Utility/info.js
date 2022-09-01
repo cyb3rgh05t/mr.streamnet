@@ -11,6 +11,7 @@ const {
 } = require('../../src/functions/chart');
 const moment = require("moment");
 const ms = require("ms");
+const client = require("../../src");
 
 module.exports = {
     name: "info",
@@ -474,7 +475,7 @@ module.exports = {
             break;
             };
         } catch (err) {
-            console.log(`[ERROR]`.red.bold, err);
+            client.logger.log(err, "error");
         };
     },
 }

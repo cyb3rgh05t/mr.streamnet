@@ -4,6 +4,7 @@ const {
     MessageActionRow,
     MessageButton
 } = require("discord.js");
+const client = require("../../src");
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {
@@ -160,7 +161,7 @@ module.exports = {
                         embeds: [Embed],
                         ephemeral: true
                     });
-                    console.log(err);
+                    client.logger.log(err, "error");
                 }
             }
             break;

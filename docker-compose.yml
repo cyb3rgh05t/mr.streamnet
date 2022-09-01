@@ -57,7 +57,7 @@ services:
     image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
     restart: "${RESTARTAPP}"
     volumes:
-      - "/opt/appdata/discordbot/config:/usr/src/bot/src/config:rw"
+      - "/opt/appdata/discordbot/config:/usr/src/bot/src:rw"
     depends_on:
       - mongodb
       - lavalink
