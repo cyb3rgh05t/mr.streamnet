@@ -3,7 +3,10 @@ const {
   Client,
   MessageEmbed
 } = require("discord.js");
-
+const {
+  guildId,
+  ownerId
+} = require("../../src/config/config.json");
 const GuildSettings = require('../../src/databases/settingsDB');
 const colors = require("colors");
 
@@ -13,17 +16,17 @@ module.exports = {
 
   async execute(message) {
     let storedSettings = await GuildSettings.findOne({
-      GuildID: client.config.guildId,
+      GuildID: guildId,
     });
     if (!storedSettings) {
       const newSettings = new GuildSettings({
-        GuildID: client.config.guildId,
+        GuildID: guildId,
       });
       await newSettings.save().catch((e) => {
         console.log(e);
       });
       storedSettings = await GuildSettings.findOne({
-        GuildID: client.config.guildId
+        GuildID: guildId
       });
     }
 
@@ -37,7 +40,7 @@ module.exports = {
     if (!cmd) return;
     try {
 
-      if (cmd.owner && message.author.id !== client.config.ownerId) {
+      if (cmd.owner && message.author.id !== ownerId) {
         return message.reply({
           embeds: [new MessageEmbed()
             .setColor("RED")

@@ -6,6 +6,13 @@ const {
 const {
     Captcha
 } = require("discord.js-captcha");
+const {
+    verifiedId,
+    verifiedChannelId,
+    guildId,
+    newMemberChannelId
+} = require("../../src/config/config.json");
+
 
 module.exports = {
     name: "guildMemberAdd",
@@ -16,9 +23,9 @@ module.exports = {
      */
     execute(member) {
         const captcha = new Captcha(client, {
-            guildID: client.config.guildId,
-            roleID: client.config.verifiedId,
-            channelID: client.config.verifiedChannelId,
+            guildID: guildId,
+            roleID: verifiedId,
+            channelID: verifiedChannelId,
             sendToTextChannel: false,
             addRoleOnSuccess: true,
             kickOnFailure: true,
@@ -91,7 +98,7 @@ module.exports = {
                     user,
                     guild
                 } = member
-                const newMemberChannel = member.guild.channels.cache.get(client.config.newMemberChannelId)
+                const newMemberChannel = member.guild.channels.cache.get(newMemberChannelId)
                 client.logger.log(`A Member has Solved a CAPTCHA!`, "log");
                 client.logger.log(data, "log");
                 client.logger.log(`New User "${member.user.username}" has joined "${member.guild.name}"`, "log");

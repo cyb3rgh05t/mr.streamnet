@@ -1,17 +1,15 @@
 const {
     Events
 } = require("../validation/eventNames");
-/**
- * 
- * @param {Client} client 
- */
+const colors = require("colors");
+
 module.exports = async (client, PG) => {
 
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
         if (!Events.includes(event.name) || !event.name) {
             const L = file.split("/");
-            await client.logger.log(`${event.name || "🟥 MISSING"} Event name is either invalid or missing`, "error");
+            await client.logger.log(`${event.name || "MISSING"} Event name is either invalid or missing`, "error");
             return;
         }
 
