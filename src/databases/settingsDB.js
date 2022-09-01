@@ -1,15 +1,12 @@
-const {
-  prefix
-} = require("../config/config.json");
 const mongoose = require("mongoose");
-
+const client = require("../index")
 const settings = mongoose.Schema({
   GuildID: {
     type: String,
   },
   Prefix: {
     type: String,
-    default: prefix,
+    default: client.config.prefix,
   },
 });
 

@@ -9,7 +9,7 @@ module.exports = {
   description: "discord-image",
   category: "logos",
   syntax: "command",
-  permissions: ["ADMINISTRATOR"],
+  permission: "ADMINISTRATOR",
   /**
    * @param {Client} client
    * @param {Message} message

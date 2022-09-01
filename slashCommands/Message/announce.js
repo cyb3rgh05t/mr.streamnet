@@ -5,7 +5,7 @@ const {
 const {
   streamnetId,
   supporterId
-} = require("../../src/config/config.json");
+} = require("../../src/config.json");
 
 module.exports = {
   name: "announce",
@@ -63,42 +63,51 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   execute(interaction) {
-    const {
-      options,
-      user
-    } = interaction;
-    const title = options.getString("title");
-    const message = options.getString("message");
-    const color = options.getString("color");
-    const footer = options.getString("footer");
-    const timestamp = options.getBoolean("timestamp");
-    const ping = options.getString("ping");
-    const embed = new MessageEmbed()
-      .setAuthor({
-        name: `${user.tag}`,
-        iconURL: `${user.displayAvatarURL({dynamic: true})}`
-      })
-      .setTitle(`${title}`)
-      .setDescription(`${message}`)
+    try {
+      const {
+        options,
+        user
+      } = interaction;
+      const title = options.getString("title");
+      const message = options.getString("message");
+      const color = options.getString("color");
+      const footer = options.getString("footer");
+      const timestamp = options.getBoolean("timestamp");
+      const ping = options.getString("ping");
+      const embed = new MessageEmbed()
+        .setAuthor({
+          name: `${user.tag}`,
+          iconURL: `${user.displayAvatarURL({dynamic: true})}`
+        })
+        .setTitle(`${title}`)
+        .setDescription(`${message}`)
 
-    if (color) embed.setColor(color.toUpperCase());
-    if (footer) embed.setFooter({
-      text: footer
-    });
-    if (timestamp) embed.setTimestamp();
+      if (color) embed.setColor(color.toUpperCase());
+      if (footer) embed.setFooter({
+        text: footer
+      });
+      if (timestamp) embed.setTimestamp();
 
-    if (!ping) {
-      interaction.reply({
-        embeds: [embed]
-      });
-    } else {
-      interaction.reply({
-        content: `${ping === "<@&694240145628463255>" ? "<@&694240145628463255>" : "<@&807277578082713671>"}`,
-        embeds: [embed],
-        allowedMentions: {
-          parse: ['roles']
-        }
-      });
+      if (!ping) {
+        interaction.reply({
+          embeds: [embed]
+        });
+      } else {
+        interaction.reply({
+          content: `${ping === "<@&694240145628463255>" ? "<@&694240145628463255>" : "<@&807277578082713671>"}`,
+          embeds: [embed],
+          allowedMentions: {
+            parse: ['roles']
+          }
+        });
+      }
+    } catch (error) {
+      errorEmbed.setDescription(`An error has occurred\n\`${error}\``)
+      return interaction.reply({
+          embeds: [errorEmbed],
+          ephemeral: true
+        }),
+        client.logger.log(error, "error")
     }
   }
 }

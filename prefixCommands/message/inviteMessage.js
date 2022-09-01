@@ -2,14 +2,13 @@ const {
   Client,
   Message
 } = require("discord.js");
-const colors = require("colors");
 
 module.exports = {
   name: "invite-message",
   description: "invite-message",
   category: "message",
   syntax: "command",
-  permissions: ["ADMINISTRATOR"],
+  permission: "ADMINISTRATOR",
   /**
    * @param {Client} client
    * @param {Message} message

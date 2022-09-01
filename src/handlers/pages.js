@@ -3,7 +3,10 @@ const {
     MessageButton,
     MessageEmbed,
 } = require('discord.js');
-
+/**
+ * 
+ * @param {Client} client 
+ */
 module.exports = {
     embedPages: async (client, interaction, embeds) => {
         const pages = {};
@@ -87,7 +90,6 @@ module.exports = {
             });
         });
 
-        // -------------- Not needed --------------
         collector.on('end', async (reason) => {
             if (reason === 'time') {
                 const warningEmbed = new MessageEmbed()
@@ -101,6 +103,5 @@ module.exports = {
                 });
             }
         });
-        // -------------- Not needed --------------
     },
 };

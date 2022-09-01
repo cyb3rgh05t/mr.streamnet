@@ -3,7 +3,6 @@ const {
     MessageEmbed
 } = require("discord.js");
 const DB = require("../../src/databases/modDB");
-const colors = require("colors");
 const client = require("../../src");
 
 
