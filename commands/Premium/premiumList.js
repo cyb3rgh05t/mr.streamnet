@@ -4,6 +4,10 @@ const {
     Client
 } = require("discord.js");
 const moment = require("moment");
+const {
+    ownerId
+} = require("../../src/config/config.json");
+
 
 module.exports = {
     name: "premium-list",
@@ -16,7 +20,7 @@ module.exports = {
      */
     async execute(interaction, client) {
         // Code
-        if (interaction.user.id !== client.config.ownerId)
+        if (interaction.user.id !== ownerId) // Change to uyour discord user id
             return interaction.reply(`You are not my Owner`);
 
         let data = client.userSettings

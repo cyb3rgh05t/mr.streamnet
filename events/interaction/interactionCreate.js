@@ -2,9 +2,7 @@ const {
   CommandInteraction,
   MessageEmbed
 } = require("discord.js");
-const {
-  Permissions
-} = require("../../src/validation/permissions");
+const colors = require("colors");
 
 module.exports = {
   name: "interactionCreate",

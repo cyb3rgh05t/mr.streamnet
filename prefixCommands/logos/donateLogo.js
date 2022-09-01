@@ -9,7 +9,7 @@ module.exports = {
   description: "donate-image",
   category: "logos",
   syntax: "command",
-  permission: "ADMINISTRATOR",
+  permissions: ["ADMINISTRATOR"],
   /**
    * @param {Client} client
    * @param {Message} message

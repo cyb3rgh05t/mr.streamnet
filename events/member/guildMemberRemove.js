@@ -3,6 +3,11 @@ const {
   GuildMember,
   MessageEmbed
 } = require("discord.js");
+const {
+  unsharedChannelId,
+  verifiedId,
+  streamnetId
+} = require("../../src/config/config.json");
 
 module.exports = {
   name: "guildMemberRemove",
@@ -12,12 +17,12 @@ module.exports = {
    * @param {GuildMember} member
    */
   execute(member) {
-    //if (member.roles.cache.some(role => role.id === client.config.verifiedId)) {
+    //if (member.roles.cache.some(role => role.id === verifiedId)) {
     const {
       user,
       guild
     } = member
-    const leaveChannel = member.guild.channels.cache.get(client.config.unsharedChannelId)
+    const leaveChannel = member.guild.channels.cache.get(unsharedChannelId)
     client.logger.log(`User "${member.user.username}" has left "${member.guild.name}"`, "log");
     const leaveMessage = `**${member.displayName}** has left the server, we now have ${member.guild.memberCount} members!`;
     leaveChannel.send(leaveMessage)

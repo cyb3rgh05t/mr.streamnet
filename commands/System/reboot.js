@@ -1,4 +1,7 @@
 const {
+    ownerId
+} = require('../../src/config/config.json');
+const {
     MessageEmbed,
     ChatInputCommandInteraction,
     CommandInteraction,
@@ -8,18 +11,18 @@ module.exports = {
     name: "reboot",
     description: "Reboot the bot (DANGEROUS)",
     usage: "/reboot",
-    permission: "ADMINISTRATOR",
+    permissions: "ADMINISTRATOR",
     /**
      * 
      * @param {Client} client 
      * @param {CommandInteraction} interaction 
      */
     async execute(interaction) {
-        if (interaction.member.id === client.config.ownerId) {
+        if (interaction.member.id === ownerId) {
             const restart = new MessageEmbed()
                 .setColor("DARK_BUT_NOT_BLACK")
                 .setDescription(
-                    `<:reload:1013121732128800859> Restarting . . . `
+                    `Restarting . . . `
                 )
             interaction.reply({
                 embeds: [restart],

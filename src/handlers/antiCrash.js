@@ -1,5 +1,6 @@
-const colors = require("colors/safe");
-const config = require("../config.json");
+const chalk = require("chalk");
+const colors = require("colors/safe")
+const config = require('../config/config.json')
 const {
     MessageEmbed,
     WebhookClient

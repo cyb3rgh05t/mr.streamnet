@@ -9,7 +9,7 @@ module.exports = {
     description: "test prefixcommand",
     category: "develop",
     syntax: "command",
-    permission: "ADMINISTRATOR",
+    permissions: ["ADMINISTRATOR"],
     /**
      * @param {Client} client
      * @param {Message} message

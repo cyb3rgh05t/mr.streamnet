@@ -45,13 +45,10 @@ module.exports = {
         var current = player.position;
 
         let embed = new MessageEmbed()
-            .setDescription(`🎶 **Now Playing**\n[${song.title}](${song.uri}) - \`[${convertTime(song.duration)}]\`- [${member}] \n\n\`${progressbar(player)}\``)
+            .setDescription(`**Now Playing**\n[${song.title}](${song.uri}) - \`[${convertTime(song.duration)}]\`- [${member}] \n\n\`${progressbar(player)}\``)
             .setThumbnail(song.displayThumbnail("3"))
             .setColor("DARK_BUT_NOT_BLACK")
-            .addFields({
-                name: "\u200b",
-                value: `\`${convertTime(current)} / ${convertTime(total)}\``
-            })
+            .addField("\u200b", `\`${convertTime(current)} / ${convertTime(total)}\``)
         return interaction.editReply({
             embeds: [embed]
         })

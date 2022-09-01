@@ -2,9 +2,6 @@ const {
     SelectMenuInteraction,
     MessageEmbed
 } = require("discord.js");
-const {
-    Permissions
-} = require("../../src/validation/permissions");
 const fs = require('fs');
 
 module.exports = {
@@ -22,7 +19,7 @@ module.exports = {
 
                 const embed = new MessageEmbed()
                     .setTitle(`${category} commands`)
-                    .setDescription(`${fs.readdirSync(`slashCommands/${category}`).map(file => {
+                    .setDescription(`${fs.readdirSync(`commands/${category}`).map(file => {
                         return `\`${file.split('.')[0]}\``
                     }).join(', ')}`)
                     .setFields([{
