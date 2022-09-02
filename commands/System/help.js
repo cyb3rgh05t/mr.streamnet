@@ -61,7 +61,7 @@ module.exports = {
 
         } else {
 
-            const directories = await fs.readdirSync('slashCommands');
+            const directories = await fs.readdirSync('commands');
 
             const row = new MessageActionRow()
                 .addComponents(

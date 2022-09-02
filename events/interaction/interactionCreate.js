@@ -2,6 +2,7 @@ const {
   CommandInteraction,
   MessageEmbed
 } = require("discord.js");
+const colors = require("colors");
 
 module.exports = {
   name: "interactionCreate",
@@ -10,6 +11,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} Client
    */
+
   async execute(interaction, client) {
     if (interaction.isCommand() || interaction.isContextMenu()) {
       const command = client.commands.get(interaction.commandName);
@@ -34,6 +36,7 @@ module.exports = {
       if (command) {
         let user = client.userSettings.get(interaction.user.id);
 
+        // If there is no user, create it in the Database as "newUser"
         if (!user) {
           const findUser = await User.findOne({
             Id: interaction.user.id

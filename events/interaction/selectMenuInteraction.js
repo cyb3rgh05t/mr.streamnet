@@ -19,14 +19,14 @@ module.exports = {
 
                 const embed = new MessageEmbed()
                     .setTitle(`${category} commands`)
-                    .setDescription(`${fs.readdirSync(`slashCommands/${category}`).map(file => {
+                    .setDescription(`${fs.readdirSync(`commands/${category}`).map(file => {
                         return `\`${file.split('.')[0]}\``
                     }).join(', ')}`)
                     .setFields([{
                         name: 'Command description:',
                         value: 'use \`/help [command_name]\`'
                     }])
-                    .setColor("DARK_BUT_NOT_BLACK")
+                    .setColor('YELLOW')
                 //.setTimestamp();
                 interaction.update({
                     embeds: [embed],

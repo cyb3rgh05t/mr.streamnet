@@ -3,6 +3,8 @@ const {
     MessageEmbed
 } = require("discord.js");
 const ms = require("ms");
+const colors = require("colors");
+
 
 module.exports = {
     name: "giveaway",

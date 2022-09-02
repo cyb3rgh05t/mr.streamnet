@@ -2,13 +2,14 @@ const {
   Client,
   Message
 } = require("discord.js");
+const colors = require("colors");
 
 module.exports = {
-  name: "invite-image",
-  description: "invite-image",
-  category: "logos",
+  name: "verify-message",
+  description: "verify-message",
+  category: "message",
   syntax: "command",
-  permission: "ADMINISTRATOR",
+  permissions: ["ADMINISTRATOR"],
   /**
    * @param {Client} client
    * @param {Message} message
@@ -17,7 +18,7 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       message.channel.send({
-        files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_INVITES.png?raw=true"]
+        content: `➡️ ... warte bis du vom Admin verifiziert wurdest ✅\n\n➡️ bitte erfülle das CAPTCHA in deinen DM's ...`
       });
     } catch (error) {
       message.channel.send("Some Error Occured");

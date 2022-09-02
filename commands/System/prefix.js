@@ -4,6 +4,7 @@ const {
 	Client
 } = require("discord.js");
 const GuildSettings = require("../../src/databases/settingsDB");
+const colors = require("colors");
 
 module.exports = {
 	name: "prefix",
@@ -33,11 +34,12 @@ module.exports = {
 				GuildID: interaction.guild.id
 			});
 			if (!storedSettings) {
+				// If there are no settings stored for this guild, we create them and try to retrive them again.
 				const newSettings = new GuildSettings({
 					GuildID: interaction.guild.id,
 				});
 				await newSettings.save().catch((e) => {
-					client.logger.log(e, "error");
+					console.log(e);
 				});
 				storedSettings = await GuildSettings.findOne({
 					GuildID: interaction.guild.id
@@ -46,7 +48,7 @@ module.exports = {
 
 			storedSettings.Prefix = caracter[0];
 			await storedSettings.save().catch((e) => {
-				client.logger.log(e, "error");
+				console.log(e);
 			});
 
 			interaction.reply({
@@ -59,11 +61,11 @@ module.exports = {
 					})
 				]
 			})
-			client.logger.log(`Client Prefix is now = "${caracter[0]}"`, "log")
+			console.log(`[INFO]`.yellow.bold, `Client Prefix is now = "${caracter[0]}"`)
 
 		} catch (error) {
 			interaction.reply("Some Error Occured");
-			client.logger.log(error, "error")
+			console.log(`[ERROR]`.red.bold, error)
 		}
 
 	}
