@@ -87,7 +87,6 @@ module.exports = {
             });
         });
 
-        // -------------- Not needed --------------
         collector.on('end', async (reason) => {
             if (reason === 'time') {
                 const warningEmbed = new MessageEmbed()
@@ -101,6 +100,5 @@ module.exports = {
                 });
             }
         });
-        // -------------- Not needed --------------
     },
 };

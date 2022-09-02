@@ -2,14 +2,13 @@ const {
   Client,
   Message
 } = require("discord.js");
-const colors = require("colors");
 
 module.exports = {
   name: "donate-message",
   description: "donate-message",
   category: "message",
   syntax: "command",
-  permissions: ["ADMINISTRATOR"],
+  permission: "ADMINISTRATOR",
   /**
    * @param {Client} client
    * @param {Message} message

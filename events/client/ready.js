@@ -17,7 +17,6 @@ const DB = require('../../src/databases/clientDB');
 const os = require("node:os");
 const osUtils = require("os-utils");
 const ms = require("ms");
-const colors = require("colors");
 const si = require('systeminformation');
 const pretty = require('prettysize');
 const moment = require("moment");
@@ -93,8 +92,7 @@ module.exports = {
                 index++;
             }, 5 * 1000) // Time in ms
 
-        }, randTime) // randTime is a random number between 1 and 5 seconds
-
+        }, randTime)
 
         // Initializing Database Connection 
         if (!databaseUrl) return;

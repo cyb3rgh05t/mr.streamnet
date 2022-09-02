@@ -4,14 +4,13 @@ const {
     MessageActionRow,
     MessageButton
 } = require("discord.js");
-const colors = require("colors");
 
 module.exports = {
     name: "rules-message",
     description: "rules-message",
     category: "message",
     syntax: "command",
-    permissions: ["ADMINISTRATOR"],
+    permission: "ADMINISTRATOR",
     /**
      * @param {Client} client
      * @param {Message} message

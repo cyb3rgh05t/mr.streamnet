@@ -1,6 +1,4 @@
 const chalk = require("chalk");
-const colors = require("colors/safe")
-const config = require('../config/config.json')
 const {
     MessageEmbed,
     WebhookClient
@@ -30,7 +28,7 @@ module.exports = (client) => {
     process.on("unhandledRejection", (reason, p) => {
         // const b = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
         console.log(
-            colors.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
+            chalk.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
             reason, p
         )
         const unhandledRejectionEmbed = new MessageEmbed()
@@ -136,5 +134,4 @@ module.exports = (client) => {
             embeds: [warningEmbed]
         })
     });
-
 }
