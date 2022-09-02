@@ -1,14 +1,12 @@
 const {
     Client
 } = require("discord.js");
-const colors = require("colors");
-
 /**
  * 
  * @param {Client} client 
  */
 
-module.exports = async (client, PG, Ascii) => {
+module.exports = async (client, PG) => {
 
     //const Table = new Ascii("Modals Handler");
 
@@ -20,8 +18,5 @@ module.exports = async (client, PG, Ascii) => {
 
         client.modals.set(modalFile.id, modalFile);
         client.logger.log(`LOADED Modal ${modalFile.id.toUpperCase()} from ${file.split("/").pop()}`, "modals")
-        //await Table.addRow(`${modalFile.id}`, "🟩 LOADED");
-
     });
-    //console.log(Table.toString());
 }

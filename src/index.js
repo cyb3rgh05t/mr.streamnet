@@ -20,8 +20,6 @@ const {
     glob
 } = require("glob");
 const PG = promisify(glob);
-const Ascii = require("ascii-table")
-const colors = require("colors");
 
 const Deezer = require("erela.js-deezer");
 const Spotify = require("better-erela.js-spotify").default;
@@ -36,8 +34,8 @@ require("./handlers/antiCrash")(client);
     require(`../systems/${system}`)(client)
 });
 
-["events", "commands", "prefixcmd", "buttons", "modals"].forEach(handler => {
-    require(`./handlers/${handler}`)(client, PG, Ascii)
+["events", "slashCommands", "commands", "buttons", "modals"].forEach(handler => {
+    require(`./handlers/${handler}`)(client, PG)
 });
 
 

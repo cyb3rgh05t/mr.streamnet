@@ -1,7 +1,6 @@
 const {
     Events
 } = require("../validation/eventNames");
-const colors = require("colors");
 
 module.exports = async (client, PG) => {
 
