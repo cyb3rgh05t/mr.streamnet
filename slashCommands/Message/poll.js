@@ -4,7 +4,7 @@ const {
     MessageActionRow,
     MessageButton
 } = require("discord.js");
-const client = require("../../src");
+const client = require("../../index");
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {

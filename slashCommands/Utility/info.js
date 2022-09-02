@@ -11,7 +11,7 @@ const {
 } = require('../../src/functions/chart');
 const moment = require("moment");
 const ms = require("ms");
-const client = require("../../src");
+const client = require("../../index");
 
 module.exports = {
     name: "info",

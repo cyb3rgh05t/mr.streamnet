@@ -3,7 +3,7 @@ const {
     MessageEmbed
 } = require("discord.js");
 const DB = require("../../src/databases/modDB");
-const client = require("../../src");
+const client = require("../../index");
 
 
 module.exports = {

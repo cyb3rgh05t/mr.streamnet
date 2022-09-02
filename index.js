@@ -25,11 +25,11 @@ const {
 require("./src/handlers/antiCrash")(client);
 
 ["giveawaySys"].forEach(system => {
-    require(`../systems/${system}`)(client)
+    require(`./systems/${system}`)(client)
 });
 
 ["events", "slashCommands", "commands", "buttons", "modals"].forEach(handler => {
-    require(`./handlers/${handler}`)(client, PG, Ascii)
+    require(`./src/handlers/${handler}`)(client, PG, Ascii)
 });
 
 client.config = require("./src/config.json");
