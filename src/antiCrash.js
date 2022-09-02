@@ -1,5 +1,4 @@
 const colors = require("colors/safe");
-const config = require("../config.json");
 const {
     MessageEmbed,
     WebhookClient

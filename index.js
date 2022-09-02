@@ -22,7 +22,7 @@ const {
     Manager
 } = require("erela.js");
 
-require("./src/handlers/antiCrash")(client);
+require("./src/antiCrash")(client);
 
 ["giveawaySys"].forEach(system => {
     require(`./systems/${system}`)(client)
