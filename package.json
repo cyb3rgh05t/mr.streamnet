@@ -1,5 +1,6 @@
 {
   "name": "mr.streamnet",
+  "type": "module",
   "version": "1.0.0",
   "description": "moderation discord bot",
   "main": "index.js",
