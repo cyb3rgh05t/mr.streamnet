@@ -1,0 +1,16 @@
+{
+    "Token": "",
+    "DatabaseUrl": "",
+    "RuleRoleId": "",
+    "RuleMessageId": "",
+    "OwnerId": "",
+    "Prefix": "!",
+    "LeaveChannelId": "",
+    "WelcomeChannelId": "",
+    "HaveRoleId": "",
+    "RemoveRoleId": "",
+    "ClientId": "",
+    "GuildId": "",
+    "NewMemberChannelId": "",
+    "RuleChannelId": ""
+}

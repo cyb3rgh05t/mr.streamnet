@@ -4,6 +4,11 @@ const {
 const RSSParser = require("rss-parser");
 const parser = new RSSParser();
 const Youtube = require("simple-youtube-api");
+const {
+    youtubeAPI,
+    rssFeedChannelId
+} = require("../../src/config/config.json")
+
 const startAt = Date.now();
 const lastVideos = {};
 
@@ -14,8 +19,8 @@ const config = {
         "LYXCODE"
 
     ],
-    "DISCORD_CHANNEL_ID": client.config.rssFeedChannelId,
-    "YOUTUBE_API_KEY": client.config.youtubeAPI
+    "DISCORD_CHANNEL_ID": rssFeedChannelId,
+    "YOUTUBE_API_KEY": youtubeAPI
 };
 
 const youtube = new Youtube(config.YOUTUBE_API_KEY);
@@ -130,8 +135,8 @@ module.exports = {
                 let channelInfos = await getYoutubeChannelInfos(youtuber);
                 if (!channelInfos) return client.logger.log("Invalid youtuber provided: " + youtuber, "error");
                 let video = await checkVideos(channelInfos.raw.snippet.title, "https://www.youtube.com/feeds/videos.xml?channel_id=" + channelInfos.id);
-                if (!video) return client.logger.log(`[${channelInfos.raw.snippet.title.toUpperCase()}] No notification`, "log");
-                //if (!video) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] No notification`, "log");
+                //if (!video) return client.logger.log(`[${channelInfos.raw.snippet.title}] No notification`, "log");
+                if (!video) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] No notification`, "log");
                 let channel = client.channels.cache.get(config.DISCORD_CHANNEL_ID);
                 if (!channel) return client.logger.log("Channel not found", "log");
                 channel.send({
