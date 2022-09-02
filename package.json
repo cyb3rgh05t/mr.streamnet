@@ -2,9 +2,11 @@
   "name": "mr.streamnet",
   "version": "1.0.0",
   "description": "moderation discord bot",
-  "main": "./index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
