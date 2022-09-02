@@ -1,4 +1,10 @@
-const { SelectMenuInteraction, MessageEmbed } = require("discord.js");
+const {
+    SelectMenuInteraction,
+    MessageEmbed
+} = require("discord.js");
+const {
+    Permissions
+} = require("../../src/validation/permissions");
 const fs = require('fs');
 
 module.exports = {
@@ -13,18 +19,24 @@ module.exports = {
         if (interaction.isSelectMenu()) {
             if (interaction.customId === 'help-category') {
                 const category = interaction.values;
-                
+
                 const embed = new MessageEmbed()
                     .setTitle(`${category} commands`)
-                    .setDescription(`${fs.readdirSync(`commands/${category}`).map(file => {
+                    .setDescription(`${fs.readdirSync(`slashCommands/${category}`).map(file => {
                         return `\`${file.split('.')[0]}\``
                     }).join(', ')}`)
-                    .setFields([{name: 'Command description:', value: 'use \`/help [command_name]\`'}])
+                    .setFields([{
+                        name: 'Command description:',
+                        value: 'use \`/help [command_name]\`'
+                    }])
                     .setColor('YELLOW')
-                    //.setTimestamp();
-                    interaction.update({ embeds: [embed], ephemeral: true })
-            
-        }
+                //.setTimestamp();
+                interaction.update({
+                    embeds: [embed],
+                    ephemeral: true
+                })
+
+            }
         }
     }
-}    
+}

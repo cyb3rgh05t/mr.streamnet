@@ -1,4 +1,12 @@
-const { MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, Client, TextInputComponent } = require("discord.js");
+const {
+    MessageActionRow,
+    MessageButton,
+    Modal,
+    MessageEmbed,
+    ModalSubmitInteraction,
+    Client,
+    TextInputComponent
+} = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -19,10 +27,16 @@ module.exports = {
         const mRow2 = i.message.components[1];
         const mRow3 = i.message.components[2];
         const input = i.fields.getTextInputValue("ce_color_modal_input");
-        if(!input.match(/[0-9A-Fa-f]{6}/g)) return interaction.reply({content: "Dies ist kein korrekter Farbcode!\nBitte benutze einen HEX Code, diesen kannst du [hier](https://www.farb-tabelle.de/de/farbtabelle.htm) finden!", ephemeral: true});
+        if (!input.match(/[0-9A-Fa-f]{6}/g)) return interaction.reply({
+            content: "Dies ist kein korrekter Farbcode!\nBitte benutze einen HEX Code, diesen kannst du [hier](https://www.farb-tabelle.de/de/farbtabelle.htm) finden!",
+            ephemeral: true
+        });
 
-        interaction.reply({content: "Farbe erfolgreich gesetzt!", ephemeral: true}).catch((err) => console.error(err.message))
-        
+        interaction.reply({
+            content: "Farbe erfolgreich gesetzt!",
+            ephemeral: true
+        }).catch((err) => console.error(err.message))
+
 
         interaction.message.edit({
             embeds: [ShowEmbed, PrevEmbed.setColor(`${input}`)],

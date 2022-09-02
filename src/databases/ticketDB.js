@@ -12,6 +12,6 @@ const tickets = new mongoose.Schema({
     ClaimedBy: String,
     CreatedBy: String,
     Opened: String,
-    });
+});
 
-    module.exports = mongoose.model("Tickets", tickets);
+module.exports = mongoose.model("Tickets", tickets);

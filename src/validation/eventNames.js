@@ -70,5 +70,11 @@ module.exports = {
         "DistubeEvents",
         "ErelaEvents",
         "ErelaRaw",
+        "nodeConnect",
+        "trackStart",
+        "trackEnd",
+        "trackError",
+        "queueEnd",
+        "nodeRaw",
     ]
 }
