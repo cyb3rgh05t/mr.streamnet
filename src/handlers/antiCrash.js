@@ -1,7 +1,19 @@
+<<<<<<< Updated upstream
 const chalk = require("chalk"); // Importing Chalk from Chalk
 const config = require('../config/config.json')
 const {MessageEmbed, WebhookClient} = require('discord.js') // Importing MessageEmbed from Discord.js
 const {inspect} = require("util")
+=======
+const colors = require("colors/safe");
+const config = require("../config.json");
+const {
+    MessageEmbed,
+    WebhookClient
+} = require('discord.js')
+const {
+    inspect
+} = require("util")
+>>>>>>> Stashed changes
 const s = new WebhookClient({
                 id: "999705430597042397",
                 token:"jlWFa-XkgN-GhUopGGmUCgmiwAsxr5p-zsENN-8UWNHRg_QuQ1Dgh6cSZaIcKp2pPAKv",

@@ -1,13 +1,23 @@
+<<<<<<< Updated upstream
 const { Events } = require("../validation/eventNames");
 const colors = require("colors");
 
+=======
+const {
+    Events
+} = require("../validation/eventNames");
+/**
+ * 
+ * @param {Client} client 
+ */
+>>>>>>> Stashed changes
 module.exports = async (client, PG) => {
 
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
         if(!Events.includes(event.name) || !event.name) {
             const L = file.split("/");
-            await client.logger.log(`${event.name || "MISSING"} Event name is either invalid or missing`, "error");
+            await client.logger.log(`${event.name || "🟥 MISSING"} Event name is either invalid or missing`, "error");
             return;
         }
 

@@ -13,4 +13,22 @@ services:
     image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
     restart: "unless-stopped"
     volumes:
+<<<<<<< Updated upstream
       - "/opt/appdata/discordbot/config:/usr/src/bot/src/config:rw"
+=======
+      - "/opt/appdata/bot/config:/bot/src/:rw"
+    depends_on:
+      - mongodb
+      - lavalink
+    links:
+      - mongodb:db
+      - lavalink
+
+volumes:
+  mongodb_data:
+
+networks:
+  proxy:
+    driver: bridge
+    external: true
+>>>>>>> Stashed changes

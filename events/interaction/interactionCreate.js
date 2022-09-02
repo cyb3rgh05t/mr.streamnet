@@ -1,5 +1,15 @@
+<<<<<<< Updated upstream
 const { CommandInteraction, MessageEmbed } = require("discord.js");
 const colors = require("colors");
+=======
+const {
+  CommandInteraction,
+  MessageEmbed
+} = require("discord.js");
+const {
+  Permissions
+} = require("../../src/validation/permissions");
+>>>>>>> Stashed changes
 
 module.exports = {
     name: "interactionCreate",

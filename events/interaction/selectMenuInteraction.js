@@ -1,4 +1,14 @@
+<<<<<<< Updated upstream
 const { SelectMenuInteraction, MessageEmbed } = require("discord.js");
+=======
+const {
+    SelectMenuInteraction,
+    MessageEmbed
+} = require("discord.js");
+const {
+    Permissions
+} = require("../../src/validation/permissions");
+>>>>>>> Stashed changes
 const fs = require('fs');
 
 module.exports = {
@@ -16,7 +26,7 @@ module.exports = {
                 
                 const embed = new MessageEmbed()
                     .setTitle(`${category} commands`)
-                    .setDescription(`${fs.readdirSync(`commands/${category}`).map(file => {
+                    .setDescription(`${fs.readdirSync(`slashCommands/${category}`).map(file => {
                         return `\`${file.split('.')[0]}\``
                     }).join(', ')}`)
                     .setFields([{name: 'Command description:', value: 'use \`/help [command_name]\`'}])

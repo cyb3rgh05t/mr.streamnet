@@ -1,5 +1,8 @@
 const chalk = require("chalk");
+<<<<<<< Updated upstream
 const moment = require("moment");
+=======
+>>>>>>> Stashed changes
 
 module.exports = class Logger {
 	static log (content, type = "log") {
