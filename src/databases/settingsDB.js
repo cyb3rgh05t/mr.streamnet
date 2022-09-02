@@ -1,3 +1,6 @@
+const {
+  prefix
+} = require("../config/config.json");
 const mongoose = require("mongoose");
 
 const settings = mongoose.Schema({
@@ -6,7 +9,7 @@ const settings = mongoose.Schema({
   },
   Prefix: {
     type: String,
-    default: client.config.prefix,
+    default: prefix,
   },
 });
 

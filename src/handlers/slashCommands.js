@@ -5,6 +5,9 @@ const {
   Client,
   ClientUser
 } = require("discord.js");
+const {
+  guildId
+} = require("../config/config.json");
 /**
  * 
  * @param {Client} client 
@@ -36,7 +39,7 @@ module.exports = async (client, PG) => {
   });
 
   client.on('ready', async () => {
-    const mainGuild = await client.guilds.cache.get(client.config.guildId);
+    const mainGuild = await client.guilds.cache.get(guildId);
     mainGuild.commands.set(CommandsArray);
   });
 }

@@ -17,13 +17,20 @@ const {
 registerFont(join(__dirname, '../../src/fonts/Panton-BlackCaps.ttf'), {
     family: 'Panton'
 });
+const {
+    memberId,
+    streamnetId,
+    welcomeChannelId
+} = require("../../src/config/config.json");
+
+
 
 module.exports = {
     id: "acceptRole",
     async execute(interaction) {
         const member = interaction.member;
 
-        if (member.roles.cache.has(client.config.memberId) || member.roles.cache.has(client.config.streamnetId)) {
+        if (member.roles.cache.has(memberId) || member.roles.cache.has(streamnetId)) {
             await interaction.reply({
                 content: 'Du hast die Regeln schon bestätigt!!',
                 ephemeral: true
@@ -33,7 +40,7 @@ module.exports = {
                 guild
             } = interaction.message
             const member = interaction.member;
-            member.roles.add(client.config.memberId);
+            member.roles.add(memberId);
             await interaction.reply({
                 content: 'Regeln bestätigt und Rolle wurde hinzugefügt!',
                 ephemeral: true
@@ -86,7 +93,7 @@ module.exports = {
             member.send({
                 embeds: [embed]
             });
-            const welcomeChannel = member.guild.channels.cache.get(client.config.welcomeChannelId);
+            const welcomeChannel = member.guild.channels.cache.get(welcomeChannelId);
             //const welcomeMessage = `Hey ${member}, willkommen in der Community 😀\nSchau dir den <#825364230827409479> Channel an und befolge die Schritte wenn du Zutritt zum Server willst!`;
             const welcomeMessage = `Begrüssen wir ${member} in der Community 😎\nHerzlich Willkommen und viel Spass. `
             welcomeChannel.send(welcomeMessage);

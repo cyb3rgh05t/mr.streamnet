@@ -3,6 +3,9 @@ const {
     Client,
     MessageEmbed
 } = require("discord.js");
+const {
+    ownerId
+} = require("../../src/config/config.json");
 const util = require("../../utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
@@ -27,7 +30,7 @@ module.exports = {
 
         const requester = dbFound.requesterId
 
-        if (interaction.user.id !== requester && interaction.user.id !== client.config.ownerId) {
+        if (interaction.user.id !== requester && interaction.user.id !== ownerId) {
             return interaction.reply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
                 },

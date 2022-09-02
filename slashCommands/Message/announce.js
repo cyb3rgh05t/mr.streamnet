@@ -2,6 +2,10 @@ const {
   CommandInteraction,
   MessageEmbed
 } = require("discord.js");
+const {
+  streamnetId,
+  supporterId
+} = require("../../src/config/config.json");
 
 module.exports = {
   name: "announce",
