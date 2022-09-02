@@ -2,9 +2,9 @@
   "name": "mr.streamnet",
   "version": "1.0.0",
   "description": "moderation discord bot",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
