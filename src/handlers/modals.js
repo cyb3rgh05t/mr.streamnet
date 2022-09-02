@@ -8,8 +8,6 @@ const {
 
 module.exports = async (client, PG) => {
 
-    //const Table = new Ascii("Modals Handler");
-
     (await PG(`${process.cwd().replace(/\\/g, "/")}/modals/*/*.js`)).map(async (file) => {
         const modalFile = require(file);
 

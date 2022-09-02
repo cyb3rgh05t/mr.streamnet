@@ -4,11 +4,6 @@ const {
     Message
 } = require("discord.js");
 const {
-    databaseUrl,
-    lavalinkChannelId,
-    systemChannelId
-} = require("../../src/config/config.json");
-const {
     connection,
     mongoose
 } = require("mongoose");
@@ -95,8 +90,8 @@ module.exports = {
         }, randTime)
 
         // Initializing Database Connection 
-        if (!databaseUrl) return;
-        mongoose.connect(databaseUrl, {
+        if (!client.config.databaseUrl) return;
+        mongoose.connect(client.config.databaseUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
@@ -107,7 +102,7 @@ module.exports = {
         });
 
         //Music System
-        const channelLava = await client.channels.fetch(lavalinkChannelId)
+        const channelLava = await client.channels.fetch(client.config.lavalinkChannelId)
         const embed = new MessageEmbed()
             .setColor('RED')
             .setTitle('🛑 No Data Found!')
@@ -145,7 +140,7 @@ module.exports = {
         //System Info
 
 
-        const channelSys = await client.channels.fetch(systemChannelId)
+        const channelSys = await client.channels.fetch(client.config.systemChannelId)
         let cl1 = await si.currentLoad();
         const Sysembed = new MessageEmbed()
             .setColor('RED')
