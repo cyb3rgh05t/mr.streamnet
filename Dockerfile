@@ -15,4 +15,4 @@ RUN npm install --production
 COPY . .
 
 # Start the bot.
-CMD ["node", "start"]
+CMD ["node", "."]
