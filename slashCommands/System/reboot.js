@@ -11,7 +11,7 @@ module.exports = {
     name: "reboot",
     description: "Reboot the bot (DANGEROUS)",
     usage: "/reboot",
-    permission: "ADMINISTRATOR",
+    permissions: "ADMINISTRATOR",
     /**
      * 
      * @param {Client} client 
