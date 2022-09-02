@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const client = require("../index");
+const client = require("../../index");
 
 const settings = mongoose.Schema({
   GuildID: {

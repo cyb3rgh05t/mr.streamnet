@@ -1,7 +1,7 @@
 const {
     Client
 } = require("discord.js");
-const client = require("../../src/index");
+const client = require("../../index");
 const DB = require("../../src/databases/musicDB");
 
 

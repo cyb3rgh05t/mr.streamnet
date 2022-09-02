@@ -1,4 +1,4 @@
-const client = require("../../src/index");
+const client = require("../../index");
 const {
     GuildMember,
     MessageEmbed

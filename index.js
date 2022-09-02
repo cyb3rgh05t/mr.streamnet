@@ -22,7 +22,7 @@ const {
     Manager
 } = require("erela.js");
 
-require("./handlers/antiCrash")(client);
+require("./src/handlers/antiCrash")(client);
 
 ["giveawaySys"].forEach(system => {
     require(`../systems/${system}`)(client)
@@ -32,9 +32,9 @@ require("./handlers/antiCrash")(client);
     require(`./handlers/${handler}`)(client, PG, Ascii)
 });
 
-client.config = require("./config.json");
-client.logger = require("../utils/logger");
-client.tools = require("../utils/embedTools");
+client.config = require("./src/config.json");
+client.logger = require("./utils/logger");
+client.tools = require("./utils/embedTools");
 client.commands = new Collection();
 client.buttons = new Collection();
 client.cooldowns = new Collection();

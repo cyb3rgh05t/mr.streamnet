@@ -3,7 +3,7 @@ const {
     GuildMember,
     MessageEmbed
 } = require("discord.js");
-const client = require('../../src/index');
+const client = require('../../index');
 const {
     drawCard,
     Text

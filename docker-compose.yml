@@ -54,7 +54,7 @@ services:
       - "${SECURITYOPS}:${SECURITYOPSSET}"
     labels:
       - "dockupdater.enable=false"
-    image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
+    image: "ghcr.io/cyb3rgh05t/mr.streamnet:v13"
     restart: "${RESTARTAPP}"
     volumes:
       - "/opt/appdata/bot/config:/bot/src:rw"
