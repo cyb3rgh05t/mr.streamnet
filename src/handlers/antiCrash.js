@@ -28,7 +28,7 @@ module.exports = (client) => {
     process.on("unhandledRejection", (reason, p) => {
         // const b = client.channels.cache.get(config.ERROR_LOG_CHANNEL)
         console.log(
-            colors.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
+            chalk.yellow('——————————[Unhandled Rejection/Catch]——————————\n'),
             reason, p
         )
         const unhandledRejectionEmbed = new MessageEmbed()
