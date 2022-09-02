@@ -3,7 +3,6 @@ const {
     MessageEmbed,
     Client
 } = require("discord.js");
-const colors = require("colors");
 
 module.exports = {
     name: "ping",
@@ -27,7 +26,7 @@ module.exports = {
             })
         } catch (error) {
             interaction.reply("Some Error Occured");
-            console.log(`[ERROR]`.red.bold, +error)
+            client.logger.log(error, "error")
         }
     }
 }

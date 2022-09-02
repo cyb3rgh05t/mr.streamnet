@@ -8,7 +8,6 @@ const {
   ownerId
 } = require("../../src/config/config.json");
 const GuildSettings = require('../../src/databases/settingsDB');
-const colors = require("colors");
 
 module.exports = {
   name: "messageCreate",

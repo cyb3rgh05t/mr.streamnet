@@ -7,7 +7,6 @@ const {
 } = require('discord-html-transcripts');
 const DB = require("../../src/databases/ticketDB");
 const TicketSetupData = require("../../src/databases/ticketSetupDB");
-const colors = require("colors");
 
 module.exports = {
 

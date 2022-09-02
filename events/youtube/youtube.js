@@ -8,7 +8,6 @@ const {
     youtubeAPI,
     rssFeedChannelId
 } = require("../../src/config/config.json")
-const colors = require("colors");
 
 const startAt = Date.now();
 const lastVideos = {};
@@ -55,15 +54,15 @@ module.exports = {
          * @returns The last video of the youtuber
          */
         async function getLastVideo(youtubeChannelName, rssURL) {
-            client.logger.log(`[${youtubeChannelName}] Getting videos...`, "debug");
+            client.logger.log(`[${youtubeChannelName.toUpperCase()}] Getting videos...`, "debug");
             let content = await parser.parseURL(rssURL);
-            client.logger.log(`[${youtubeChannelName}] ${content.items.length} videos found`, "log");
+            client.logger.log(`[${youtubeChannelName.toUpperCase()}] ${content.items.length} videos found`, "log");
             let tLastVideos = content.items.sort((a, b) => {
                 let aPubDate = new Date(a.pubDate || 0).getTime();
                 let bPubDate = new Date(b.pubDate || 0).getTime();
                 return bPubDate - aPubDate;
             });
-            client.logger.log(`[${youtubeChannelName}] The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`, "log");
+            client.logger.log(`[${youtubeChannelName.toUpperCase()}] The last video is "${tLastVideos[0] ? tLastVideos[0].title : "err"}"`, "log");
             return tLastVideos[0];
         }
 
@@ -74,15 +73,15 @@ module.exports = {
          * @returns The video || null
          */
         async function checkVideos(youtubeChannelName, rssURL) {
-            client.logger.log(`[${youtubeChannelName}] Get the last video..`, "debug");
+            client.logger.log(`[${youtubeChannelName.toUpperCase()}] Get the last video..`, "debug");
             let lastVideo = await getLastVideo(youtubeChannelName, rssURL);
             // If there isn't any video in the youtube channel, return
             if (!lastVideo) return client.logger.log("No video found for " + lastVideo, "log");
             // If the date of the last uploaded video is older than the date of the bot starts, return 
-            if (new Date(lastVideo.pubDate).getTime() < startAt) return client.logger.log(`[${youtubeChannelName}] Last video was uploaded before the bot starts`, "log");
+            if (new Date(lastVideo.pubDate).getTime() < startAt) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] Last video was uploaded before the bot starts`, "log");
             let lastSavedVideo = lastVideos[youtubeChannelName];
             // If the last video is the same as the last saved, return
-            if (lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return client.logger.log(`[${youtubeChannelName}] Last video is the same as the last saved`, "log");
+            if (lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return client.logger.log(`[${youtubeChannelName..toUpperCase()}] Last video is the same as the last saved`, "log");
             return lastVideo;
         }
 
