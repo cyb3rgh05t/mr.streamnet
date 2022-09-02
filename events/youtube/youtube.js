@@ -81,7 +81,7 @@ module.exports = {
             if (new Date(lastVideo.pubDate).getTime() < startAt) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] Last video was uploaded before the bot starts`, "log");
             let lastSavedVideo = lastVideos[youtubeChannelName];
             // If the last video is the same as the last saved, return
-            if (lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return client.logger.log(`[${youtubeChannelName..toUpperCase()}] Last video is the same as the last saved`, "log");
+            if (lastSavedVideo && (lastSavedVideo.id === lastVideo.id)) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] Last video is the same as the last saved`, "log");
             return lastVideo;
         }
 
