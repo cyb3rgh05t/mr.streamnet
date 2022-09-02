@@ -135,8 +135,8 @@ module.exports = {
                 let channelInfos = await getYoutubeChannelInfos(youtuber);
                 if (!channelInfos) return client.logger.log("Invalid youtuber provided: " + youtuber, "error");
                 let video = await checkVideos(channelInfos.raw.snippet.title, "https://www.youtube.com/feeds/videos.xml?channel_id=" + channelInfos.id);
-                //if (!video) return client.logger.log(`[${channelInfos.raw.snippet.title}] No notification`, "log");
-                if (!video) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] No notification`, "log");
+                if (!video) return client.logger.log(`[${channelInfos.raw.snippet.title.toUpperCase()}] No notification`, "log");
+                //if (!video) return client.logger.log(`[${youtubeChannelName.toUpperCase()}] No notification`, "log");
                 let channel = client.channels.cache.get(config.DISCORD_CHANNEL_ID);
                 if (!channel) return client.logger.log("Channel not found", "log");
                 channel.send({
