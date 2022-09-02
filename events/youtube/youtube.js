@@ -4,11 +4,6 @@ const {
 const RSSParser = require("rss-parser");
 const parser = new RSSParser();
 const Youtube = require("simple-youtube-api");
-const {
-    youtubeAPI,
-    rssFeedChannelId
-} = require("../../src/config/config.json")
-
 const startAt = Date.now();
 const lastVideos = {};
 
@@ -19,8 +14,8 @@ const config = {
         "LYXCODE"
 
     ],
-    "DISCORD_CHANNEL_ID": rssFeedChannelId,
-    "YOUTUBE_API_KEY": youtubeAPI
+    "DISCORD_CHANNEL_ID": client.config.rssFeedChannelId,
+    "YOUTUBE_API_KEY": client.config.youtubeAPI
 };
 
 const youtube = new Youtube(config.YOUTUBE_API_KEY);

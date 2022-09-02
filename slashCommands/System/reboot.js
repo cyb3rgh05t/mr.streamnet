@@ -1,7 +1,4 @@
 const {
-    ownerId
-} = require('../../src/config/config.json');
-const {
     MessageEmbed,
     ChatInputCommandInteraction,
     CommandInteraction,
@@ -18,7 +15,7 @@ module.exports = {
      * @param {CommandInteraction} interaction 
      */
     async execute(interaction) {
-        if (interaction.member.id === ownerId) {
+        if (interaction.member.id === client.config.ownerId) {
             const restart = new MessageEmbed()
                 .setColor("DARK_BUT_NOT_BLACK")
                 .setDescription(
