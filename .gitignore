@@ -4,6 +4,7 @@ node_modules
 #settings
 .env
 config.json
+package-lock.json
 
 #Visual Studio Code
 .vs
