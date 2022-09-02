@@ -1,5 +1,6 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const GuildSettings = require("../../src/databases/settingsDB");
+const colors = require("colors");
 
 module.exports = {
 	name: "prefix",
@@ -49,15 +50,11 @@ module.exports = {
 					.setColor("RANDOM")
 					.setFooter({text: `Custom Prefix Was Not So Hard To Make`})]
 			})
-<<<<<<< Updated upstream:commands/system/prefix.js
 			console.log(`[INFO]`.yellow.bold,`Client Prefix is now = "${caracter[0]}"`)
-=======
-			client.logger.log(`Client Prefix is now = "${caracter[0]}"`, "log")
->>>>>>> Stashed changes:slashCommands/System/prefix.js
 
 		} catch (error) {
 			interaction.reply("Some Error Occured");
-			console.log(error, "error")
+			console.log(`[ERROR]`.red.bold, error)
 		}
 
 	}

@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 const { Perms } = require("../validation/permissions");
 const { Client, ClientUser } = require("discord.js");
 const { guildId } = require("../config/config.json");
@@ -37,18 +36,10 @@ module.exports = async(client, PG, Ascii) => {
     //await Table.addRow(command.name,"🟩 LOADED");
     
   });
-=======
-const {
-    Perms
-} = require("../validation/permissions");
->>>>>>> Stashed changes
 
-module.exports = async (client, PG) => {
+  //console.log(Table.toString());
 
-    (await PG(`${(process.cwd().replace(/\\/g, "/"))}/commands/*/*.js`)).map(async (file) => {
-        const cmd = require(file);
 
-<<<<<<< Updated upstream
      
     // PERMISSION CHECK //
 
@@ -56,19 +47,4 @@ module.exports = async (client, PG) => {
       const mainGuild = await client.guilds.cache.get(guildId);
       mainGuild.commands.set(CommandsArray);
   });
-=======
-        if (cmd.permission) {
-            if (Perms.includes(cmd.permission))
-                cmd.defaultPermission = false;
-            else
-                client.logger.log(`${cmd.name} 🟥 FAILED Permission is invalid.`, "error")
-        }
-
-        if (cmd.name) {
-            client.prefixcmd.set(cmd.name, cmd);
-        }
-        client.logger.log(`LOADED Command ${cmd.name.toUpperCase()} from ${file.split("/").pop()}`, "prefix")
-
-    });
->>>>>>> Stashed changes
 }

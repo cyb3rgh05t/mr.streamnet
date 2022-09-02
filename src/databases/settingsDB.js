@@ -1,16 +1,13 @@
-<<<<<<< Updated upstream
 const { prefix } = require("../config/config.json");
-=======
->>>>>>> Stashed changes
 const mongoose = require("mongoose");
-const client = require("../index")
+
 const settings = mongoose.Schema({
   GuildID: {
     type: String,
   },
   Prefix: {
     type: String,
-    default: client.config.prefix,
+    default: prefix,
   },
 });
 

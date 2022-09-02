@@ -1,4 +1,6 @@
-module.exports = async (client, PG) => {
+const colors = require("colors");
+
+module.exports = async (client, PG, Ascii) => {
 
     const buttonsFolder = await PG(`${(process.cwd().replace(/\\/g, "/"))}/buttons/*/*.js`);
 

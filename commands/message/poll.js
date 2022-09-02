@@ -1,14 +1,4 @@
-<<<<<<< Updated upstream:commands/message/poll.js
 const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-=======
-const {
-    CommandInteraction,
-    MessageEmbed,
-    MessageActionRow,
-    MessageButton
-} = require("discord.js");
-const client = require("../../src");
->>>>>>> Stashed changes:slashCommands/Message/poll.js
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {
@@ -155,16 +145,8 @@ module.exports = {
                 } catch (err) {
                     ErrorEmbed
                         .setDescription(`<:denied:941879735200382986> There was an error while trying to create a poll`);
-<<<<<<< Updated upstream:commands/message/poll.js
                     interaction.reply({embeds: [Embed], ephemeral: true});
                     console.log(err);
-=======
-                    interaction.reply({
-                        embeds: [Embed],
-                        ephemeral: true
-                    });
-                    client.logger.log(err, "error");
->>>>>>> Stashed changes:slashCommands/Message/poll.js
                 }
             }
             break;
