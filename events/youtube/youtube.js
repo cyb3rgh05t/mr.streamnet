@@ -4,6 +4,7 @@ const {
 const RSSParser = require("rss-parser");
 const parser = new RSSParser();
 const Youtube = require("simple-youtube-api");
+const client = require('../../src/index');
 const startAt = Date.now();
 const lastVideos = {};
 

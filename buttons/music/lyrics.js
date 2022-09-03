@@ -9,7 +9,6 @@ const genius = require("genius-lyrics");
 const gClient = new genius.Client(client.config.lyricsKey);
 const DB = require("../../src/databases/musicDB");
 
-
 module.exports = {
     id: "lyrics",
     public: true,
