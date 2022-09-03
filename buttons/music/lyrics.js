@@ -23,7 +23,7 @@ module.exports = {
         });
         const member = interaction.member;
 
-        const player = client.manager.get(interaction.guildId);
+        const player = interaction.client.manager.get(interaction.guildId);
 
         const dbFound = await DB.findOne({
             guildId: player.guild
@@ -35,7 +35,7 @@ module.exports = {
             return interaction.editReply({
                     embeds: [new MessageEmbed().setColor("RED").setDescription(`<:rejected:995614671128244224> Dieser Button kann nur von der Person verwendet werden, die den aktuellen Titel abgespielt hat`)]
                 },
-                setTimeout(() => interaction.deleteReply(), 5000));
+                setTimeout(() => interaction.deleteReply(), 3000));
         }
         try {
             const track = player.queue.current;

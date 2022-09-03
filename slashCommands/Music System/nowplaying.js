@@ -28,15 +28,16 @@ module.exports = {
         });
         const member = interaction.member;
 
-        const player = client.manager.get(interaction.guildId);
+        const player = interaction.client.manager.get(interaction.guildId);
 
-        if (!player.queue.current) {
+        if (!player) {
             let thing = new MessageEmbed()
                 .setColor("RED")
-                .setDescription("There is no music playing.");
-            return interaction.reply({
-                embeds: [thing]
-            });
+                .setDescription("<:rejected:995614671128244224> Es wird gerade keine Musik gespielt");
+            return interaction.editReply({
+                    embeds: [thing]
+                },
+                setTimeout(() => interaction.deleteReply(), 3000));
         }
 
         const song = player.queue.current
@@ -44,13 +45,15 @@ module.exports = {
         var current = player.position;
 
         let embed = new MessageEmbed()
-            .setDescription(`**Now Playing**\n[${song.title}](${song.uri}) - \`[${convertTime(song.duration)}]\`- [${member}] \n\n\`${progressbar(player)}\``)
+            .setDescription(`🎶 **Now Playing**\n[${song.title}](${song.uri}) - \`[${convertTime(song.duration)}]\`- [${member}] \n\n\`${progressbar(player)}\``)
             .setThumbnail(song.displayThumbnail("3"))
             .setColor("DARK_BUT_NOT_BLACK")
-            .addField("\u200b", `\`${convertTime(current)} / ${convertTime(total)}\``)
+            .addFields({
+                name: "\u200b",
+                value: `\`${convertTime(current)} / ${convertTime(total)}\``
+            })
         return interaction.editReply({
             embeds: [embed]
-        })
-
+        });
     }
 };

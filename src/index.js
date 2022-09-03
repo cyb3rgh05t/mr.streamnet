@@ -32,6 +32,7 @@ require("./handlers/antiCrash")(client);
 
 client.config = require("./config/config.json");
 client.logger = require("./utils/logger");
+client.tools = require("./utils/tools")
 client.commands = new Collection();
 client.buttons = new Collection();
 client.cooldowns = new Collection();
@@ -56,7 +57,6 @@ client.manager = new Manager({
 });
 
 module.exports = client;
-
 
 client.login(client.config.token).then(() => {}).catch((err) => {
     client.logger.log(err, "error")

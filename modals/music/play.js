@@ -154,7 +154,7 @@ module.exports = {
         return interaction.editReply({
                 embeds: [enqueueEmbed]
             },
-            setTimeout(() => interaction.deleteReply(), 5000));
+            setTimeout(() => interaction.deleteReply(), 3000));
 
     }
 }

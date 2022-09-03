@@ -109,7 +109,7 @@ module.exports = {
             await interaction.reply({
                     embeds: [enqueueEmbed]
                 },
-                setTimeout(() => interaction.deleteReply(), 5000));
+                setTimeout(() => interaction.deleteReply(), 3000));
 
     }
 }
