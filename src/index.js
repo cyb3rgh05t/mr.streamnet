@@ -5,14 +5,6 @@ const {
 const client = new Client({
     intents: 131071
 });
-
-const {
-    nodes,
-    SpotifyClientID,
-    SpotifySecret,
-    token
-} = require("./config/config.json");
-
 const {
     promisify
 } = require("util");
@@ -38,7 +30,7 @@ require("./handlers/antiCrash")(client);
     require(`./handlers/${handler}`)(client, PG)
 });
 
-
+client.config = require("./config/config.json");
 client.tools = require("../utils/embedTools");
 client.commands = new Collection();
 client.buttons = new Collection();
@@ -48,11 +40,11 @@ client.prefixcmd = new Collection();
 client.modals = new Collection();
 client.logger = require("../utils/logger");
 client.manager = new Manager({
-    nodes: nodes,
+    nodes: client.config.nodes,
     plugins: [
         new Spotify({
-            clientID: SpotifyClientID,
-            clientSecret: SpotifySecret,
+            clientID: client.config.SpotifyClientID,
+            clientSecret: client.config.SpotifySecret,
         }),
         new Apple(),
         new Deezer(),
@@ -67,6 +59,6 @@ client.manager = new Manager({
 module.exports = client;
 
 
-client.login(token).then(() => {}).catch((err) => {
+client.login(client.config.token).then(() => {}).catch((err) => {
     client.logger.log(err, "error")
 });
