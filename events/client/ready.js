@@ -100,10 +100,13 @@ module.exports = {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
-            client.logger.log(`[DATABASE] Connected to MongoDB Database!`, "debug")
+            client.logger.log(`[DATABASE] Connected to MongoDB Database!`, "log")
             client.logger.log(`[DATABASE] Database is now ready`, "ready")
         }).catch((err) => {
             client.logger.log(err, "error")
+        });
+        mongoose.connection.on('disconnected', () => {
+            client.logger.log('[DATABASE] Mongoose disconnected', "warn");
         });
 
         //Music System
@@ -143,8 +146,6 @@ module.exports = {
         client.logger.log(`[API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "ready");
 
         //System Info
-
-
         const channelSys = await client.channels.fetch(systemChannelId)
         let cl1 = await si.currentLoad();
         const Sysembed = new MessageEmbed()
@@ -212,14 +213,11 @@ module.exports = {
             }, 5000);
         })
 
-
-
         // Initialising Premium Users
         const users = await User.find();
         for (let user of users) {
             client.userSettings.set(user.Id, user);
         }
-
         require('../../src/handlers/premium')(client)
 
         // Memory Data Update
