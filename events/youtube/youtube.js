@@ -17,7 +17,6 @@ const config = {
     "MESSAGE": "New video: **{videoTitle}**! It was uploaded by {videoAuthorName} at {videoPubDate}! Here is the link: {videoURL}",
     "YOUTUBERS": [
         "LYXCODE"
-
     ],
     "DISCORD_CHANNEL_ID": rssFeedChannelId,
     "YOUTUBE_API_KEY": youtubeAPI
@@ -34,7 +33,6 @@ module.exports = {
 
         check();
         setInterval(check, 21600 * 1000);
-
         /**
          * Format a date to a readable string
          * @param {Date} date The date to format 
