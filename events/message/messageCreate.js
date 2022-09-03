@@ -11,11 +11,11 @@ module.exports = {
 
   async execute(message) {
     let storedSettings = await GuildSettings.findOne({
-      GuildID: guildId,
+      GuildID: client.config.guildId,
     });
     if (!storedSettings) {
       const newSettings = new GuildSettings({
-        GuildID: guildId,
+        GuildID: client.config.guildId,
       });
       await newSettings.save().catch((e) => {
         console.log(e);
