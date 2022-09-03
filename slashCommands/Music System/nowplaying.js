@@ -5,17 +5,16 @@ const {
 } = require("discord.js")
 const {
     convertTime
-} = require('../../utils/convert.js');
+} = require('../../src/utils/convert');
 const {
     progressbar
-} = require('../../utils/progressbar.js')
+} = require('../../src/utils/progressbar')
 
 module.exports = {
     name: "nowplaying",
     description: "Show the current playing song",
     usage: "/nowplaying",
     public: true,
-
     /**
      * 
      * @param {Client} client 

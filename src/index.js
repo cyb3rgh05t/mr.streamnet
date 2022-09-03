@@ -23,7 +23,7 @@ const {
 require("./handlers/antiCrash")(client);
 
 ["giveawaySys"].forEach(system => {
-    require(`../systems/${system}`)(client)
+    require(`./systems/${system}`)(client)
 });
 
 ["events", "slashCommands", "commands", "buttons", "modals"].forEach(handler => {
@@ -31,14 +31,13 @@ require("./handlers/antiCrash")(client);
 });
 
 client.config = require("./config/config.json");
-client.tools = require("../utils/embedTools");
+client.logger = require("./utils/logger");
 client.commands = new Collection();
 client.buttons = new Collection();
 client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
 client.modals = new Collection();
-client.logger = require("../utils/logger");
 client.manager = new Manager({
     nodes: client.config.nodes,
     plugins: [

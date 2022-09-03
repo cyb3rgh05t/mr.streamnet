@@ -43,6 +43,7 @@ module.exports = {
     },
   ],
   /**
+   * @param {Client} client
    * @param {CommandInteraction} interaction 
    */
   async execute(interaction, client) {

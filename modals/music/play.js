@@ -7,7 +7,7 @@ const {
     Client,
     TextInputComponent
 } = require("discord.js");
-const util = require("../../utils/util");
+const util = require("../../src/utils/util");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();
 const DB = require("../../src/databases/musicDB");
