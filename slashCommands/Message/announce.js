@@ -96,7 +96,7 @@ module.exports = {
         content: `${ping === "<@&694240145628463255>" ? "<@&694240145628463255>" : "<@&807277578082713671>"}`,
         embeds: [embed],
         allowedMentions: {
-          parse: ['roles']
+          parse: ["roles", "users", "everyone"]
         }
       });
     }
