@@ -4,7 +4,7 @@ LABEL maintainer=cyb3rgh05t
 LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/mr.streamnet
 
 # Create the bot's directory
-WORKDIR /bot/streamnet/
+WORKDIR /app/bot/
 
 COPY package*.json ./
 
