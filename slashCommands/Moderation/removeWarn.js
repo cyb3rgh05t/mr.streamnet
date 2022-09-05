@@ -1,8 +1,4 @@
-const {
-  CommandInteraction,
-  MessageEmbed,
-  Client
-} = require("discord.js");
+const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const warnModel = require("../../src/databases/warnDB");
 
 module.exports = {
@@ -16,7 +12,6 @@ module.exports = {
     type: "STRING",
     required: true,
   }, ],
-
   /**
    * @param {CommandInteraction} interaction
    * @param {Client} client

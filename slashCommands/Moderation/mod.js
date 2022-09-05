@@ -1,9 +1,4 @@
-const {
-    CommandInteraction,
-    MessageEmbed,
-    Client,
-    GuildMember
-} = require("discord.js");
+const { CommandInteraction, MessageEmbed, Client, GuildMember } = require("discord.js");
 const ms = require("ms");
 const DB = require("../../src/databases/modDB");
 const warnModel = require("../../src/databases/warnDB");

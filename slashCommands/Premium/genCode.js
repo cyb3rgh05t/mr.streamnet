@@ -1,11 +1,7 @@
-const {
-  CommandInteraction,
-  Client
-} = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js");
 const moment = require("moment");
 const voucher_codes = require("voucher-code-generator");
 const schema = require("../../src/databases/codeDB");
-
 
 module.exports = {
   name: "gencode",

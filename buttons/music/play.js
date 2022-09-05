@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ButtonInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, Modal, ButtonInteraction, TextInputComponent } = require("discord.js");
 
 module.exports = {
     id: "playMusic",

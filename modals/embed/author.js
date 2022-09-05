@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -31,7 +23,7 @@ module.exports = {
 
         if (input2.length != 0) {
             if (!input2.startsWith("https://")) return interaction.reply({
-                content: "Dies ist keine korrekte URL!",
+                content: "Incorrect URL!",
                 ephemeral: true
             }).catch((err) => console.error(err.message));
             await interaction.message.edit({
@@ -43,7 +35,7 @@ module.exports = {
             }).catch((err) => console.error(err.message))
 
             interaction.reply({
-                content: "Autorzeile erfolgreich gesetzt!",
+                content: "Author set successful!",
                 ephemeral: true
             }).catch((err) => console.error(err.message))
 
@@ -57,7 +49,7 @@ module.exports = {
             }).catch((err) => console.error(err.message))
 
             interaction.reply({
-                content: "Autorzeile erfolgreich gesetzt!",
+                content: "Author set successful!",
                 ephemeral: true
             }).catch((err) => console.error(err.message))
 

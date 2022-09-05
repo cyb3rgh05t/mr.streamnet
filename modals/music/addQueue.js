@@ -1,11 +1,5 @@
-const {
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client
-} = require("discord.js");
+const { Client, MessageEmbed, ModalSubmitInteraction } = require("discord.js");
 const util = require("../../src/utils/util");
-const genius = require("genius-lyrics");
-const gClient = new genius.Client();
 const DB = require("../../src/databases/musicDB");
 
 function msToTime(duration) {

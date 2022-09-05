@@ -1,11 +1,6 @@
+const { MessageEmbed, WebhookClient } = require('discord.js');
+const { inspect } = require("util");
 const chalk = require("chalk");
-const {
-    MessageEmbed,
-    WebhookClient
-} = require('discord.js')
-const {
-    inspect
-} = require("util")
 const s = new WebhookClient({
     id: "999705430597042397",
     token: "jlWFa-XkgN-GhUopGGmUCgmiwAsxr5p-zsENN-8UWNHRg_QuQ1Dgh6cSZaIcKp2pPAKv",

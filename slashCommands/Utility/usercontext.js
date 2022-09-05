@@ -1,7 +1,4 @@
-const {
-  ContextMenuInteraction,
-  MessageEmbed
-} = require("discord.js");
+const { ContextMenuInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "usercontext",

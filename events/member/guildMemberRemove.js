@@ -1,8 +1,5 @@
-const client = require("../../src/index");
-const {
-  GuildMember,
-  MessageEmbed
-} = require("discord.js");
+const { GuildMember, MessageEmbed } = require("discord.js");
+const client = require('../../src/index');
 
 module.exports = {
   name: "guildMemberRemove",

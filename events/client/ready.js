@@ -1,12 +1,5 @@
-const {
-    Client,
-    MessageEmbed,
-    Message
-} = require("discord.js");
-const {
-    connection,
-    mongoose
-} = require("mongoose");
+const { Client, MessageEmbed, Message } = require("discord.js");
+const { connection, mongoose } = require("mongoose");
 const User = require("../../src/databases/userDB");
 const DB = require('../../src/databases/clientDB');
 const os = require("node:os");

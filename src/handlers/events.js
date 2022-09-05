@@ -1,11 +1,11 @@
-const {
-    Events
-} = require("../validation/eventNames");
+const { Events } = require("../validation/eventNames");
 
 module.exports = async (client, PG) => {
 
+    let count = 0;
     (await PG(`${(process.cwd().replace(/\\/g, "/"))}/events/*/*.js`)).map(async (file) => {
         const event = require(file);
+        count++;
         if (!Events.includes(event.name) || !event.name) {
             const L = file.split("/");
             await client.logger.log(`${event.name || "MISSING"} Event name is either invalid or missing`, "error");
@@ -17,8 +17,6 @@ module.exports = async (client, PG) => {
         } else {
             client.on(event.name, (...args) => event.execute(...args, client));
         };
-        const L = file.split("/");
-        client.logger.log(`LOADED Event ${event.name.toUpperCase()} from ${file.split("/").pop()}`, "event")
     });
-
+    client.logger.log(`Client Events Loaded: ${count}`, "event")
 }

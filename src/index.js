@@ -1,24 +1,13 @@
-const {
-    Client,
-    Collection
-} = require("discord.js");
-const client = new Client({
-    intents: 131071
-});
-const {
-    promisify
-} = require("util");
-const {
-    glob
-} = require("glob");
+const { Client, Collection } = require("discord.js");
+const client = new Client({ intents: 131071 });
+const { promisify } = require("util");
+const { glob } = require("glob");
 const PG = promisify(glob);
 
 const Deezer = require("erela.js-deezer");
 const Spotify = require("better-erela.js-spotify").default;
 const Apple = require("better-erela.js-apple").default;
-const {
-    Manager
-} = require("erela.js");
+const { Manager } = require("erela.js");
 
 require("./handlers/antiCrash")(client);
 

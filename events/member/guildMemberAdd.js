@@ -1,11 +1,6 @@
-const client = require("../../src/index");
-const {
-    GuildMember,
-    MessageEmbed
-} = require("discord.js");
-const {
-    Captcha
-} = require("discord.js-captcha");
+const { GuildMember, MessageEmbed } = require("discord.js");
+const { Captcha } = require("discord.js-captcha");
+const client = require('../../src/index');
 
 module.exports = {
     name: "guildMemberAdd",

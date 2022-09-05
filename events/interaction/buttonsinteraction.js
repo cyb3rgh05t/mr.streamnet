@@ -1,6 +1,4 @@
-const {
-    ButtonInteraction
-} = require("discord.js");
+const { ButtonInteraction } = require("discord.js");
 
 module.exports = {
     name: "interactionCreate",

@@ -1,12 +1,6 @@
-const {
-    MessageEmbed,
-    MessageActionRow,
-    MessageButton
-} = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const client = require("../../src/index");
 const DB = require("../../src/databases/musicDB");
-
-
 
 function msToTime(duration) {
     var milliseconds = Math.floor((duration % 1000) / 100),

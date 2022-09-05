@@ -1,8 +1,4 @@
-const {
-    Client,
-    GuildMember,
-    MessageEmbed
-} = require("discord.js");
+const { Client, GuildMember, MessageEmbed } = require("discord.js");
 const client = require('../../src/index');
 const {
     drawCard,

@@ -1,14 +1,5 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ButtonInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ButtonInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
-
 
 module.exports = {
     id: "removeField",
@@ -18,8 +9,6 @@ module.exports = {
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
      */
-
-
     async execute(interaction, client) {
         const i = interaction;
         const m = i.member;
@@ -37,7 +26,7 @@ module.exports = {
         }, async (err, data) => {
             if (err) throw err;
             if (!data) return interaction.reply({
-                content: "Dieses Menü gehört nicht dir!",
+                content: "You are not the Owner!",
                 ephemeral: true
             }).catch((err) => console.error(err.message));
 
@@ -49,14 +38,14 @@ module.exports = {
             const Row0 = new MessageActionRow()
                 .addComponents([
                     new MessageButton()
-                    .setLabel("Alle entfernen")
+                    .setLabel("Remove all Fields")
                     .setCustomId("remove_all_fields")
                     .setStyle("DANGER")
                 ])
 
 
             if (PrevEmbed.fields.length == 0) return interaction.reply({
-                content: "Dein Embed hat derzeit kein Feld!",
+                content: "No Field present!",
                 ephemeral: true
             }).catch((err) => console.error(err.message));
 
@@ -217,7 +206,7 @@ module.exports = {
                     }).catch((err) => console.error(err.message))
 
                     interaction.editReply({
-                        content: "Das Feld wurde erfolgreich gelöscht!",
+                        content: "Field removed successful!",
                         components: []
                     }).catch((err) => console.error(err.message));
 

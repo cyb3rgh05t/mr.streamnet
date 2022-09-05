@@ -1,9 +1,4 @@
-const {
-    CommandInteraction,
-    MessageEmbed,
-    MessageActionRow,
-    MessageButton
-} = require('discord.js');
+const { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const client = require("../../src/index");
 const DB = require("../../src/databases/ticketSetupDB");
 

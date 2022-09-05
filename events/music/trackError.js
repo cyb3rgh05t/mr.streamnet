@@ -1,9 +1,6 @@
-const {
-    Client
-} = require("discord.js");
+const { Client } = require("discord.js");
 const client = require("../../src/index");
 const DB = require("../../src/databases/musicDB");
-
 
 module.exports = {
     name: "trackError",

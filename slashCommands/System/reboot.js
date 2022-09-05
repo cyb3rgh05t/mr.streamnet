@@ -1,7 +1,4 @@
-const {
-    MessageEmbed,
-    CommandInteraction,
-} = require('discord.js')
+const { MessageEmbed, CommandInteraction } = require('discord.js')
 
 module.exports = {
     name: "reboot",

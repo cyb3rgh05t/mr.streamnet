@@ -1,9 +1,4 @@
-const {
-    Client,
-    Message,
-    MessageActionRow,
-    MessageButton
-} = require("discord.js");
+const { Client, Message, MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
     name: "rules-message",

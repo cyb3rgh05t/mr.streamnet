@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ButtonInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, Modal, MessageEmbed, ButtonInteraction, TextInputComponent } = require("discord.js");
 const DB = require("../../src/databases/musicDB");
 
 module.exports = {
@@ -17,8 +9,6 @@ module.exports = {
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
      */
-
-
     async execute(interaction, client) {
 
         const player = interaction.client.manager.get(interaction.guildId);

@@ -1,13 +1,4 @@
-const {
-    Client,
-    CommandInteraction,
-    MessageEmbed,
-    MessageActionRow,
-    MessageButton,
-    MessageSelectMenu,
-    Modal,
-    Message
-} = require('discord.js')
+const { Client, CommandInteraction, MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu, Modal, Message } = require('discord.js')
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -21,13 +12,11 @@ module.exports = {
         type: "CHANNEL",
         required: true
     }],
-
     /**
      *
      * @param {CommandInteraction} interaction
      * @param {Client} client
      */
-
     async execute(interaction, client) {
 
         const i = interaction;

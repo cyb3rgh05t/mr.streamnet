@@ -1,7 +1,5 @@
-const client = require("../../src/index");
-const {
-    GuildMember
-} = require("discord.js");
+const { GuildMember } = require("discord.js");
+const client = require('../../src/index');
 
 module.exports = {
     name: "guildMemberUpdate",

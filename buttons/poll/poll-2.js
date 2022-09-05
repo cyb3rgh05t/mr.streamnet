@@ -1,7 +1,4 @@
-const {
-    ButtonInteraction,
-    Client
-} = require("discord.js");
+const { Client, ButtonInteraction } = require("discord.js");
 const DB = require("../../src/databases/pollDB");
 
 module.exports = {

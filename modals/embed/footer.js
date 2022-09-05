@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {

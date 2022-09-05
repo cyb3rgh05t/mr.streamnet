@@ -1,8 +1,4 @@
-const {
-	CommandInteraction,
-	MessageEmbed,
-	Client
-} = require("discord.js");
+const {	CommandInteraction,	MessageEmbed,Client } = require("discord.js");
 const GuildSettings = require("../../src/databases/settingsDB");
 
 module.exports = {
@@ -16,13 +12,11 @@ module.exports = {
 		type: "STRING",
 		required: true,
 	}, ],
-
 	/**
 	 * @param {Client} client 
 	 * @param {Message} message 
 	 * @param {CommandInteraction} interaction
 	 */
-
 	async execute(interaction, client) {
 		const caracter = interaction.options.getString("caracter");
 		if (!caracter[0]) return interaction.reply("Please Enter a Valid Prefix")

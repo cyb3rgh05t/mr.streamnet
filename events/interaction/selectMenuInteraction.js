@@ -1,7 +1,4 @@
-const {
-    SelectMenuInteraction,
-    MessageEmbed
-} = require("discord.js");
+const { SelectMenuInteraction, MessageEmbed } = require("discord.js");
 const fs = require('fs');
 
 module.exports = {

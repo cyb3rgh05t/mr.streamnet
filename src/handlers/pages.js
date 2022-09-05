@@ -1,8 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    MessageEmbed,
-} = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 module.exports = {
     embedPages: async (client, interaction, embeds) => {

@@ -1,6 +1,4 @@
-const {
-    Client
-} = require("discord.js");
+const { Client } = require("discord.js");
 const RSSParser = require("rss-parser");
 const parser = new RSSParser();
 const Youtube = require("simple-youtube-api");
@@ -8,7 +6,6 @@ const client = require('../../src/index');
 const startAt = Date.now();
 const lastVideos = {};
 
-//config
 const config = {
     "MESSAGE": "New video: **{videoTitle}**! It was uploaded by {videoAuthorName} at {videoPubDate}! Here is the link: {videoURL}",
     "YOUTUBERS": [

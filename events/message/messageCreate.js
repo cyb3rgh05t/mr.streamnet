@@ -1,13 +1,9 @@
+const { Client, MessageEmbed } = require("discord.js");
 const client = require('../../src/index');
-const {
-  Client,
-  MessageEmbed
-} = require("discord.js");
 const GuildSettings = require('../../src/databases/settingsDB');
 
 module.exports = {
   name: "messageCreate",
-
 
   async execute(message) {
     let storedSettings = await GuildSettings.findOne({

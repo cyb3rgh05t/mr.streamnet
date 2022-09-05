@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -95,7 +87,7 @@ module.exports = {
 
         if (PrevEmbed.fields.find(f => f.name.toLowerCase() == input.toLowerCase())) {
             interaction.reply({
-                content: "Es gibt bereits ein Feld mit diesem Namen!",
+                content: "A Field with the same name already exists!",
                 ephemeral: true
             });
         } else {
@@ -108,7 +100,7 @@ module.exports = {
             }).catch((err) => console.error(err.message))
 
             interaction.reply({
-                content: "Feld erfolgreich hinzugefügt!",
+                content: "Field added successful!",
                 ephemeral: true
             }).catch((err) => console.error(err.message))
         }

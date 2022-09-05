@@ -1,7 +1,4 @@
-const {
-    CommandInteraction,
-    MessageEmbed
-} = require("discord.js");
+const { CommandInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../src/databases/modDB");
 const client = require("../../src/index");
 

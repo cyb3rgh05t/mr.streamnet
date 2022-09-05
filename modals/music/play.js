@@ -1,15 +1,5 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const util = require("../../src/utils/util");
-const genius = require("genius-lyrics");
-const gClient = new genius.Client();
 const DB = require("../../src/databases/musicDB");
 
 function msToTime(duration) {

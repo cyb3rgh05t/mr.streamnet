@@ -1,24 +1,16 @@
-const {
-    MessageEmbed,
-    Client,
-} = require('discord.js');
-
-const {
-    embedPages
-} = require('../../src/handlers/pages');
+const { MessageEmbed, Client } = require('discord.js');
+const { embedPages } = require('../../src/handlers/pages');
 
 module.exports = {
     name: "testpages",
     description: "Test the pages handler",
     usage: "/testpages",
     permission: "ADMINISTRATOR",
-
     /**
      *
      * @param {ChatInputCommandInteraction} interaction
      * @param {Client} client
      */
-
     async execute(interaction, client) {
         const embeds = [
             new MessageEmbed()

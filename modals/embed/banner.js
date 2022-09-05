@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ModalSubmitInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -28,13 +20,13 @@ module.exports = {
         const mRow3 = i.message.components[2];
         const input = i.fields.getTextInputValue("ce_banner_modal_input");
         if (!input.startsWith("https://")) return interaction.reply({
-            content: "Dies ist keine korrekte URL!",
+            content: "Incorrect URL!",
             ephemeral: true
         }).catch((err) => console.error(err.message));
 
 
         interaction.reply({
-            content: "Banner erfolgreich gesetzt!",
+            content: "Banner set successful!",
             ephemeral: true
         }).catch((err) => console.error(err.message))
 

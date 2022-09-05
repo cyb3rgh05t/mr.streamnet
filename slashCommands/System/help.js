@@ -1,10 +1,4 @@
-const {
-    Client,
-    SelectMenuInteraction,
-    MessageEmbed,
-    MessageActionRow,
-    MessageSelectMenu
-} = require('discord.js');
+const { Client, SelectMenuInteraction, MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
 const fs = require('fs');
 
 module.exports = {

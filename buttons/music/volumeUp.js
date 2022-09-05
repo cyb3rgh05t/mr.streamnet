@@ -1,12 +1,6 @@
-const {
-    ButtonInteraction,
-    Client,
-    MessageEmbed
-} = require("discord.js");
+const { client, ButtonInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../src/databases/musicDB");
 const util = require("../../src/utils/util");
-const genius = require("genius-lyrics");
-const gClient = new genius.Client();
 
 module.exports = {
     id: "volumeUpMusic",

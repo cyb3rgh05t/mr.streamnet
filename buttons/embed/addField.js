@@ -1,12 +1,4 @@
-const {
-    MessageActionRow,
-    MessageButton,
-    Modal,
-    MessageEmbed,
-    ButtonInteraction,
-    Client,
-    TextInputComponent
-} = require("discord.js");
+const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ButtonInteraction, TextInputComponent } = require("discord.js");
 const db = require("../../src/databases/embedDB");
 
 module.exports = {
@@ -17,8 +9,6 @@ module.exports = {
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
      */
-
-
     async execute(interaction, client) {
         const i = interaction;
         const m = i.member;
@@ -36,18 +26,18 @@ module.exports = {
         }, async (err, data) => {
             if (err) throw err;
             if (!data) return interaction.reply({
-                content: "Dieses Menü gehört nicht dir!",
+                content: "You are not the Owner!",
                 ephemeral: true
             }).catch((err) => console.error(err.message));
 
             if (PrevEmbed.fields.length == 25) return interaction.reply({
-                content: "Du hast bereits das Maximum an Feldern erreicht! (25x)",
+                content: "Reached maximum of Fields! (25x)",
                 ephemeral: true
             }).catch((err) => console.error(err.message));
 
             const InputField = new TextInputComponent()
                 .setCustomId("ce_fieldName_modal_input")
-                .setLabel("Gebe hier einen den Namen des Feldes ein!")
+                .setLabel("Field Name!")
                 .setMinLength(1)
                 .setMaxLength(256)
                 .setRequired(true)
@@ -55,7 +45,7 @@ module.exports = {
 
             const InputField2 = new TextInputComponent()
                 .setCustomId("ce_fieldValue_modal_input")
-                .setLabel("Gebe hier einen den Inhalt des Feldes ein!")
+                .setLabel("Field Value!")
                 .setMinLength(1)
                 .setMaxLength(1024)
                 .setRequired(true)
