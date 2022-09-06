@@ -1,6 +1,6 @@
 const { Client, ButtonInteraction, MessageEmbed } = require("discord.js");
 const client = require('../../src/index');
-const util = require("../../src/utils/util");
+const util = require("../../src/functions/util");
 const DB = require("../../src/databases/musicDB");
 const genius = require("genius-lyrics");
 const gClient = new genius.Client();

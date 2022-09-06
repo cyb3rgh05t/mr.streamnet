@@ -20,8 +20,8 @@ require("./handlers/antiCrash")(client);
 });
 
 client.config = require("./config/config.json");
-client.logger = require("./utils/logger");
-client.tools = require("./utils/tools")
+client.logger = require("./functions/logger");
+client.tools = require("./functions/tools")
 client.commands = new Collection();
 client.buttons = new Collection();
 client.cooldowns = new Collection();

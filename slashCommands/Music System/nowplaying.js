@@ -1,6 +1,6 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js")
-const { convertTime } = require('../../src/utils/convert');
-const { progressbar } = require('../../src/utils/progressbar')
+const { convertTime } = require('../../src/functions/convert');
+const { progressbar } = require('../../src/functions/progressbar')
 
 module.exports = {
     name: "nowplaying",

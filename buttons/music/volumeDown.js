@@ -1,6 +1,6 @@
 const { Client, ButtonInteraction, MessageEmbed } = require("discord.js");
 const DB = require("../../src/databases/musicDB");
-const util = require("../../src/utils/util");
+const util = require("../../src/functions/util");
 
 module.exports = {
     id: "volumeDownMusic",
