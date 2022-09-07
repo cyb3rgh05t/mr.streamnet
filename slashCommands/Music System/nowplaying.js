@@ -1,6 +1,7 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js")
-const { convertTime } = require('../../src/functions/convert');
-const { progressbar } = require('../../src/functions/progressbar')
+//const { convertTime } = require('../../src/functions/convert');
+const { progressbar } = require('../../src/functions/progressbar');
+const pms = require("pretty-ms");
 
 module.exports = {
     name: "nowplaying",
@@ -18,7 +19,11 @@ module.exports = {
         await interaction.deferReply({
             ephemeral: false
         });
-        const member = interaction.member;
+        const {
+            options,
+            member,
+            guild
+        } = interaction;
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -32,18 +37,28 @@ module.exports = {
                 setTimeout(() => interaction.deleteReply(), 3000));
         }
 
-        const song = player.queue.current
-        var total = song.duration;
+        const track = player.queue.current;
+        var total = track.duration;
         var current = player.position;
 
         let embed = new MessageEmbed()
-            .setDescription(`🎶 **Now Playing**\n[${song.title}](${song.uri}) - \`[${convertTime(song.duration)}]\`- [${member}] \n\n\`${progressbar(player)}\``)
-            .setThumbnail(song.displayThumbnail("3"))
+            .setAuthor({
+                    name: "Now Playing",
+                    iconURL: member.user.avatarURL({
+                        dynamic: true
+                    }),
+                })
+                .setDescription(
+                    `[${track.title}](${track.uri}) [${
+                    player.queue.current.requester
+                  }]
+                  
+                  \`${pms(player.position)}\` ${progressbar(player)} \`${pms(
+                    player.queue.current.duration
+                  )}\`
+                `
+                )
             .setColor("DARK_BUT_NOT_BLACK")
-            .addFields({
-                name: "\u200b",
-                value: `\`${convertTime(current)} / ${convertTime(total)}\``
-            })
         return interaction.editReply({
             embeds: [embed]
         });

@@ -1,5 +1,6 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const client = require("../../src/index");
+const { Player, Track } = require("erela.js");
 const DB = require("../../src/databases/musicDB");
 
 function msToTime(duration) {
@@ -15,72 +16,43 @@ function msToTime(duration) {
     return minutes + ":" + seconds;
 }
 
-const row = new MessageActionRow()
-    .addComponents(
-        new MessageButton()
-        .setCustomId('shuffleMusic') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('🔀'),
-        new MessageButton()
-        .setCustomId('skipMusic') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('⏩'),
-        new MessageButton()
-        .setCustomId('pauseMusic') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('⏸️'),
-        new MessageButton()
-        .setCustomId('resumeMusic') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('⏯️'),
-        new MessageButton()
-        .setCustomId('stopMusic') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('⏹')
-    )
-const row2 = new MessageActionRow()
-    .addComponents(
-        new MessageButton()
-        .setCustomId('volumeDownMusic') //DONE
-        .setStyle('DANGER')
-        .setEmoji('🔉'),
-        //.setDisabled(true),
-        new MessageButton()
-        .setCustomId('volumeUpMusic') //DONE
-        .setStyle('SUCCESS')
-        .setEmoji('🔊'),
-        //.setDisabled(true)
-        new MessageButton()
-        .setCustomId('queueAdd') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('🎵')
-        .setLabel("Add Song"),
-        new MessageButton()
-        .setCustomId('queue') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('🎶')
-        .setLabel("Queue")
-        /*new MessageButton()
-        .setCustomId('lyrics') //DONE
-        .setStyle('SECONDARY')
-        .setEmoji('💬')
-        .setLabel("Lyrics")*/
-    )
-
 module.exports = {
     name: "trackStart",
+    /**
+     * @param {Player} player
+     * @param {Track} track
+     */
 };
 
 client.manager
 
-    .on("trackStart", async (player, track) => {
+.on("trackStart", async (player, track) => {
 
         const dbFound = await DB.findOne({
             guildId: player.guild
         });
 
+        const row = new MessageActionRow().addComponents(
+                new MessageButton().setCustomId('shuffleMusic').setStyle('SECONDARY').setEmoji('🔀'),       
+                new MessageButton().setCustomId('skipMusic').setStyle('SECONDARY').setEmoji('⏩'),
+                new MessageButton().setCustomId('pauseMusic').setStyle('SECONDARY').setEmoji('⏸️'),
+                new MessageButton().setCustomId('resumeMusic').setStyle('SECONDARY').setEmoji('⏯️'),
+                new MessageButton().setCustomId('stopMusic').setStyle('SECONDARY').setEmoji('⏹')
+                )
+        const row2 = new MessageActionRow().addComponents(
+                new MessageButton().setCustomId('volumeDownMusic').setStyle('DANGER').setEmoji('🔉'),
+                new MessageButton().setCustomId('volumeUpMusic').setStyle('SUCCESS').setEmoji('🔊'),
+                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('🎵').setLabel("Add Song"),
+                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎶').setLabel(`Queue ${player.queue.size}`),
+                new MessageButton().setCustomId('lyrics').setStyle('SECONDARY').setEmoji('💬').setLabel("Lyrics")
+                )
+
         trackMsgId = await client.channels.cache.get(player.textChannel).send({
-            embeds: [new MessageEmbed().setColor("DARK_BUT_NOT_BLACK").setTitle(`🎶 Now Playing`).setDescription(`**[${track.title}](${track.uri})**`).addFields({
+            embeds: [new MessageEmbed()
+                .setColor("DARK_BUT_NOT_BLACK")
+                .setTitle(`🎧 Started Playing`)
+                .setDescription(`**[${track.title}](${track.uri})**`)
+                .addFields({
                 name: `Duration :`,
                 value: `\`${msToTime(track.duration) || "Undetermined"}\``,
                 inline: true

@@ -35,14 +35,21 @@ module.exports = {
         }
         try {
             const track = player.queue.current;
-            const trackTitle = track.title.replace("(Official Video)", "").replace("(Official Audio)", "");
+            const trackTitle = track.title
+                .replace("(Official Video)", "")
+                .replace("(Official Audio)", "")
+                .replace("(Official Lyric Video)", "");
             const actualTrack = await gClient.songs.search(trackTitle);
             const searches = actualTrack[0];
             const lyrics = await searches.lyrics();
 
             const lyricsEmbed = new MessageEmbed()
                 .setColor("DARK_BUT_NOT_BLACK")
-                .setTitle(`💬 Lyrics\n**${trackTitle}**`)
+                .setAuthor({
+                    name: `💬 Lyrics for ${trackTitle}`,
+                    url: searches.url,
+                })
+                //.setTitle(`💬 Lyrics\n**${trackTitle}**`)
                 .setDescription(lyrics)
                 .setThumbnail(track.displayThumbnail("3"))
             member.send({

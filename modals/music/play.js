@@ -100,10 +100,11 @@ module.exports = {
             if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
             const playlistEmbed = new MessageEmbed()
                 .setDescription(`🎶  **${res.playlist.name}** has been added to the queue.`)
-                .addField("Enqueued", `\`${res.tracks.length}\` tracks added by ${member}`)
+                .addFields({ name: "Enqueued", value: `\`${res.tracks.length}\` tracks added by ${member}`})
             return interaction.reply({
                 embeds: [playlistEmbed]
-            })
+            },
+            setTimeout(() => interaction.deleteReply(), 3000));
         }
 
         if (res.loadType === "TRACK_LOADED" || res.loadType === "SEARCH_RESULT") {
@@ -111,12 +112,10 @@ module.exports = {
             player.queue.add(res.tracks[0]);
         }
 
-
         const enqueueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
             .setTitle("🎶  Enqueued")
             .setDescription(`▶️  **[${res.tracks[0].title}](${res.tracks[0].uri})**`)
-            //.setFooter({ text: `${res.tracks[0].requester}` })
             .setThumbnail(res.tracks[0].displayThumbnail("3"))
             .addFields({
                 name: `Duration :`,
@@ -130,7 +129,8 @@ module.exports = {
             })
         await interaction.reply({
             embeds: [enqueueEmbed]
-        });
+        },
+        setTimeout(() => interaction.deleteReply(), 3000));
 
 
         if (!player.playing && !player.paused && !player.queue.size) player.play()

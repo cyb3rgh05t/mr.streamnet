@@ -46,18 +46,34 @@ module.exports = {
 
         const queue = player.queue.map((t, i) => `\`${++i}.\` **${t.title}** [${member}]`);
         const chunked = util.chunk(queue, 100).map(x => x.join("\n"));
+        const track = player.queue.current;
 
         const queueEmbed = new MessageEmbed()
             .setColor("DARK_BUT_NOT_BLACK")
-            .setTitle(`🎶 Aktuelle Playlist für ${guild.name}`)
-            .setDescription(chunked[0])
+            .setAuthor({
+                name: `Current queue for ${guild.name}`,
+                iconURL: member.user.avatarURL({
+                    dynamic: true
+                }),
+            })
+            .setDescription(chunked[0]);
 
+        const nowplaying = new MessageEmbed()
+            .setColor("DARK_BUT_NOT_BLACK")
+            .setAuthor({
+                    name: "Now Playing",
+                    iconURL: member.user.avatarURL({
+                        dynamic: true
+                    }),
+                })
+            .setDescription(`▶️ [${track.title}](${track.uri})`);
 
         if (dbFound) await dbFound.updateOne({
             queueId: queueEmbed.id,
         });
+
         member.send({
-            embeds: [queueEmbed]
+            embeds: [ nowplaying, queueEmbed]
         });
 
         return interaction.editReply({
