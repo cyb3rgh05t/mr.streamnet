@@ -5,28 +5,25 @@ const DB = require('../../src/databases/clientDB');
 const os = require("node:os");
 const osUtils = require("os-utils");
 const ms = require("ms");
+const { uptimer } = require("../../src/functions/uptimer");
+const { formatBytes } = require("../../src/functions/formatBytes");
+const { switchTo } = require("../../src/functions/switchTo");
 const si = require('systeminformation');
 const pretty = require('prettysize');
 const moment = require("moment");
 require("moment-duration-format");
 
-/* ----------[CPU Usage]---------- */
 const cpus = os.cpus();
 const cpu = cpus[0];
 
-// Accumulate every CPU times values
 const total = Object.values(cpu.times).reduce(
     (acc, tv) => acc + tv, 0
 );
 
-// Calculate the CPU usage
 const usage = process.cpuUsage();
 const currentCPUUsage = (usage.user + usage.system) * 1000;
 const perc = currentCPUUsage / total * 100;
 
-/* ----------[RAM Usage]---------- */
-
-/**Get the process memory usage (in MB) */
 async function getMemoryUsage() {
     return process.memoryUsage().heapUsed / (1024 * 1024).toFixed(2);
 }
@@ -36,15 +33,17 @@ module.exports = {
     once: true,
     /**
      * @param {Client} client
+     * @param {GuildMember} member
      */
-    async execute(client) {
-        //Bot Activity
-        client.logger.log(`[BOT] Checking Client....`, "debug")
-        client.logger.log(`[BOT] Logged in as ${client.user.tag}`, "ready")
-        client.logger.log(`[BOT] Client is starting....`, "debug")
-        client.logger.log(`[BOT] Client is now ready and online!`, "ready")
+    async execute(client, member) {
 
-        // Client Activity
+        client.logger.log(`[BOT] Checking Client....`, "debug")
+        client.logger.log(`[BOT] Client is starting....`, "debug")
+        client.logger.log(`[BOT] Logged in as ${client.user.tag}`, "ready")
+        client.logger.log(`[BOT] Client is now ready and online!`, "ready")
+        client.logger.log(`[API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "ready");
+
+
         const initialStatus = setTimeout(() => {
             client.user.setPresence({
                 activities: [{
@@ -78,11 +77,10 @@ module.exports = {
                     status: "online"
                 });
                 index++;
-            }, 5 * 1000) // Time in ms
+            }, 5 * 1000)
 
         }, randTime)
 
-        // Initializing Database Connection 
         if (!client.config.databaseUrl) return;
         mongoose.connect(client.config.databaseUrl, {
             useNewUrlParser: true,
@@ -97,7 +95,12 @@ module.exports = {
             client.logger.log('[DATABASE] Mongoose disconnected', "warn");
         });
 
-        //Music System
+        const users = await User.find();
+        for (let user of users) {
+            client.userSettings.set(user.Id, user);
+        }
+        require('../../src/handlers/premium')(client)
+
         const channelLava = await client.channels.fetch(client.config.lavalinkChannelId)
         const embed = new MessageEmbed()
             .setColor('RED')
@@ -131,9 +134,7 @@ module.exports = {
         })
 
         client.manager.init(client.user.id);
-        client.logger.log(`[API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "ready");
 
-        //System Info
         const channelSys = await client.channels.fetch(client.config.systemChannelId)
         let cl1 = await si.currentLoad();
         const Sysembed = new MessageEmbed()
@@ -154,7 +155,9 @@ module.exports = {
                 let uptime = await os.uptime();
 
                 const Sysrembed = new MessageEmbed()
-                    .setTitle(`StreamNet Server`)
+                .setAuthor({
+                    name: `StreamNet Server`
+                })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .addFields({
 
@@ -201,26 +204,18 @@ module.exports = {
             }, 5000);
         })
 
-        // Initialising Premium Users
-        const users = await User.find();
-        for (let user of users) {
-            client.userSettings.set(user.Id, user);
-        }
-        require('../../src/handlers/premium')(client)
 
-        // Memory Data Update
+
         let memArray = [];
 
         setInterval(async () => {
 
-            //Used Memory in GB
             memArray.push(await getMemoryUsage());
 
             if (memArray.length >= 14) {
                 memArray.shift();
             }
 
-            // Store in Database
             await DB.findOneAndUpdate({
                 Client: true,
             }, {
@@ -229,71 +224,7 @@ module.exports = {
                 upsert: true,
             });
 
-        }, ms("5s")); //= 5000 (ms)
+        }, ms("5s"));
 
     },
-}
-
-function switchTo(val) {
-    var status = " ";
-    switch (val) {
-        case 0:
-            status = `<:icon_offline:993232252647514152> DISCONNECTED`
-            break;
-
-        case 1:
-            status = `<:icon_online:993231898291736576> CONNECTED`
-            break;
-
-        case 2:
-            status = `<:icon_connecting:993232321685762048> CONNECTING`
-            break;
-
-        case 3:
-            status = `<:icon_disconnecting:993232346172104756> DISCONNECTING`
-            break;
-    }
-    return status;
-}
-
-function uptimer(seconds) {
-    seconds = seconds || 0;
-    seconds = Number(seconds);
-    seconds = Math.abs(seconds);
-
-    var d = Math.floor(seconds / (3600 * 24));
-    var h = Math.floor(seconds % (3600 * 24) / 3600);
-    var m = Math.floor(seconds % 3600 / 60);
-    var s = Math.floor(seconds % 60);
-    var parts = new Array();
-
-    if (d > 0) {
-        var dDisplay = d > 0 ? d + ' ' + (d == 1 ? "day" : "days") : "";
-        parts.push(dDisplay);
-    }
-
-    if (h > 0) {
-        var hDisplay = h > 0 ? h + ' ' + (h == 1 ? "hour" : "hours") : "";
-        parts.push(hDisplay)
-    }
-
-    if (m > 0) {
-        var mDisplay = m > 0 ? m + ' ' + (m == 1 ? "minute" : "minutes") : "";
-        parts.push(mDisplay)
-    }
-
-    if (s > 0) {
-        var sDisplay = s > 0 ? s + ' ' + (s == 1 ? "second" : "seconds") : "";
-        parts.push(sDisplay)
-    }
-
-    return parts.join(', ', parts);
-}
-
-function formatBytes(bytes) {
-    if (bytes === 0) return "0 B";
-    const sizes = ["B", "KB", "MB", "GB", "TB"];
-    return `${(
-        bytes / Math.pow(1024, Math.floor(Math.log(bytes) / Math.log(1024)))
-    ).toFixed(2)} ${sizes[Math.floor(Math.log(bytes) / Math.log(1024))]}`;
 }

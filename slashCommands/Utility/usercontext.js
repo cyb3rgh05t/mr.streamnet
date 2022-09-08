@@ -4,7 +4,7 @@ module.exports = {
   name: "usercontext",
   type: "USER",
   usage: "context menu",
-  permission: "SEND_MESSAGES",
+  public: true,
   /**
    * 
    * @param {ContextMenuInteraction} interaction
@@ -14,7 +14,6 @@ module.exports = {
 
     const Response = new MessageEmbed()
       .setColor("BLUE")
-      //.setAuthor(target.user.tag, target.user.avatarURL({dynamic: true, size: 512}))
       .setAuthor({
         name: target.user.tag,
         iconURL: target.user.avatarURL({
@@ -26,10 +25,10 @@ module.exports = {
         dynamic: true,
         size: 512
       }))
-      .addField("ID", `${target.user.id}`)
-      .addField("Roles", `${target.roles.cache.map(r => r).join(" ").replace("@everyone", " ") || "NONE"}`)
-      .addField("Member Since", `<t:${parseInt(target.joinedTimestamp / 1000)}:R>`, true)
-      .addField("Discord User Since", `<t:${parseInt(target.user.createdTimestamp / 1000)}:R>`, true)
+      .addFields({ name: "ID", value: `${target.user.id}`})
+      .addFields({ name: "Roles", value: `${target.roles.cache.map(r => r).join(" ").replace("@everyone", " ") || "NONE"}`})
+      .addFields({ name: "Member Since", value: `<t:${parseInt(target.joinedTimestamp / 1000)}:R>`, inline: true})
+      .addFields({ name: "Discord User Since", value: `<t:${parseInt(target.user.createdTimestamp / 1000)}:R>`, inline: true})
 
     interaction.reply({
       embeds: [Response],

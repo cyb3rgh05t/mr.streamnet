@@ -9,15 +9,10 @@ module.exports = {
    * @param {GuildMember} member
    */
   execute(member) {
-    //if (member.roles.cache.some(role => role.id === verifiedId)) {
-    const {
-      user,
-      guild
-    } = member
+    const { user, guild } = member
     const leaveChannel = member.guild.channels.cache.get(client.config.unsharedChannelId)
     client.logger.log(`User "${member.user.username}" has left "${member.guild.name}"`, "log");
     const leaveMessage = `**${member.displayName}** has left the server, we now have ${member.guild.memberCount} members!`;
     leaveChannel.send(leaveMessage)
-    //}
   }
 }

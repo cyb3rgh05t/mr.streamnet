@@ -3,6 +3,7 @@ const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const { generateChartConfig } = require('../../src/functions/chart');
 const moment = require("moment");
 const ms = require("ms");
+const client = require("../../src");
 
 module.exports = {
     name: "info",
@@ -56,7 +57,6 @@ module.exports = {
 
                     const Target = options.getMember("user");
                     await Target.fetch();
-
                     /**
                      * 
                      * @param {Target} Target 
@@ -68,7 +68,6 @@ module.exports = {
                         } else {
                             return '#2F3136'; // Transparent
                         }
-
                     };
 
                     const Response = new MessageEmbed()
@@ -205,8 +204,6 @@ module.exports = {
                     const webhooks = await channel.fetchWebhooks();
                     const webhookArray = webhooks.size;
 
-                    // Channel Message Analytics 
-
                     const msgs = await channel.messages.fetch().then((res) => {
                         return res
                     });
@@ -240,8 +237,6 @@ module.exports = {
                         (msg) => now - msg.createdTimestamp < ms('7d')
                     ).size;
 
-
-                    // Graph Data
                     const colors = {
                         purple: {
                             default: "rgba(149, 76, 233, 1)",
@@ -274,9 +269,6 @@ module.exports = {
                         'Last 1 Day',
                     ];
 
-                    /**
-                     * Generates a canvas for the chart
-                     */
                     const canvas = new ChartJSNodeCanvas({
                         width: 1500,
                         height: 720,
@@ -286,9 +278,6 @@ module.exports = {
                         chartCallback: (ChartJS) => {},
                     });
 
-                    /**
-                     * Generates chart configuration
-                     */
                     const chartConfig = generateChartConfig({
                         type: "line",
                         data: {
@@ -370,7 +359,6 @@ module.exports = {
                     const image = await canvas.renderToBuffer(chartConfig);
                     const attachment = new MessageAttachment(image, 'chart.png');
 
-                    // Info Embed
                     const Response = new MessageEmbed()
                         .setColor(`#954CE9`) // ${colors.purple.default}
                         .setAuthor({
@@ -466,7 +454,7 @@ module.exports = {
             break;
             };
         } catch (err) {
-            console.log(`[ERROR]`.red.bold, err);
+            client.logger.log(err, "error");
         };
     },
 }

@@ -1,12 +1,6 @@
-const {
-    glob
-} = require("glob");
-const {
-    builtinModules
-} = require("module");
-const {
-    promisify
-} = require("util");
+const { glob } = require("glob");
+const { builtinModules } = require("module");
+const { promisify } = require("util");
 const proGlob = promisify(glob);
 
 async function loadFiles(dirName) {

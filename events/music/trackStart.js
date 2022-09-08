@@ -2,19 +2,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const client = require("../../src/index");
 const { Player, Track } = require("erela.js");
 const DB = require("../../src/databases/musicDB");
-
-function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return minutes + ":" + seconds;
-}
+const { convertTime } = require('../../src/functions/convert');
 
 module.exports = {
     name: "trackStart",
@@ -42,8 +30,8 @@ client.manager
         const row2 = new MessageActionRow().addComponents(
                 new MessageButton().setCustomId('volumeDownMusic').setStyle('DANGER').setEmoji('🔉'),
                 new MessageButton().setCustomId('volumeUpMusic').setStyle('SUCCESS').setEmoji('🔊'),
-                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('🎵').setLabel("Add Song"),
-                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎶').setLabel(`Queue ${player.queue.size}`),
+                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('🎵').setLabel("➕ Song"),
+                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎶').setLabel(`Queue | ${player.queue.size}`),
                 new MessageButton().setCustomId('lyrics').setStyle('SECONDARY').setEmoji('💬').setLabel("Lyrics")
                 )
 
@@ -54,7 +42,7 @@ client.manager
                 .setDescription(`**[${track.title}](${track.uri})**`)
                 .addFields({
                 name: `Duration :`,
-                value: `\`${msToTime(track.duration) || "Undetermined"}\``,
+                value: `\`${convertTime(track.duration) || "Undetermined"}\``,
                 inline: true
 
             }, {

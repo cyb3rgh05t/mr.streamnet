@@ -1,7 +1,6 @@
 const { MessageEmbed, CommandInteraction, Client } = require("discord.js")
-//const { convertTime } = require('../../src/functions/convert');
+const { convertTime } = require('../../src/functions/convert');
 const { progressbar } = require('../../src/functions/progressbar');
-const pms = require("pretty-ms");
 
 module.exports = {
     name: "nowplaying",
@@ -19,11 +18,8 @@ module.exports = {
         await interaction.deferReply({
             ephemeral: false
         });
-        const {
-            options,
-            member,
-            guild
-        } = interaction;
+        
+        const { options, member, guild } = interaction;
 
         const player = interaction.client.manager.get(interaction.guildId);
 
@@ -48,16 +44,7 @@ module.exports = {
                         dynamic: true
                     }),
                 })
-                .setDescription(
-                    `[${track.title}](${track.uri}) [${
-                    player.queue.current.requester
-                  }]
-                  
-                  \`${pms(player.position)}\` ${progressbar(player)} \`${pms(
-                    player.queue.current.duration
-                  )}\`
-                `
-                )
+            .setDescription(`[${track.title}](${track.uri}) [${player.queue.current.requester}]\n\`${convertTime(player.position)}\` ${progressbar(player)} \`${convertTime(player.queue.current.duration)}\``)
             .setColor("DARK_BUT_NOT_BLACK")
         return interaction.editReply({
             embeds: [embed]

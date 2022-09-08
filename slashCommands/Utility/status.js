@@ -4,29 +4,18 @@ const { execute } = require("../../events/client/ready");
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const DB = require('../../src/databases/clientDB');
 const moment = require("moment");
+const { switchTo } = require("../../src/functions/switchTo");
+const { getPBar } = require("../../src/functions/getPBar");
 
 require("../../events/client/ready");
 require("moment-duration-format");
 
-// Optional, disabled by Default
-function getPBar(percent) {
-    let thick = Math.floor(percent / 5);
-    let thin = Math.ceil((100 - percent) / 10) * 2;
-    let str = " [";
-
-    for (let i = 0; i < thick; i++) str += "▰";
-    for (let i = 0; i < thin; i++) str += "▱";
-
-    str += "] ";
-    return str;
-}
 
 module.exports = {
     name: "status",
     usage: "/status",
     description: "Bot status information",
     public: true,
-
     /**
      * 
      * @param {CommandInteraction} interaction 
@@ -34,7 +23,6 @@ module.exports = {
      */
     async execute(interaction, client) {
 
-        // Database 
         const docs = await DB.findOne({
             Client: true
         });
@@ -55,7 +43,6 @@ module.exports = {
 
         const avgMem = (mem0 + mem1 + mem2 + mem3 + mem4 + mem5 + mem6 + mem7 + mem8 + mem9 + mem10 + mem11 + mem12) / 13;
 
-        // Graph Data
         const colors = {
             purple: {
                 default: "rgba(149, 76, 233, 1)",
@@ -93,7 +80,6 @@ module.exports = {
             mem12,
         ];
 
-        // Change it according to the setInterval() in the ready event
         const labels = [
             '60',
             '55',
@@ -109,7 +95,6 @@ module.exports = {
             '5',
         ];
 
-        // Chart Generation
         const width = 1500;
         const height = 720;
 
@@ -125,7 +110,6 @@ module.exports = {
             }
         }
 
-        // Canvas Generation
         const chartCallback = (ChartJS) => {}
         const canvas = new ChartJSNodeCanvas({
             width: width,
@@ -136,7 +120,6 @@ module.exports = {
             chartCallback: chartCallback
         })
 
-        // Chart Data
         const chartData = {
             labels: labels,
             datasets: [{
@@ -160,7 +143,6 @@ module.exports = {
             }, ],
         }
 
-        // Output
         const chartConfig = {
             type: "line",
             data: chartData,
@@ -263,26 +245,4 @@ module.exports = {
             files: [attachment],
         });
     }
-}
-
-function switchTo(val) {
-    var status = " ";
-    switch (val) {
-        case 0:
-            status = `<:icon_offline:993232252647514152> DISCONNECTED`
-            break;
-
-        case 1:
-            status = `<:icon_online:993231898291736576> CONNECTED`
-            break;
-
-        case 2:
-            status = `<:icon_connecting:993232321685762048> CONNECTING`
-            break;
-
-        case 3:
-            status = `<:icon_disconnecting:993232346172104756> DISCONNECTING`
-            break;
-    }
-    return status;
 }

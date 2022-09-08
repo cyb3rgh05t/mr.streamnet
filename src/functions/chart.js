@@ -6,7 +6,6 @@ module.exports = {
 	/**
 	 * 
 	 * @param {configOptions} options 
-	 * Generate the Chart Configuration
 	 */
 	generateChartConfig(options) {
 		return options;
