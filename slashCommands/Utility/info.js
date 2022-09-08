@@ -3,7 +3,7 @@ const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const { generateChartConfig } = require('../../src/functions/chart');
 const moment = require("moment");
 const ms = require("ms");
-const client = require("../../src");
+const client = require("../../src/index");
 
 module.exports = {
     name: "info",

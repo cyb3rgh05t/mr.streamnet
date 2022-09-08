@@ -33,9 +33,10 @@ module.exports = {
     once: true,
     /**
      * @param {Client} client
-     * @param {GuildMember} member
+     * @param {GuildMember} member     
+     * @param {Guild} guild
      */
-    async execute(client, member) {
+    async execute(client, member, guild) {
 
         client.logger.log(`[BOT] Checking Client....`, "debug")
         client.logger.log(`[BOT] Client is starting....`, "debug")
@@ -113,7 +114,9 @@ module.exports = {
             setInterval(async () => {
 
                 const rembed = new MessageEmbed()
-                    .setTitle(`Music System`)
+                    .setAuthor({
+                        name: `StreamNet | Music Server`,
+                    })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .addFields([{
                         name: "**Lavalink**",
@@ -152,12 +155,12 @@ module.exports = {
                 let diskdata = await si.fsSize();
                 let osdata = await si.osInfo();
                 let cpudata = await si.cpu();
-                let uptime = await os.uptime();
+                //let uptime = await os.uptime();
 
                 const Sysrembed = new MessageEmbed()
-                .setAuthor({
-                    name: `StreamNet Server`
-                })
+                    .setAuthor({
+                        name: `StreamNet Server | Information`,
+                    })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .addFields({
 
