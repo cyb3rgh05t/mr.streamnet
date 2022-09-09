@@ -44,7 +44,7 @@ module.exports = {
                         dynamic: true
                     }),
                 })
-            .setDescription(`[${track.title}](${track.uri}) [${player.queue.current.requester}]\n\`${convertTime(player.position)}\` ${progressbar(player)} \`${convertTime(player.queue.current.duration)}\``)
+            .setDescription(`[${track.title}](${track.uri}) [${player.queue.current.requester}]\n\n\`${convertTime(player.position)}\` ${progressbar(player)} \`${convertTime(player.queue.current.duration)}\``)
             .setColor("DARK_BUT_NOT_BLACK")
         return interaction.editReply({
             embeds: [embed]

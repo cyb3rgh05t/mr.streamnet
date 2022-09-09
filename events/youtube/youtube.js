@@ -120,7 +120,7 @@ module.exports = {
          * Check for new videos
          */
         async function check() {
-            client.logger.log(`Checking YOUTUBE API...`, "debug");
+            client.logger.log(`[YOUTUBE] Checking API...`, "debug");
             config.YOUTUBERS.forEach(async (youtuber) => {
                 client.logger.log(`[YOUTUBE] Start checking...`, "debug");
                 let channelInfos = await getYoutubeChannelInfos(youtuber);
