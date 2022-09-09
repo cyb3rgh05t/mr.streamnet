@@ -1,3 +1,4 @@
+const { Client } = require("discord.js");
 const client = require("../../src/index");
 
 module.exports = {

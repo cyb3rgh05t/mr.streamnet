@@ -1,19 +1,7 @@
 const { Client, MessageEmbed, ModalSubmitInteraction } = require("discord.js");
 const util = require("../../src/functions/util");
 const DB = require("../../src/databases/musicDB");
-
-function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return minutes + ":" + seconds;
-}
+const { convertTime } = require('../../src/functions/convert');
 
 module.exports = {
     id: "addMusic_modal",
@@ -83,7 +71,7 @@ module.exports = {
             .setThumbnail(res.tracks[0].displayThumbnail("3"))
             .addFields({
                 name: `Duration :`,
-                value: `\`${msToTime(res.tracks[0].duration) || "Undetermined"}\``,
+                value: `\`${convertTime(res.tracks[0].duration) || "Undetermined"}\``,
                 inline: true
 
             }, {

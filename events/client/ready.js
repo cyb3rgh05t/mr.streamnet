@@ -40,9 +40,9 @@ module.exports = {
 
         client.logger.log(`[BOT] Checking Client....`, "debug")
         client.logger.log(`[BOT] Client is starting....`, "debug")
+        client.logger.log(`[DISCORD_API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "log");
         client.logger.log(`[BOT] Logged in as ${client.user.tag}`, "ready")
         client.logger.log(`[BOT] Client is now ready and online!`, "ready")
-        client.logger.log(`[API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "ready");
 
 
         const initialStatus = setTimeout(() => {
@@ -105,7 +105,7 @@ module.exports = {
         const channelLava = await client.channels.fetch(client.config.lavalinkChannelId)
         const embed = new MessageEmbed()
             .setColor('RED')
-            .setTitle('🛑 No Data Found!')
+            .setTitle('<:rejected:995614671128244224> No Data Found!')
             .setDescription('Please Wait For The Information To Be Collected!')
         channelLava.bulkDelete(10);
         channelLava.send({
@@ -142,7 +142,7 @@ module.exports = {
         let cl1 = await si.currentLoad();
         const Sysembed = new MessageEmbed()
             .setColor('RED')
-            .setTitle('🛑 No Data Found!')
+            .setTitle('<:rejected:995614671128244224> No Data Found!')
             .setDescription('Please Wait For The Information To Be Collected!')
         channelSys.bulkDelete(10);
         channelSys.send({

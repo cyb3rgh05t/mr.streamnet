@@ -1,19 +1,8 @@
 const { Client, MessageActionRow, MessageButton, Modal, MessageEmbed, ModalSubmitInteraction, TextInputComponent } = require("discord.js");
 const util = require("../../src/functions/util");
 const DB = require("../../src/databases/musicDB");
+const { convertTime } = require('../../src/functions/convert');
 
-function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return minutes + ":" + seconds;
-}
 
 module.exports = {
     id: "playMusic_modal",
@@ -119,7 +108,7 @@ module.exports = {
             .setThumbnail(res.tracks[0].displayThumbnail("3"))
             .addFields({
                 name: `Duration :`,
-                value: `\`${msToTime(res.tracks[0].duration) || "Undetermined"}\``,
+                value: `\`${convertTime(res.tracks[0].duration) || "Undetermined"}\``,
                 inline: true
 
             }, {
@@ -127,10 +116,6 @@ module.exports = {
                 value: `${member}`,
                 inline: true
             })
-        await interaction.reply({
-            embeds: [enqueueEmbed]
-        },
-        setTimeout(() => interaction.deleteReply(), 3000));
 
 
         if (!player.playing && !player.paused && !player.queue.size) player.play()
@@ -141,7 +126,7 @@ module.exports = {
                 name: "Position in queue",
                 value: `\`${player.queue.size - 0}\``
             });
-        return interaction.editReply({
+        return interaction.reply({
                 embeds: [enqueueEmbed]
             },
             setTimeout(() => interaction.deleteReply(), 3000));

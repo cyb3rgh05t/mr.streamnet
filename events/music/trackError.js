@@ -22,7 +22,7 @@ client.manager
                 msg.delete()
             }, 3000)
         });
-        client.logger.log(`Error when loading song! Track is error in [${player.guild}]`, "error");
+        client.logger.log(`[LAVALINK] Error when loading song! Track is error in [${player.voiceChannel}]`, "error");
         if (!player.voiceChannel) player.destroy();
 
     })

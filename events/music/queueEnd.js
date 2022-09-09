@@ -1,20 +1,6 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { Client, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const client = require("../../src/index");
 const DB = require("../../src/databases/musicDB");
-
-function msToTime(duration) {
-    var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return minutes + ":" + seconds;
-}
-
 
 module.exports = {
     name: "queueEnd",
@@ -38,8 +24,8 @@ client.manager
         const row4 = new MessageActionRow().addComponents(
                 new MessageButton().setCustomId('volumeDownMusic').setStyle('DANGER').setEmoji('🔉').setDisabled(true),
                 new MessageButton().setCustomId('volumeUpMusic').setStyle('SUCCESS').setEmoji('🔊').setDisabled(true),
-                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('🎵').setLabel("Add Song").setDisabled(true),
-                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎶').setLabel("Queue").setDisabled(true),
+                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('➕').setLabel("Song").setDisabled(true),
+                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎧').setLabel("Queue").setDisabled(true),
                 new MessageButton().setCustomId('lyrics').setStyle('SECONDARY').setEmoji('💬').setLabel("Lyrics").setDisabled(true)
                 )
 
@@ -48,13 +34,13 @@ client.manager
         await fetchedMessage.edit({
                 embeds: [new MessageEmbed()
                     .setColor("DARK_BUT_NOT_BLACK")
-                    .setTitle(`⏹  Finished | Queue has ended`)
+                    .setTitle(`⏹ Queue has ended`)
                     .setDescription(`**[${track.title}](${track.uri})**`)
                     .setImage(track.displayThumbnail("maxresdefault"))],
                 components: [row3, row4]
             },
-            setTimeout(() => fetchedMessage.delete(), 20000));
-
+            setTimeout(() => fetchedMessage.delete(), 10000));
+            client.logger.log(`[LAVALINK] Queue ended! Player destroyed in [${player.voiceChannel}]`, "log");
         player.destroy()
         player.disconnect()
 

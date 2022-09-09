@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { Client, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const client = require("../../src/index");
 const { Player, Track } = require("erela.js");
 const DB = require("../../src/databases/musicDB");
@@ -6,10 +6,6 @@ const { convertTime } = require('../../src/functions/convert');
 
 module.exports = {
     name: "trackStart",
-    /**
-     * @param {Player} player
-     * @param {Track} track
-     */
 };
 
 client.manager
@@ -30,8 +26,8 @@ client.manager
         const row2 = new MessageActionRow().addComponents(
                 new MessageButton().setCustomId('volumeDownMusic').setStyle('DANGER').setEmoji('🔉'),
                 new MessageButton().setCustomId('volumeUpMusic').setStyle('SUCCESS').setEmoji('🔊'),
-                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('🎵').setLabel("➕ Song"),
-                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎶').setLabel(`Queue | ${player.queue.size}`),
+                new MessageButton().setCustomId('queueAdd').setStyle('SECONDARY').setEmoji('➕').setLabel("Song"),
+                new MessageButton().setCustomId('queue').setStyle('SECONDARY').setEmoji('🎧').setLabel(`Queue | ${player.queue.size}`),
                 new MessageButton().setCustomId('lyrics').setStyle('SECONDARY').setEmoji('💬').setLabel("Lyrics")
                 )
 
@@ -66,4 +62,5 @@ client.manager
             messageId: trackMsgId.id,
 
         });
+        client.logger.log(`[LAVALINK] Player started playing in [${player.voiceChannel}]`, "log");
     })

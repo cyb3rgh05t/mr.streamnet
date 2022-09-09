@@ -17,6 +17,7 @@ client.manager
         const fetchedMessage = await client.channels.cache.get(player.textChannel).messages.fetch(dbFound.messageId)
 
         await fetchedMessage.delete()
+        client.logger.log(`[LAVALINK] Track ended! Player destroyed in [${player.voiceChannel}]`, "log");
 
         //player.destroy()
 

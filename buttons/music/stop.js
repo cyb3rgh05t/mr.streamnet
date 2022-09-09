@@ -27,6 +27,7 @@ module.exports = {
         }
 
         player.destroy()
+        client.logger.log(`[LAVALINK] Player stopped in [${player.voiceChannel}]`, "log");
 
         const dbmessage = await DB.findOne({
             guildId: player.guild
@@ -43,6 +44,5 @@ module.exports = {
                 embeds: [disconnectEmbed]
             },
             setTimeout(() => interaction.deleteReply(), 3000));
-
     }
 }

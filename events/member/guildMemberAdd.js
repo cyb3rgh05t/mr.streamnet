@@ -88,7 +88,7 @@ module.exports = {
                 } = member
                 const newMemberChannel = member.guild.channels.cache.get(client.config.newMemberChannelId)
                 client.logger.log(`A Member has Solved a CAPTCHA!`, "log");
-                client.logger.log(data, "log");
+                //client.logger.log(data, "log");
                 client.logger.log(`New User "${member.user.username}" has joined "${member.guild.name}"`, "log");
                 //const newMemberMessage = `**${member.user}** joined the Server, we now have ${member.guild.memberCount} members!`;
                 newMemberChannel.send({
