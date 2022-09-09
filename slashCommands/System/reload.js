@@ -1,6 +1,6 @@
 const { Client, CommandInteraction } = require("discord.js");
-const { loadEventFiles } = require('../../src/functions/eventLoader');
-const { loadCommandFiles } = require('../../src/functions/cmdLoader');
+//const { loadEventFiles } = require('../../src/functions/eventLoader');
+//const { loadCommandFiles } = require('../../src/functions/cmdLoader');
 
 module.exports = {
         name: "reload",
