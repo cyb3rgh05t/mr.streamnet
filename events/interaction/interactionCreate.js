@@ -14,7 +14,7 @@ module.exports = {
         embeds: [
           new MessageEmbed()
           .setColor("RED")
-          .setDescription("✖ An error occured while running this command")
+          .setDescription("<:rejected:995614671128244224> An error occured while running this command")
         ],
         ephemeral: true
       }) && client.commands.delete(interaction.commandName);
