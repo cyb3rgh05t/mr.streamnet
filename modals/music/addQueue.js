@@ -48,7 +48,7 @@ module.exports = {
             if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
             const playlistEmbed = new MessageEmbed()
                 .setDescription(`🎶  **${res.playlist.name}** has been added to the queue.`)
-                .addField("Enqueued", `\`${res.tracks.length}\` tracks added by ${member}`)
+                .addFields({ name:"Enqueued", value: `\`${res.tracks.length}\` tracks added by ${member}`})
             return interaction.reply({
                 embeds: [playlistEmbed]
             },
