@@ -51,7 +51,8 @@ module.exports = {
                 .addField("Enqueued", `\`${res.tracks.length}\` tracks added by ${member}`)
             return interaction.reply({
                 embeds: [playlistEmbed]
-            })
+            },
+            setTimeout(() => interaction.deleteReply(), 3000));
         }
 
         if (res.loadType === "TRACK_LOADED" || res.loadType === "SEARCH_RESULT") {
