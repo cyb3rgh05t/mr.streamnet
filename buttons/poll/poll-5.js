@@ -3,7 +3,7 @@ const DB = require("../../src/databases/pollDB");
 
 module.exports = {
     id: "poll-5",
-    permission: "MANAGE_MESSAGES",
+    permission: "SEND_MESSAGES",
     /**
      * @param {ButtonInteraction} interaction 
      * @param {Client} client 
@@ -16,7 +16,7 @@ module.exports = {
         if (!data) return;
 
         if (data.Users.includes(interaction.user.id)) return interaction.reply({
-            content: `You have already chosen your answer`,
+            content: `Du hast bereits eine Stimme abgegeben!`,
             ephemeral: true
         });
 
@@ -31,7 +31,7 @@ module.exports = {
         });
 
         interaction.reply({
-            content: `Your answer has been sent`,
+            content: `Deine Stimme wurde gespeichert!`,
             ephemeral: true
         });
     }

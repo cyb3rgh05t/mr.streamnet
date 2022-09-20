@@ -185,10 +185,10 @@ module.exports = {
                 })
                 .setTimestamp();
 
-            let ButtonSize = [`1️⃣ - \`${Data.Button1}\` Users Selected`, `2️⃣ - \`${Data.Button2}\` Users Selected`];
-            if (Data.Button3 !== null) ButtonSize.push(`3️⃣ - \`${Data.Button3}\` Users Selected`);
-            if (Data.Button4 !== null) ButtonSize.push(`4️⃣ - \`${Data.Button4}\` Users Selected`);
-            if (Data.Button5 !== null) ButtonSize.push(`5️⃣ - \`${Data.Button5}\` Users Selected`);
+            let ButtonSize = [`1️⃣ - \`${Data.Button1}\` Users`, `2️⃣ - \`${Data.Button2}\` Users`];
+            if (Data.Button3 !== null) ButtonSize.push(`3️⃣ - \`${Data.Button3}\` Users`);
+            if (Data.Button4 !== null) ButtonSize.push(`4️⃣ - \`${Data.Button4}\` Users`);
+            if (Data.Button5 !== null) ButtonSize.push(`5️⃣ - \`${Data.Button5}\` Users`);
 
             Embed.setDescription(ButtonSize.join("\n\n"));
             interaction.reply({
