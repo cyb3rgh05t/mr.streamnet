@@ -155,7 +155,7 @@ module.exports = {
                         embeds: [Embed],
                         ephemeral: true
                     });
-                    console.log(err);
+                    client.logger.log(err, "error");
                 }
             }
             break;

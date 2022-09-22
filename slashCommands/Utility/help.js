@@ -1,5 +1,6 @@
 const { Client, SelectMenuInteraction, MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
 const fs = require('fs');
+const GuildSettings = require('../../src/databases/settingsDB');
 
 module.exports = {
     name: 'help',
@@ -16,6 +17,23 @@ module.exports = {
      * @param {Client} client
      */
     async execute(interaction, client) {
+        let storedSettings = await GuildSettings.findOne({
+            GuildID: client.config.guildId,
+          });
+          if (!storedSettings) {
+            const newSettings = new GuildSettings({
+              GuildID: client.config.guildId,
+            });
+            await newSettings.save().catch((e) => {
+              console.log(e);
+            });
+            storedSettings = await GuildSettings.findOne({
+              GuildID: client.config.guildId
+            });
+          }
+      
+          const prefix = storedSettings.Prefix;
+
         let cmdFound = "";
         const {
             options
@@ -38,7 +56,7 @@ module.exports = {
                         );
 
                         cmdoptions.map((option) => {
-                            embedDescription.addField(option.name, `${option.description || "None"}`);
+                            embedDescription.addFields({ name: option.name, value: `${option.description || "None"}`});
                         });
                     }
 
@@ -74,7 +92,7 @@ module.exports = {
 
             const embed = new MessageEmbed()
                 .setTitle(`${client.user.username} | Help`)
-                .setDescription(` Hallo **<@${interaction.member.user.id}>**, Ich bin <@${client.user.id}>. \n\nEin mehrzweck Butler Bot für StreamNet.club.  \n\n*Wähle unten eine Kategorie aus, für alle Befehle.* \n\n`)
+                .setDescription(` Hallo **<@${interaction.member.user.id}>**, Ich bin <@${client.user.id}>. \n\nEin mehrzweck Butler Bot für StreamNet.club.\n\n Prefix: \`${prefix}\`\n\n*Wähle unten eine Kategorie aus, für alle Befehle.* \n\n`)
                 .setThumbnail(client.user.displayAvatarURL())
                 .setColor("DARK_BUT_NOT_BLACK")
             //.setTimestamp()
