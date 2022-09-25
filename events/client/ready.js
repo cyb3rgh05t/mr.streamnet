@@ -119,8 +119,10 @@ module.exports = {
                     })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .addFields([{
-                        name: "**Lavalink**",
-                        value: `${client.manager.nodes.map((node) => `
+
+                        name: "<:icon_reply:993231553083736135> LAVALINK-SERVER",
+                        value: `
+                        ${client.manager.nodes.map((node) => `
                         **\`•\`Name**: ${node.options.identifier}
                         **\`•\`Status**: ${node.connected ? "<:icon_online:993231898291736576>  Online" : "<:icon_offline:993232252647514152> Offline"}
                         **\`•\`Memory Usage**: ${formatBytes(node.stats.memory.allocated)} - ${node.stats.cpu.lavalinkLoad.toFixed(2)}%
