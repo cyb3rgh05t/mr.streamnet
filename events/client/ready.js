@@ -115,7 +115,7 @@ module.exports = {
         }).then((msg) => {
             setInterval(async () => {
 
-                sys.probe('plex.mystreamnet.club', (isAlive) => {
+                sys.probe(client.config.plexURL, (isAlive) => {
                     if(isAlive) {
                         const plexstatus = new MessageEmbed()
                         .setAuthor({
