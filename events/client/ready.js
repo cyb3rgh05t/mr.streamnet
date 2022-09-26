@@ -131,9 +131,9 @@ module.exports = {
                             name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
                             value: `
                             **\`•\`Name**: StreamNet
-                            **\`•\`Status**: <:icon_online:993231898291736576>  Online
+                            **\`•\`Status**: <:icon_online:993231898291736576>  ONLINE
                             \u200B
-                            **\`•\`Status**: <:icon_online:993231898291736576>  Online
+                            **\Enjoy Streaming**
                             
                             `
                         }])
@@ -152,9 +152,9 @@ module.exports = {
                             name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
                             value: `
                             **\`•\`Name**: StreamNet
-                            **\`•\`Status**: <:icon_offline:993232252647514152>  Offline
+                            **\`•\`Status**: <:icon_offline:993232252647514152>  OFFLINE
                             \u200B
-                            **\`•\`Reason**: Server Updates und Serverwartungen....
+                            **Server Updates und Serverwartungen....**
                             
                             `
                         }])
@@ -191,7 +191,7 @@ module.exports = {
                         value: `
                         ${client.manager.nodes.map((node) => `
                         **\`•\`Name**: ${node.options.identifier}
-                        **\`•\`Status**: ${node.connected ? "<:icon_online:993231898291736576>  Online" : "<:icon_offline:993232252647514152> Offline"}
+                        **\`•\`Status**: ${node.connected ? "<:icon_online:993231898291736576>  ONLINE" : "<:icon_offline:993232252647514152> OFFLINE"}
                         **\`•\`Memory Usage**: ${formatBytes(node.stats.memory.allocated)} - ${node.stats.cpu.lavalinkLoad.toFixed(2)}%
                         **\`•\`Connections**: ${node.stats.playingPlayers} / ${node.stats.players} players
                         
