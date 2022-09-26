@@ -13,10 +13,6 @@ const pretty = require('prettysize');
 const moment = require("moment");
 require("moment-duration-format");
 const { sys } = require('ping');
-
-
-
-
 const cpus = os.cpus();
 const cpu = cpus[0];
 
@@ -137,7 +133,6 @@ module.exports = {
                             
                             `
                         }])
-
                         msg.edit({
                             embeds: [plexstatus]
                         })
@@ -158,14 +153,11 @@ module.exports = {
                             
                             `
                         }])
-
                         msg.edit({
                             embeds: [plexstatus]
                         })
                     }
-    
                 })
-
             }, 5000);
         })
 
