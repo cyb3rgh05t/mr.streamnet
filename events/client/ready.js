@@ -12,6 +12,10 @@ const si = require('systeminformation');
 const pretty = require('prettysize');
 const moment = require("moment");
 require("moment-duration-format");
+const { sys } = require('ping');
+
+
+
 
 const cpus = os.cpus();
 const cpu = cpus[0];
@@ -101,6 +105,69 @@ module.exports = {
             client.userSettings.set(user.Id, user);
         }
         require('../../src/handlers/premium')(client)
+
+        
+
+        const channelplex = await client.channels.fetch(client.config.plexChannelId)
+        const plex = new MessageEmbed()
+            .setColor('RED')
+            .setTitle('<:rejected:995614671128244224> No Data Found!')
+            .setDescription('Please Wait For The Information To Be Collected!')
+        channelplex.bulkDelete(10);
+        channelplex.send({
+            embeds: [plex]
+        }).then((msg) => {
+            setInterval(async () => {
+
+                sys.probe('plex.mystreamnet.club', (isAlive) => {
+                    if(isAlive) {
+                        const plexstatus = new MessageEmbed()
+                        .setAuthor({
+                            name: `StreamNet | Plex Server`,
+                        })
+                        .setColor("DARK_BUT_NOT_BLACK")
+                        .addFields([{
+    
+                            name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
+                            value: `
+                            **\`•\`Name**: StreamNet
+                            **\`•\`Status**: <:icon_online:993231898291736576>  Online
+                            \u200B
+                            **\`•\`Status**: <:icon_online:993231898291736576>  Online
+                            
+                            `
+                        }])
+
+                        msg.edit({
+                            embeds: [plexstatus]
+                        })
+                    } else {
+                        const plexstatus = new MessageEmbed()
+                        .setAuthor({
+                            name: `StreamNet | Plex Server`,
+                        })
+                        .setColor("DARK_BUT_NOT_BLACK")
+                        .addFields([{
+    
+                            name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
+                            value: `
+                            **\`•\`Name**: StreamNet
+                            **\`•\`Status**: <:icon_offline:993232252647514152>  Offline
+                            \u200B
+                            **\`•\`Reason**: Server Updates und Serverwartungen....
+                            
+                            `
+                        }])
+
+                        msg.edit({
+                            embeds: [plexstatus]
+                        })
+                    }
+    
+                })
+
+            }, 5000);
+        })
 
         const channelLava = await client.channels.fetch(client.config.lavalinkChannelId)
         const embed = new MessageEmbed()
