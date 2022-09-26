@@ -133,7 +133,7 @@ module.exports = {
                             **\`•\`Name**: StreamNet
                             **\`•\`Status**: <:icon_online:993231898291736576>  ONLINE
                             \u200B
-                            **\Enjoy Streaming**
+                            **\Enjoy Streaming** <:streamnet:855771751820296232>
                             
                             `
                         }])
