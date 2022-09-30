@@ -1,4 +1,4 @@
-const { Discord, Client, Message } = require("discord.js");
+const { Client, Message } = require("discord.js");
 const { poll } = require('../../src/functions/poll');
 
 module.exports = {

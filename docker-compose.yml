@@ -55,6 +55,8 @@ services:
     labels:
       - "dockupdater.enable=false"
     image: "ghcr.io/cyb3rgh05t/mr.streamnet:latest"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     restart: "${RESTARTAPP}"
     volumes:
       - "/opt/appdata/discordbot/:/app/bot/src/config:rw"
