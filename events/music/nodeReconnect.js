@@ -7,5 +7,5 @@ module.exports = {
 client.manager
 
     .on("nodeReconnect", (node) => {
-        client.logger.log(`[LAVALINK] Node "${node.options.identifier}" reconnected.`, "log")
+        client.logger.log(`[LAVALINK] Node "${node.options.identifier}" reconnected!`, "log")
     })

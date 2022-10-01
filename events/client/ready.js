@@ -39,9 +39,9 @@ module.exports = {
 
         client.logger.log(`[BOT] Checking Client....`, "debug")
         client.logger.log(`[BOT] Client is starting....`, "debug")
-        client.logger.log(`[DISCORD_API] ${client.user.username} is ready with ${client.guilds.cache.size} server`, "log");
-        client.logger.log(`[BOT] Logged in as ${client.user.tag}`, "ready")
-        client.logger.log(`[BOT] Client is now ready and online!`, "ready")
+        client.logger.log(`[DISCORD_API] ${client.user.username} is ready with ${client.guilds.cache.size} server!`, "log");
+        client.logger.log(`[BOT] Logged in as ${client.user.tag}!`, "ready")
+        client.logger.log(`[BOT] Client is now ready and online`, "ready")
 
 
         const initialStatus = setTimeout(() => {
@@ -87,12 +87,12 @@ module.exports = {
             useUnifiedTopology: true
         }).then(() => {
             client.logger.log(`[DATABASE] Connected to MongoDB Database!`, "log")
-            client.logger.log(`[DATABASE] Database is now ready`, "ready")
+            client.logger.log(`[DATABASE] Database is now online`, "ready")
         }).catch((err) => {
             client.logger.log(err, "error")
         });
         mongoose.connection.on('disconnected', () => {
-            client.logger.log('[DATABASE] Mongoose disconnected', "warn");
+            client.logger.log('[DATABASE] Mongoose disconnected!', "warn");
         });
 
         const users = await User.find();

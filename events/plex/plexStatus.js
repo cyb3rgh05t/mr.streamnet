@@ -7,10 +7,6 @@ const plexStatus = new PlexAPI({
     password: client.config.plexPASS
 });
 
-const plex = new MessageEmbed()
-             .setColor('RED')
-             .setTitle('<:rejected:995614671128244224> No Data Found!')
-             .setDescription('Please Wait For The Information To Be Collected!')
 
 module.exports = {
     name: "ready",
@@ -18,12 +14,13 @@ module.exports = {
      * @param {Client} client 
      */
     async execute(client) {
-        client.logger.log("[PLEX] Connecting to Plex....", "debug");
+        //client.logger.log("[PLEX] Connecting to Plex....", "debug");
         plexStatus.query("/").then(function (results) {
-	        client.logger.log("[PLEX] Connected to Plex", "log");
+            client.logger.log("[PLEX] Connecting to Plex....", "debug");
+	        client.logger.log("[PLEX] Connected to Plex!", "log");
             client.logger.log("[PLEX] Plex is online", "ready");
             }, function (err) {
-                client.logger.log("[PLEX] Could not connect to Plex", "error");
+                client.logger.log("[PLEX] Could not connect to Plex!", "error");
                 });
 
                 const channelplex = await client.channels.fetch(client.config.plexChannelId)
@@ -36,7 +33,7 @@ module.exports = {
                     embeds: [plex]
                 }).then((msg) => {
                    check();
-                   setInterval(check, 60 * 1000);
+                   setInterval(check, 300 * 1000);
                     async function check() {
                         plexStatus.query("/").then(function (results) {
                             const plexstatus = new MessageEmbed()
@@ -58,7 +55,7 @@ module.exports = {
                                    msg.edit({
                                        embeds: [plexstatus]
                                    })
-                                   client.logger.log("[PLEX] Connected to Plex", "log");
+                                   client.logger.log("[PLEX] Plex is online", "ready");
                             }, function (err) {
                                 const plexstatus = new MessageEmbed()
                                    .setAuthor({
@@ -79,7 +76,8 @@ module.exports = {
                                    msg.edit({
                                        embeds: [plexstatus]
                                    })
-                                   client.logger.log("[PLEX] Could not connect to Plex", "error");
+                                   client.logger.log("[PLEX] Could not connect to Plex!", "error");
+                                   client.logger.log("[PLEX] Trying reconnecting to Plex....", "debug");
                                 });                        
                    } 
                 })
