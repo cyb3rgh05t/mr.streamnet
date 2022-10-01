@@ -26,6 +26,13 @@ module.exports = {
             check();
         setInterval(check, 60 * 1000);
         client.logger.log(`[PLEX] Checking Server Status...`, "debug");
+        sys.probe(client.config.plexURL, (isAlive) => {
+            if(isAlive) {
+                        client.logger.log(`[PLEX] Plex Server connected and online`, "ready");
+                    } else {
+                        client.logger.log(`[PLEX] Plex Server disconnected`, "error");
+                        }
+
 
         async function check() {
                     sys.probe(client.config.plexURL, (isAlive) => {
@@ -49,7 +56,7 @@ module.exports = {
                             msg.edit({
                                 embeds: [plexstatus]
                             })
-                            client.logger.log(`[PLEX] Plex Server connected and online`, "ready");
+                            client.logger.log(`[PLEX] Plex Server connected`, "log");
                         } else {
                             const plexstatus = new MessageEmbed()
                             .setAuthor({
