@@ -114,9 +114,10 @@ module.exports = {
 
                 const rembed = new MessageEmbed()
                     .setAuthor({
-                        name: `StreamNet | Music Server`,
+                        name: `StreamNet | Music Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                     })
                     .setColor("DARK_BUT_NOT_BLACK")
+                    .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                     .addFields([{
 
                         name: "<:icon_reply:993231553083736135> LAVALINK-SERVER",
@@ -160,9 +161,11 @@ module.exports = {
 
                 const Sysrembed = new MessageEmbed()
                     .setAuthor({
-                        name: `StreamNet Server | Information`,
+                        name: `StreamNet Server | Information`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                     })
                     .setColor("DARK_BUT_NOT_BLACK")
+                    .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
+                    //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/vmod.png?raw=true")
                     .addFields({
 
                         name: `<:icon_reply:993231553083736135> SYSTEM`,

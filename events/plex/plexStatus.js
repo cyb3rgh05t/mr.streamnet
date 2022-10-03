@@ -38,9 +38,11 @@ module.exports = {
                         plexStatus.query("/").then(function (results) {
                             const plexstatus = new MessageEmbed()
                                    .setAuthor({
-                                       name: `StreamNet | Plex Server`,
+                                       name: `StreamNet | Plex Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    })
                                    .setColor("DARK_BUT_NOT_BLACK")
+                                   //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/vmod.png?raw=true")
+                                   .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    .addFields([{
                
                                        name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
@@ -48,7 +50,7 @@ module.exports = {
                                        **\`•\`Name**: StreamNet
                                        **\`•\`Status**: <:icon_online:993231898291736576>  ONLINE
                                        \u200B
-                                       **\Enjoy Streaming** <:streamnet:855771751820296232>
+                                       \**Enjoy Streaming** 😎
                                        
                                        `
                                    }])
@@ -59,9 +61,10 @@ module.exports = {
                             }, function (err) {
                                 const plexstatus = new MessageEmbed()
                                    .setAuthor({
-                                       name: `StreamNet | Plex Server`,
+                                       name: `StreamNet | Plex Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    })
                                    .setColor("DARK_BUT_NOT_BLACK")
+                                   .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    .addFields([{
                
                                        name: "<:icon_reply:993231553083736135> STREAMNET SERVER",
