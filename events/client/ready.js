@@ -130,7 +130,7 @@ module.exports = {
                         
                         `)}`
                     }])
-
+                    .setTimestamp()
                 msg.edit({
                     embeds: [rembed]
                 });
@@ -204,6 +204,7 @@ module.exports = {
                         inline: false,
 
                     })
+                    .setTimestamp()
                 msg.edit({
                     embeds: [Sysrembed]
                 });

@@ -1,4 +1,5 @@
 const { Client, MessageEmbed, WebhookClient } = require("discord.js");
+const moment = require("moment");
 const client = require('../../src/index');
 const PlexAPI = require("plex-api");
 const plexStatus = new PlexAPI({
@@ -15,6 +16,7 @@ module.exports = {
      */
     async execute(client) {
         //client.logger.log("[PLEX] Connecting to Plex....", "debug");
+        const date = `${moment().format("hh:mm")}`;
         plexStatus.query("/").then(function (results) {
             client.logger.log("[PLEX] Connecting to Plex....", "debug");
 	        client.logger.log("[PLEX] Connected to Plex!", "log");
@@ -41,7 +43,7 @@ module.exports = {
                                        name: `StreamNet | Plex Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    })
                                    .setColor("DARK_BUT_NOT_BLACK")
-                                   //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/vmod.png?raw=true")
+                                   //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Logo%20PNG%20Positive/LOGO_SNC_FLAT_ns.png?raw=true")
                                    .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
                                    .addFields([{
                
@@ -54,6 +56,7 @@ module.exports = {
                                        
                                        `
                                    }])
+                                   .setTimestamp()
                                    msg.edit({
                                        embeds: [plexstatus]
                                    })
@@ -76,6 +79,7 @@ module.exports = {
                                        
                                        `
                                    }])
+                                   .setTimestamp()
                                    msg.edit({
                                        embeds: [plexstatus]
                                    })
