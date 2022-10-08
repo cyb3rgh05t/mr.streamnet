@@ -1,7 +1,7 @@
 const { Client, Message, Formatters } = require("discord.js");
 
 module.exports = {
-  name: "donate-message",
+  name: "thankyou",
   description: "thankyou",
   category: "message",
   syntax: "command",
