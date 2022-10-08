@@ -15,10 +15,10 @@ module.exports = {
     try {
       const msg = new MessageEmbed()
       .setColor("DARK_BUT_NOT_BLACK")
-      .setTitle("Spenden Optionen")
+      //.setTitle("Spenden Optionen")
       .addFields([{
                
-                name: "PAYPAL",
+                name: "💗 PAYPAL",
                 value: `
                 <:icon_reply:993231553083736135>[PayPal.me](https://paypal.me/IveFlammang)
                 `
@@ -26,14 +26,14 @@ module.exports = {
             },
             {
                
-                name: "SKRILL",
+                name: "💗 SKRILL",
                 value: `
                 <:icon_reply:993231553083736135>\`admin@mystreamnet.club\`
                 `
             },
             {
                
-                name: "BITCOIN",
+                name: "💗 BITCOIN",
                 value: `
                 <:icon_reply:993231553083736135>\`bc1q79d8u595z5fjdmege7pvzgtxwrsrhtgl7yajf5\`
                 `
