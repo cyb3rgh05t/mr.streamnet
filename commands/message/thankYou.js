@@ -1,0 +1,25 @@
+const { Client, Message, Formatters } = require("discord.js");
+
+module.exports = {
+  name: "donate-message",
+  description: "thankyou",
+  category: "message",
+  syntax: "command",
+  permission: "ADMINISTRATOR",
+  /**
+   * @param {Client} client
+   * @param {Message} message
+   * @param {String[]} args
+   */
+  run: async (client, message, args) => {
+    try {
+      const msg = Formatters.hyperlink("PayPal", "https://paypal.me/IveFlammang");
+      message.channel.send({
+        content: `**Ich bedanke mich herzlich für den Support.** <:streamnet:855771751820296232>`
+      });
+    } catch (error) {
+      message.channel.send("Some Error Occured");
+      client.logger.log(error, "error")
+    }
+  }
+}
