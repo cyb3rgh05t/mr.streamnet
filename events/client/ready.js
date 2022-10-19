@@ -110,7 +110,9 @@ module.exports = {
         channelLava.send({
             embeds: [embed]
         }).then((msg) => {
-            setInterval(async () => {
+            check();
+            setInterval(check, 120 * 1000);
+             async function check() {
 
                 const rembed = new MessageEmbed()
                     .setAuthor({
@@ -133,10 +135,11 @@ module.exports = {
                     .setTimestamp()
                 msg.edit({
                     embeds: [rembed]
-                });
-
-            }, 5000);
+                 })  
+                
+            }
         })
+
 
         client.manager.init(client.user.id);
 
@@ -150,7 +153,9 @@ module.exports = {
         channelSys.send({
             embeds: [Sysembed]
         }).then((msg) => {
-            setInterval(async () => {
+            check();
+            setInterval(check, 120 * 1000);
+             async function check() {
 
                 let netdata = await si.networkStats();
                 let memdata = await si.mem();
@@ -207,12 +212,10 @@ module.exports = {
                     .setTimestamp()
                 msg.edit({
                     embeds: [Sysrembed]
-                });
-
-            }, 5000);
+                })  
+                
+            }
         })
-
-
 
         let memArray = [];
 
