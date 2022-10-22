@@ -15,8 +15,7 @@ module.exports = {
 
         const embed = new MessageEmbed()
             .setAuthor({
-                name: `${guild.name} | Music System`,
-                iconURL: `${guild.iconURL({dynamic: true})}`
+                name: `${guild.name} | Music System`
             })
             .setColor("DARK_BUT_NOT_BLACK")
             .setTitle('🎶 Lust auf Musik ? 🎶')
