@@ -40,7 +40,7 @@ module.exports = {
                         plexStatus.query("/").then(function (results) {
                             const plexstatus = new MessageEmbed()
                                    .setAuthor({
-                                       name: `StreamNet | Plex Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
+                                       name: `StreamNet | Plex Server`
                                    })
                                    .setColor("DARK_BUT_NOT_BLACK")
                                    //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Logo%20PNG%20Positive/LOGO_SNC_FLAT_ns.png?raw=true")
@@ -64,7 +64,7 @@ module.exports = {
                             }, function (err) {
                                 const plexstatus = new MessageEmbed()
                                    .setAuthor({
-                                       name: `StreamNet | Plex Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
+                                       name: `StreamNet | Plex Server`
                                    })
                                    .setColor("DARK_BUT_NOT_BLACK")
                                    .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")

@@ -116,7 +116,7 @@ module.exports = {
 
                 const rembed = new MessageEmbed()
                     .setAuthor({
-                        name: `StreamNet | Music Server`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
+                        name: `StreamNet | Music Server`
                     })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
@@ -166,7 +166,7 @@ module.exports = {
 
                 const Sysrembed = new MessageEmbed()
                     .setAuthor({
-                        name: `StreamNet Server | Information`, iconURL: ("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
+                        name: `StreamNet Server | Information`
                     })
                     .setColor("DARK_BUT_NOT_BLACK")
                     .setThumbnail("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true")
