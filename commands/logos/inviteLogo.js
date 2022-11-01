@@ -14,7 +14,7 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       message.channel.send({
-        files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/SNC_INVITES.png?raw=true"]
+        files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Discord/SNC_INVITES.png?raw=true"]
       });
     } catch (error) {
       message.channel.send("Some Error Occured");
