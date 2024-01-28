@@ -28,22 +28,6 @@ client.cooldowns = new Collection();
 client.userSettings = new Collection();
 client.prefixcmd = new Collection();
 client.modals = new Collection();
-client.manager = new Manager({
-    nodes: client.config.nodes,
-    plugins: [
-        new Spotify({
-            clientID: client.config.SpotifyClientID,
-            clientSecret: client.config.SpotifySecret,
-        }),
-        new Apple(),
-        new Deezer(),
-    ],
-    autoplay: true,
-    send: (id, payload) => {
-        let guild = client.guilds.cache.get(id);
-        if (guild) guild.shard.send(payload);
-    },
-});
 
 module.exports = client;
 
