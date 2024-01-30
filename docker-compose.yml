@@ -31,7 +31,7 @@ services:
     labels:
       - "dockupdater.enable=false"
     image: "ghcr.io/cyb3rgh05t/mr.streamnet_lite:latest"
-    stdin_open: true # docker run -i
+    stdin_open: true # 
     tty: true        # docker run -t
     restart: "${RESTARTAPP}"
     volumes:
