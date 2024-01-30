@@ -1,0 +1,11 @@
+#node.js
+node_modules
+package-lock.json
+
+#settings
+.env
+config.json
+
+#Visual Studio Code
+.vs
+.vscode
