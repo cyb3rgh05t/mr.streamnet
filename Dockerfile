@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:21
 
 LABEL maintainer=cyb3rgh05t
 LABEL org.opencontainers.image.source https://github.com/cyb3rgh05t/mr.streamnet-lite
