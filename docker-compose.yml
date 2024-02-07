@@ -2,15 +2,15 @@
 version: "3"
 services:
   mongodb:
-    container_name: "streamnet-mongodb"
+    container_name: "mongodb"
     image: "mongo:latest"
     environment:
       MONGO_INITDB_ROOT_USERNAME: cyb3rgh05t
       MONGO_INITDB_ROOT_PASSWORD: 9ffe4e761f
     networks:
-      - ${DOCKERNETWORK}
+      - proxy
     security_opt:
-      - "${SECURITYOPS}:${SECURITYOPSSET}"
+      - "no-new-privileges:true"
     labels:
       - "dockupdater.enable=false"
     restart: "${RESTARTAPP}"
@@ -21,21 +21,21 @@ services:
     hostname: "mr_streamnet"
     container_name: "mr_streamnet"
     environment:
-      - "PGID=${ID}"
-      - "PUID=${ID}"
-      - "TZ=${TZ}"
+      - "PGID=1000"
+      - "PUID=1000"
+      - "TZ=Europe/Berlin"
     networks:
-      - ${DOCKERNETWORK}
+      - proxy
     security_opt:
-      - "${SECURITYOPS}:${SECURITYOPSSET}"
+      - "no-new-privileges:true"
     labels:
       - "dockupdater.enable=false"
     image: "ghcr.io/cyb3rgh05t/mr.streamnet_lite:latest"
-    stdin_open: true # 
-    tty: true        # docker run -t
-    restart: "${RESTARTAPP}"
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    restart: "unless-stopped"
     volumes:
-      - "${APPFOLDER}/mr.streamnet/:/app/bot/src/config:rw"
+      - "opt/appdata/mr.streamnet/:/app/bot/src/config:rw"
     depends_on:
       - mongodb
     links:
