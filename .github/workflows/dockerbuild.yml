@@ -15,6 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: FranzDiebold/github-env-vars-action@v2.7.0
+      - name: Print environment variables
+        run: |
+          echo "CI_REPOSITORY_NAME=$CI_REPOSITORY_NAME"
+          echo "CI_RUN_NUMBER=$CI_RUN_NUMBER"
+
       - name: Prepare GHRC.io
         id: prep
         run: |
