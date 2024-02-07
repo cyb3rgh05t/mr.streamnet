@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "moderation discord bot",
   "main": "./src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyb3rgh05t/mr.streamnet-lite.git"
