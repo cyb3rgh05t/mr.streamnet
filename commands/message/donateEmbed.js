@@ -26,13 +26,6 @@ module.exports = {
             },
             {
                
-                name: "💗 SKRILL",
-                value: `
-                <:icon_reply:993231553083736135>\`admin@mystreamnet.club\`
-                `
-            },
-            {
-               
                 name: "💗 BITCOIN",
                 value: `
                 <:icon_reply:993231553083736135>\`bc1q79d8u595z5fjdmege7pvzgtxwrsrhtgl7yajf5\`
