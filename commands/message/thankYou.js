@@ -15,7 +15,7 @@ module.exports = {
     try {
       const msg = Formatters.hyperlink("PayPal", "https://paypal.me/IveFlammang");
       message.channel.send({
-        content: ` ‼️ **SEHR WICHTIG BEI PAYPAL SPENDEN** ‼️ - **UNBEDINGT** über **FREUNDE und FAMILLIE** spenden und **NICHT** als **DIENSTLEISTUNG** spenden.\n\nIch bedanke mich für den Support <:streamnet:855771751820296232>`
+        content: ` ‼️ **SEHR WICHTIG BEI PAYPAL SPENDEN** ‼️ - **UNBEDINGT** über **FREUNDE und FAMILLIE** spenden und **NICHT** als **DIENSTLEISTUNG** spenden.\n\nIch bedanke mich für den Support <:streamnet:1033460420587049021>`
       });
     } catch (error) {
       message.channel.send("Some Error Occured");
