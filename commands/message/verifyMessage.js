@@ -14,7 +14,7 @@ module.exports = {
   run: async (client, message, args) => {
     try {
 
-      const imagePath = './src/images/discord.png'; // Replace this with the path to your local image file
+      const imagePath = './src/images/verify.png'; // Replace this with the path to your local image file
       const file = new MessageAttachment(imagePath);
 
       await message.channel.send({
