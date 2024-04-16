@@ -1,4 +1,4 @@
-const { Client, Message } = require("discord.js");
+const { Client, Message, MessageAttachment } = require("discord.js");
 
 module.exports = {
   name: "dash-image",
@@ -13,8 +13,12 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      message.channel.send({
-        files: ["https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Discord/SNC_Dashboard.png?raw=true"]
+
+      const imagePath = './src/images/dashboard.png'; // Replace this with the path to your local image file
+      const file = new MessageAttachment(imagePath);
+	  
+      await.message.channel.send({
+        files: [file]
       });
     } catch (error) {
       message.channel.send("Some Error Occured");
