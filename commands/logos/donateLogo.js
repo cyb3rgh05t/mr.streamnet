@@ -17,7 +17,7 @@ module.exports = {
       const imagePath = './src/images/donate.png'; // Replace this with the path to your local image file
       const file = new MessageAttachment(imagePath);
 	  
-      await.message.channel.send({
+      message.channel.send({
         files: [file]
       });
     } catch (error) {
