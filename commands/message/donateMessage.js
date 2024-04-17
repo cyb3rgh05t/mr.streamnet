@@ -1,8 +1,8 @@
 const { Client, Message, Formatters } = require("discord.js");
 
 module.exports = {
-  name: "donate-message",
-  description: "donate-message",
+  name: "donate",
+  description: "donate channel message",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",

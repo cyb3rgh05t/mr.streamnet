@@ -1,8 +1,8 @@
 const { Client, Message, MessageAttachment } = require("discord.js");
 
 module.exports = {
-  name: "invite-image",
-  description: "invite-image",
+  name: "invitepic",
+  description: "invites channel logo",
   category: "logos",
   syntax: "command",
   permission: "ADMINISTRATOR",
@@ -13,11 +13,10 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-
       const imagePath = './src/images/invites.png'; // Replace this with the path to your local image file
       const file = new MessageAttachment(imagePath);
-	  
-      await.message.channel.send({
+
+      await message.channel.send({
         files: [file]
       });
     } catch (error) {

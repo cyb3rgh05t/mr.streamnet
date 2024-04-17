@@ -1,8 +1,8 @@
 const { Client, Message, MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
-    name: "rules-message",
-    description: "rules-message",
+    name: "rules",
+    description: "rules channel message",
     category: "message",
     syntax: "command",
     permission: "ADMINISTRATOR",

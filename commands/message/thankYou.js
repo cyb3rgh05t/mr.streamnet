@@ -2,7 +2,7 @@ const { Client, Message, Formatters } = require("discord.js");
 
 module.exports = {
   name: "thankyou",
-  description: "thankyou",
+  description: "doante channel thankyou message",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",

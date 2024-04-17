@@ -1,8 +1,8 @@
 const { Client, Message } = require("discord.js");
 
 module.exports = {
-  name: "invite-message",
-  description: "invite-message",
+  name: "invite",
+  description: "invite channel message",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",

@@ -1,8 +1,8 @@
 const { Client, Message, MessageAttachment } = require("discord.js");
 
 module.exports = {
-  name: "verify-message",
-  description: "verify-message",
+  name: "verify",
+  description: "verify channel message + discord settings pic",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",

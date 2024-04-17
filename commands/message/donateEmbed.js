@@ -1,8 +1,8 @@
 const { Client, Message, Formatters, MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "donate-pay",
-  description: "donate-message",
+  name: "paylink",
+  description: "donate channel payment links embed",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",

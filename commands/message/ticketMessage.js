@@ -1,8 +1,8 @@
 const { Client, Message } = require("discord.js");
 
 module.exports = {
-  name: "ticket-message",
-  description: "ticket-message",
+  name: "ticket",
+  description: "ticket setup channel message",
   category: "message",
   syntax: "command",
   permission: "ADMINISTRATOR",
