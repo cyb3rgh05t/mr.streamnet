@@ -14,7 +14,7 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       message.channel.send({
-        content: `=======================================\n\n**Willkommen bei <:streamnet:1033460420587049021> StreamNet's Discord Server - Ein täglich upgedateter Deutsch/Englisch Plex Media Server.**\n\n=======================================\n\n➡️  Wie bekomme ich Zutritt zum **StreamNet** Server ?\n\n**1. **Bestätige die** REGELN **in <#694495838013095967> !\n\n**2. **Befolge die Anweisungen für eine **EINLADUNG** in <#825352124547989544> !\n\n**3. **Folge den Anweisungen vom **<@825635238188285952>** !\n\n**4. **Akzeptiere die **PLEX-EINLADUNG** für StreamNet in deiner **PLEX EMAIL BOX**!\n    (für manuelle Aktivierung <#864928903000227850> )\n\nViel Spass beim streamen.. <:streamnet:1033460420587049021>`
+        content: `=======================================\n\n**Willkommen bei <:sclub:1246363251143348257> StreamNet Club's Discord Server**\n\n=======================================\n\n➡️  Wie bekomme ich Zutritt zum **StreamNet Club Service** ?\n\n**1. **Bestätige die** REGELN **in <#694495838013095967> !\n\n**2.** Suche dir ein Projekt aus  <#1246852243680919592> oder <#1246852387570978818> !\n\n**3.** Folge den Anweisungen um Zutritt zu bekommen !\n\n**4.** Viel Spass beim streamen.. <:sclub:1246363251143348257>`
       });
     } catch (error) {
       message.channel.send("Some Error Occured");
