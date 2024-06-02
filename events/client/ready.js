@@ -130,12 +130,10 @@ module.exports = {
 
           const Sysrembed = new MessageEmbed()
             .setAuthor({
-              name: `StreamNet Server | Information`,
+              name: `StreamNet Plex Server | Information`,
+			  iconURL: `${guild.iconURL({dynamic: true})}`
             })
             .setColor("DARK_BUT_NOT_BLACK")
-            .setThumbnail(
-              "https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Avatar/ICON_SNC_white.png?raw=true"
-            )
             //.setImage("https://github.com/cyb3rgh05t/images/blob/master/StreamNet/Different%20App%20Logos/vmod.png?raw=true")
             .addFields(
               {

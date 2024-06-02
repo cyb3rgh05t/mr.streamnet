@@ -131,7 +131,7 @@ module.exports = {
                     name: `${guild.name} | Ticket System`,
                     iconURL: `${guild.iconURL({dynamic: true})}`
                 })
-                .setTitle("StreamNet Support")
+                .setTitle("StreamNet Plex Support")
                 .setDescription(Description)
                 .setColor("RANDOM")
                 .setThumbnail(guild.iconURL({
